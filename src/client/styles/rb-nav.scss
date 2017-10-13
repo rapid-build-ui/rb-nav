@@ -1,0 +1,31 @@
+/****************
+ * RB-NAV STYLES
+ ****************/
+:host {
+
+}
+
+nav {
+	display: flex;
+	a {
+		cursor: pointer;
+		padding: 10px 10px 12px;
+		color: lightslategray;
+		text-decoration: underline;
+		&:hover {
+			color: indianred;
+			text-decoration: none;
+		}
+	}
+}
+
+/* Layout Options (*horizontal | vertical)
+ *****************/
+nav.layout- {
+	&horizontal {
+		flex-flow: row wrap;
+	}
+	&vertical {
+		flex-flow: column nowrap;
+	}
+}
