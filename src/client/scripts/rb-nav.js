@@ -10,6 +10,7 @@ export class RbNav extends PolymerElement {
 	 ************/
 	constructor() {
 		super();
+		this.importPath = '/node_modules/@rapid-build-ui/rb-nav';
 	}
 	ready() {
 		super.ready();
@@ -47,7 +48,7 @@ export class RbNav extends PolymerElement {
 	 ***********/
 	static get template() {
 		return `
-			<link rel="stylesheet" href="/node_modules/@rapid-build-ui/rb-nav/styles/rb-nav.css">
+			<link rel="stylesheet" href="[[importPath]]/styles/rb-nav.css">
 
 			<nav class$="layout-[[layout]] [[_setResponsive(responsive)]]">
 				<template is="dom-repeat" items="[[collection]]">
