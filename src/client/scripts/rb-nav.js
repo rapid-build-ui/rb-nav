@@ -4,6 +4,7 @@
 import { Element as PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
 import { DomRepeat as DomRepeat } from '../../../@polymer/polymer/lib/elements/dom-repeat.js';
 import { DomBind as DomBind } from '../../../@polymer/polymer/lib/elements/dom-bind.js';
+import template from '../views/rb-nav.html';
 
 export class RbNav extends PolymerElement {
 	/* Lifecycle
@@ -47,15 +48,7 @@ export class RbNav extends PolymerElement {
 	/* Template
 	 ***********/
 	static get template() {
-		return `
-			<link rel="stylesheet" href="[[importPath]]/styles/rb-nav.css">
-
-			<nav class$="layout-[[layout]] [[_setResponsive(responsive)]]">
-				<template is="dom-repeat" items="[[collection]]">
-					<a>[[item.first]]</a>
-				</template>
-			</nav>
-		`;
+		return template;
 	}
 }
 
