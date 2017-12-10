@@ -1,20 +1,36 @@
 /****************
  * RB-NAV STYLES
  ****************/
-:host {
-
+// sass functions
+@function remy($px, $pxBase: 16) { // :rem (pixels to rem converter)
+	@return ($px / $pxBase) + rem;
 }
 
 nav {
-	display: flex;
+	display: inline-flex;
 	a {
+		margin: 0;
+		&:not(:last-child) {
+			margin-right: remy(15);
+		}
 		cursor: pointer;
-		padding: 10px 10px 12px;
 		color: lightslategray;
 		text-decoration: underline;
+		&:focus,
 		&:hover {
 			color: indianred;
 			text-decoration: none;
+		}
+		&:active {
+			color: darken(indianred, 15%);
+		}
+		&.active {
+			cursor: default;
+			color: indianred;
+			text-decoration: none;
+		}
+		&:focus {
+			outline: none;
 		}
 	}
 }

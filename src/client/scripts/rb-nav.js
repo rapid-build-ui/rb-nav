@@ -15,10 +15,11 @@ export class RbNav extends PolymerElement {
 	}
 	ready() {
 		super.ready();
-		this.collection = [
-			{ first: 'Yev', last: 'Okun' },
-			{ first: 'Judson', last: 'Younce' }
-		];
+		const nav = this.root.querySelector('nav');
+		this.createNav(nav);
+		var links = nav.querySelectorAll('a');
+		this.setTabIndexes(links);
+		this.attachEvents(nav, links);
 	}
 
 	/* Properties
@@ -39,9 +40,39 @@ export class RbNav extends PolymerElement {
 		}
 	}
 
+	/* Private
+	 **********/
+	createNav(nav) {
+		nav.innerHTML = this.innerHTML;
+	}
+
+	setActive(nav, link) {
+		var active = nav.querySelector('a.active');
+		if (active === link) return;
+		if (active) active.classList.remove('active');
+		link.classList.add('active');
+	}
+
+	setTabIndexes(links) {
+		if (!links.length) return;
+		for (let link of links) {
+			if (link.hasAttribute('tabindex')) continue;
+			link.setAttribute('tabindex', 0);
+		}
+	}
+
+	attachEvents(nav, links) {
+		if (!links.length) return;
+		this.addEventListener('click', e => {
+			var link = e.composedPath()[0];
+			if (link & link.tagName.toLowerCase() !== 'a') return;
+			this.setActive(nav, link);
+		});
+	}
+
 	/* Computed Bindings
 	 ********************/
-	_setResponsive(responsive) {
+	setResponsive(responsive) {
 		return responsive ? 'responsive' : '';
 	}
 
