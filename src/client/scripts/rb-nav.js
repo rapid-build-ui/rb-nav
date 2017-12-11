@@ -26,9 +26,9 @@ export class RbNav extends PolymerElement {
 	 ************/
 	static get properties() {
 		return {
-			layout:	{
-				type: String,
-				value: 'horizontal'
+			vertical: {
+				type: Boolean,
+				value: false
 			},
 			responsive: {
 				type: Boolean
@@ -72,6 +72,9 @@ export class RbNav extends PolymerElement {
 
 	/* Computed Bindings
 	 ********************/
+	getLayout(vertical) {
+		return vertical ? 'vertical' : 'horizontal';
+	}
 	setResponsive(responsive) {
 		return responsive ? 'responsive' : '';
 	}
