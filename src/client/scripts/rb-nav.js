@@ -52,13 +52,13 @@ export class RbNav extends PolymerElement {
 			},
 			/* Computed
 			 ***********/
-			_dividers: {
-				type: String,
-				computed: 'getDividers(dividers)'
-			},
 			_display: {
 				type: String,
 				computed: 'getDisplay(inline)'
+			},
+			_dividers: {
+				type: String,
+				computed: 'getDividers(dividers)'
 			},
 			_layout: {
 				type: String,
@@ -73,11 +73,11 @@ export class RbNav extends PolymerElement {
 
 	/* Computed Bindings
 	 ********************/
-	getDividers(dividers) {
-		return dividers ? 'dividers' : '';
-	}
 	getDisplay(inline) {
 		return inline ? 'inline' : 'block';
+	}
+	getDividers(dividers) {
+		return dividers ? 'dividers' : '';
 	}
 	getLayout(vertical) {
 		return vertical ? 'vertical' : 'horizontal';
