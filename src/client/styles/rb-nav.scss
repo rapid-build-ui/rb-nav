@@ -6,8 +6,17 @@
 	@return ($px / $pxBase) + rem;
 }
 
-:host {
-	contain: content;
+:host {}
+
+/* Display Options (*block | inline)
+ *****************/
+nav {
+	&.block {
+		display: flex;
+	}
+	&.inline {
+		display: inline-flex;
+	}
 }
 
 /* Layout Options (*horizontal | vertical)
@@ -39,8 +48,6 @@ nav {
 /* Default Kind
  ***************/
 nav.default {
-	display: inline-flex;
-
 	::slotted(a) {
 		margin: 0;
 		color: lightslategray !important;

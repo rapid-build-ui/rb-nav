@@ -15,7 +15,6 @@ export class RbNav extends PolymerElement {
 	}
 	ready() {
 		super.ready();
-		// const nav = this.root.querySelector('nav');
 		var links =
 			this.root.querySelector('slot')
 			.assignedNodes({flatten:true})
@@ -32,6 +31,10 @@ export class RbNav extends PolymerElement {
 			/* API
 			 ******/
 			dividers: {
+				type: Boolean,
+				value: false
+			},
+			inline: {
 				type: Boolean,
 				value: false
 			},
@@ -53,6 +56,10 @@ export class RbNav extends PolymerElement {
 				type: String,
 				computed: 'getDividers(dividers)'
 			},
+			_display: {
+				type: String,
+				computed: 'getDisplay(inline)'
+			},
 			_layout: {
 				type: String,
 				computed: 'getLayout(vertical)'
@@ -68,6 +75,9 @@ export class RbNav extends PolymerElement {
 	 ********************/
 	getDividers(dividers) {
 		return dividers ? 'dividers' : '';
+	}
+	getDisplay(inline) {
+		return inline ? 'inline' : 'block';
 	}
 	getLayout(vertical) {
 		return vertical ? 'vertical' : 'horizontal';
