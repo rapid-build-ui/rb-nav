@@ -1,7 +1,5 @@
 <link rel="stylesheet" href$="[[importPath]]/styles/rb-nav.css">
 
-<nav class$="layout-[[getLayout(vertical)]] [[setResponsive(responsive)]]">
-	<!-- <template is="dom-repeat" items="[[collection]]">
-		<a>[[item.first]]</a>
-	</template> -->
+<nav class$="[[kind]] [[_layout]] [[_responsive]] [[_dividers]]">
+	<slot></slot>
 </nav>

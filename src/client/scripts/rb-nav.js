@@ -2,8 +2,8 @@
  * RB-NAV
  *********/
 import { Element as PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import { DomRepeat as DomRepeat } from '../../../@polymer/polymer/lib/elements/dom-repeat.js';
-import { DomBind as DomBind } from '../../../@polymer/polymer/lib/elements/dom-bind.js';
+// import { DomRepeat as DomRepeat } from '../../../@polymer/polymer/lib/elements/dom-repeat.js';
+// import { DomBind as DomBind } from '../../../@polymer/polymer/lib/elements/dom-bind.js';
 import template from '../views/rb-nav.html';
 
 export class RbNav extends PolymerElement {
@@ -15,68 +15,96 @@ export class RbNav extends PolymerElement {
 	}
 	ready() {
 		super.ready();
-		const nav = this.root.querySelector('nav');
-		this.createNav(nav);
-		var links = nav.querySelectorAll('a');
+		// const nav = this.root.querySelector('nav');
+		var links =
+			this.root.querySelector('slot')
+			.assignedNodes({flatten:true})
+			.filter(n => n.nodeType === Node.ELEMENT_NODE)
+			.filter(n => n.tagName.toLowerCase() === 'a');
 		this.setTabIndexes(links);
-		this.attachEvents(nav, links);
+		this.attachEvents(links);
 	}
 
 	/* Properties
 	 ************/
 	static get properties() {
 		return {
+			/* API
+			 ******/
+			dividers: {
+				type: Boolean,
+				value: false
+			},
+			kind: {
+				type: String,
+				value: 'default'
+			},
+			unresponsive: {
+				type: Boolean,
+				value: false
+			},
 			vertical: {
 				type: Boolean,
 				value: false
 			},
-			responsive: {
-				type: Boolean
+			/* Computed
+			 ***********/
+			_dividers: {
+				type: String,
+				computed: 'getDividers(dividers)'
 			},
-			collection: {
-				type: Array,
-				notify: true
+			_layout: {
+				type: String,
+				computed: 'getLayout(vertical)'
+			},
+			_responsive: {
+				type: String,
+				computed: 'getResponsive(unresponsive)'
 			}
 		}
 	}
 
+	/* Computed Bindings
+	 ********************/
+	getDividers(dividers) {
+		return dividers ? 'dividers' : '';
+	}
+	getLayout(vertical) {
+		return vertical ? 'vertical' : 'horizontal';
+	}
+	getResponsive(unresponsive) {
+		return unresponsive ? '' : 'responsive';
+	}
+
 	/* Private
 	 **********/
-	createNav(nav) {
-		nav.innerHTML = this.innerHTML;
-	}
-
-	setActive(nav, link) {
-		var active = nav.querySelector('a.active');
-		if (active === link) return;
-		if (active) active.classList.remove('active');
-		link.classList.add('active');
-	}
-
-	setTabIndexes(links) {
-		if (!links.length) return;
+	setTabIndexes(links) { // :this
+		if (!links.length) return this;
 		for (let link of links) {
 			if (link.hasAttribute('tabindex')) continue;
 			link.setAttribute('tabindex', 0);
 		}
+		return this;
 	}
 
-	attachEvents(nav, links) {
-		if (!links.length) return;
+	setActive(links, link) { // :void
+		if (link.classList.contains('active')) return;
+		for (let link of links)
+			if (link.classList.contains('active')) {
+				link.classList.remove('active');
+				break;
+			}
+		link.classList.add('active');
+	}
+
+	attachEvents(links) { // :this
+		if (!links.length) return this;
 		this.addEventListener('click', e => {
-			var link = e.composedPath()[0];
-			if (link & link.tagName.toLowerCase() !== 'a') return;
-			this.setActive(nav, link);
+			let link = e.composedPath()[0];
+			if (link.tagName.toLowerCase() !== 'a') return;
+			this.setActive(links, link);
 		});
-	}
-
-	/* Computed Bindings
-	 ********************/
-	getLayout(vertical) {
-		return vertical ? 'vertical' : 'horizontal';
-	}
-	setResponsive(responsive) {
-		return responsive ? 'responsive' : '';
+		return this;
 	}
 
 	/* Template

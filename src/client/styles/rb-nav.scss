@@ -6,42 +6,96 @@
 	@return ($px / $pxBase) + rem;
 }
 
-nav {
-	display: inline-flex;
-	a {
-		margin: 0;
-		&:not(:last-child) {
-			margin-right: remy(15);
-		}
-		cursor: pointer;
-		color: lightslategray;
-		text-decoration: underline;
-		&:focus,
-		&:hover {
-			color: indianred;
-			text-decoration: none;
-		}
-		&:active {
-			color: darken(indianred, 15%);
-		}
-		&.active {
-			cursor: default;
-			color: indianred;
-			text-decoration: none;
-		}
-		&:focus {
-			outline: none;
-		}
-	}
+:host {
+	contain: content;
 }
 
 /* Layout Options (*horizontal | vertical)
  *****************/
-nav.layout- {
-	&horizontal {
+nav {
+	&.horizontal {
 		flex-flow: row wrap;
 	}
-	&vertical {
+	&.vertical {
 		flex-flow: column nowrap;
+	}
+}
+
+/* Shared
+ *********/
+nav {
+	::slotted(a) {
+		cursor: pointer !important;
+		text-decoration: none !important;
+	}
+	::slotted(a:focus) {
+		outline: none !important;
+	}
+	::slotted(a.active) {
+		cursor: default !important;
+	}
+}
+
+/* Default Kind
+ ***************/
+nav.default {
+	display: inline-flex;
+
+	::slotted(a) {
+		margin: 0;
+		color: lightslategray !important;
+	}
+	::slotted(a:not(:last-child)) {
+		margin-right: remy(15);
+	}
+	::slotted(a:hover) {
+		color: indianred !important;
+	}
+	::slotted(a:focus) {
+		color: indianred !important;
+	}
+	::slotted(a:active) {
+		color: darken(indianred, 15%) !important;
+	}
+	::slotted(a.active) {
+		color: indianred !important;
+	}
+
+	&.vertical {
+		::slotted(a) {
+			margin: 0;
+		}
+		::slotted(a:not(:last-child)) {
+			margin-bottom: remy(10);
+		}
+	}
+
+	/* Dividers Option
+	 ******************/
+	&.dividers {
+		&.horizontal {
+			::slotted(a:not(:last-child))::after {
+				top: 1px;
+				position: relative;
+				display: inline-block;
+				height: remy(12);
+				margin-left: remy(15);
+				border-left: 1px solid #f9f9f9;
+				border-right: 1px solid lightslategray;
+				content: '';
+			}
+		}
+		&.vertical {
+			::slotted(a) {
+				margin: 0;
+				padding: remy(10) 0 remy(12);
+			}
+			::slotted(a:first-child) {
+				padding-top: 0;
+			}
+			::slotted(a:not(:last-child)) {
+				border-bottom: 1px solid #ccc;
+			}
+		}
 	}
 }
