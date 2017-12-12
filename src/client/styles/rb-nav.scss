@@ -34,6 +34,7 @@ nav {
  *********/
 nav {
 	::slotted(a) {
+		box-sizing: border-box !important;
 		cursor: pointer !important;
 		text-decoration: none !important;
 	}
@@ -93,15 +94,19 @@ nav.default {
 			}
 		}
 		&.vertical {
+			$borderColor: #e3e3e3;
 			::slotted(a) {
 				margin: 0;
-				padding: remy(10) 0 remy(12);
+				padding: remy(7) remy(12) remy(9);
+				border-bottom: 1px solid $borderColor;
 			}
 			::slotted(a:first-child) {
-				padding-top: 0;
+				border-top: 1px solid $borderColor;
 			}
-			::slotted(a:not(:last-child)) {
-				border-bottom: 1px solid #ccc;
+			::slotted(a:hover),
+			::slotted(a:focus),
+			::slotted(a.active) {
+				background-color: #f9f9f9;
 			}
 		}
 	}
