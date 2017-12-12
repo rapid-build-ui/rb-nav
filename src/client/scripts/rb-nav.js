@@ -13,15 +13,12 @@ export class RbNav extends PolymerElement {
 		super();
 		this.importPath = '/node_modules/@rapid-build-ui/rb-nav';
 	}
+
 	ready() {
 		super.ready();
-		var links =
-			this.root.querySelector('slot')
-			.assignedNodes({flatten:true})
-			.filter(n => n.nodeType === Node.ELEMENT_NODE)
-			.filter(n => n.tagName.toLowerCase() === 'a');
-		this.setTabIndexes(links);
-		this.attachEvents(links);
+		this._slot = this.root.querySelector('slot');
+		this.setTabIndexes();
+		this.attachEvents();
 	}
 
 	/* Properties
@@ -73,33 +70,52 @@ export class RbNav extends PolymerElement {
 
 	/* Computed Bindings
 	 ********************/
-	getDisplay(inline) {
+	getDisplay(inline) { // :string
 		return inline ? 'inline' : 'block';
 	}
-	getDividers(dividers) {
+	getDividers(dividers) { // :string
 		return dividers ? 'dividers' : '';
 	}
-	getLayout(vertical) {
+	getLayout(vertical) { // :string
 		return vertical ? 'vertical' : 'horizontal';
 	}
-	getResponsive(unresponsive) {
+	getResponsive(unresponsive) { // :string
 		return unresponsive ? '' : 'responsive';
+	}
+
+	/* Getters
+	 **********/
+	get _links() { // :element[]
+		return this._slot
+			.assignedNodes({flatten:true})
+			.filter(n => n.nodeType === Node.ELEMENT_NODE)
+			.filter(n => n.tagName.toLowerCase() === 'a');
 	}
 
 	/* Private
 	 **********/
-	setTabIndexes(links) { // :this
-		if (!links.length) return this;
-		for (let link of links) {
+	setTabIndexes() { // :this
+		if (!this._links.length) return this;
+		for (let link of this._links) {
 			if (link.hasAttribute('tabindex')) continue;
 			link.setAttribute('tabindex', 0);
 		}
 		return this;
 	}
 
-	setActive(links, link) { // :void
+	/* Event Handlers
+	 *****************/
+	attachEvents() { // :this
+		this.addEventListener('click', this.setActive);
+		return this;
+	}
+
+	setActive(e) { // :void
+		if (!this._links.length) return this;
+		let link = e.composedPath()[0];
+		if (link.tagName.toLowerCase() !== 'a') return;
 		if (link.classList.contains('active')) return;
-		for (let link of links)
+		for (let link of this._links)
 			if (link.classList.contains('active')) {
 				link.classList.remove('active');
 				break;
@@ -107,19 +123,9 @@ export class RbNav extends PolymerElement {
 		link.classList.add('active');
 	}
 
-	attachEvents(links) { // :this
-		if (!links.length) return this;
-		this.addEventListener('click', e => {
-			let link = e.composedPath()[0];
-			if (link.tagName.toLowerCase() !== 'a') return;
-			this.setActive(links, link);
-		});
-		return this;
-	}
-
 	/* Template
 	 ***********/
-	static get template() {
+	static get template() { // :template literal
 		return template;
 	}
 }
