@@ -13,12 +13,14 @@ export class RbNav extends PolymerElement {
 		super();
 		this.importPath = '/node_modules/@rapid-build-ui/rb-nav';
 	}
-
 	ready() {
 		super.ready();
 		this._slot = this.root.querySelector('slot');
 		this.setTabIndexes();
 		this.attachEvents();
+	}
+	disconnectedCallback() {
+		this.removeEventListener('click', this.setActive);
 	}
 
 	/* Properties
@@ -105,11 +107,6 @@ export class RbNav extends PolymerElement {
 
 	/* Event Handlers
 	 *****************/
-	attachEvents() { // :this
-		this.addEventListener('click', this.setActive);
-		return this;
-	}
-
 	setActive(e) { // :void
 		if (!this._links.length) return this;
 		let link = e.composedPath()[0];
@@ -121,6 +118,13 @@ export class RbNav extends PolymerElement {
 				break;
 			}
 		link.classList.add('active');
+	}
+
+	/* Attach Events
+	 ****************/
+	attachEvents() { // :this
+		this.addEventListener('click', this.setActive);
+		return this;
 	}
 
 	/* Template

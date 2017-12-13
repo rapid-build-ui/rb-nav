@@ -8,7 +8,7 @@
 
 :host {}
 
-/* Shared
+/* SHARED
  *********/
 nav {
 	position: relative;
@@ -27,10 +27,10 @@ nav {
 	}
 }
 
-/* Display Options (*block | inline)
+/* DISPLAY OPTIONS
  *****************/
 nav {
-	&.block {
+	&.block { // default
 		display: flex;
 	}
 	&.inline {
@@ -38,10 +38,10 @@ nav {
 	}
 }
 
-/* Layout Options (*horizontal | vertical)
+/* LAYOUT OPTIONS
  *****************/
 nav {
-	&.horizontal {
+	&.horizontal { // default
 		flex-flow: row wrap;
 	}
 	&.vertical {
@@ -49,7 +49,7 @@ nav {
 	}
 }
 
-/* Kind: Default
+/* KIND: DEFAULT
  ****************/
 nav.default {
 	::slotted(a) {
@@ -67,6 +67,8 @@ nav.default {
 		color: darken(indianred, 15%) !important;
 	}
 
+	/* Layouts
+	 **********/
 	&.vertical {
 		::slotted(a) {
 			margin: 0;
@@ -76,8 +78,8 @@ nav.default {
 		}
 	}
 
-	/* Dividers Option
-	 ******************/
+	/* Dividers
+	 ***********/
 	&.dividers {
 		&.horizontal {
 			::slotted(a:not(:last-child))::after {
@@ -110,39 +112,82 @@ nav.default {
 	}
 }
 
-/* Kind: Tabs
+/* KIND: TABS
  *************/
 nav.tabs {
-	top: 1px; // to go overlap bottom border of container
+	/* Layouts
+	 **********/
+	&.horizontal {
+		top: 1px; // to overlap bottom border of container
 
-	::slotted(a) {
-		padding: remy(10) remy(10) remy(18);
-		color: lightslategray !important;
-		font-size: remy(13) !important;
-		font-weight: 600 !important;
-		letter-spacing: .1px !important;
-		text-transform: uppercase !important;
-		border-radius: 10px 10px 0 0;
-		border: 1px solid transparent;
-		border-bottom: none;
-	}
-	::slotted(a:not(:last-child)) {
-		margin-right: remy(2);
-	}
-	::slotted(a:hover),
-	::slotted(a:focus),
-	::slotted(a:active),
-	::slotted(a.active) {
-		border-color: #ddd;
-		background-color: white;
-	}
-	::slotted(a:hover),
-	::slotted(a:focus) {
-		color: lightslategray !important;
+		::slotted(a) {
+			padding: remy(10) remy(10) remy(18);
+			color: lightslategray !important;
+			font-size: remy(13) !important;
+			font-weight: 600 !important;
+			letter-spacing: .1px !important;
+			text-transform: uppercase !important;
+			border-radius: 10px 10px 0 0;
+			border: 1px solid transparent;
+			border-bottom: none;
+		}
+		::slotted(a:not(:last-child)) {
+			margin-right: remy(2);
+		}
+		::slotted(a:hover),
+		::slotted(a:focus),
+		::slotted(a:active),
+		::slotted(a.active) {
+			border-color: #ddd;
+			background-color: white;
+		}
+		::slotted(a:hover),
+		::slotted(a:focus) {
+			color: lightslategray !important;
 
+		}
+		::slotted(a:active),
+		::slotted(a.active) {
+			color: dimgray !important;
+		}
 	}
-	::slotted(a:active),
-	::slotted(a.active) {
-		color: dimgray !important;
+
+	&.vertical {
+		::slotted(a) {
+			padding: remy(10) remy(10) remy(11);
+			color: lightslategray !important;
+			font-size: remy(13) !important;
+			font-weight: 600 !important;
+			letter-spacing: .1px !important;
+			text-transform: uppercase !important;
+			border: 1px solid transparent;
+			border-radius: 10px;
+		}
+		::slotted(a:not(:last-child)) {
+			margin-bottom: remy(2);
+		}
+		::slotted(a:hover),
+		::slotted(a:focus),
+		::slotted(a:active),
+		::slotted(a.active) {
+			color: dimgray !important;
+			background-color: #f9f9f9;
+		}
+	}
+
+	/* Dividers
+	 ***********/
+	&.dividers {
+		&.horizontal {
+			::slotted(a) {
+				border-color: #ddd;
+			}
+			::slotted(a:hover),
+			::slotted(a:focus),
+			::slotted(a:active),
+			::slotted(a.active) {
+				background-color: #f9f9f9;
+			}
+		}
 	}
 }
