@@ -154,13 +154,12 @@ nav.tabs {
 
 	&.vertical {
 		::slotted(a) {
-			padding: remy(10) remy(10) remy(11);
+			padding: remy(11) remy(12) remy(12);
 			color: lightslategray !important;
 			font-size: remy(13) !important;
 			font-weight: 600 !important;
 			letter-spacing: .1px !important;
 			text-transform: uppercase !important;
-			border: 1px solid transparent;
 			border-radius: 10px;
 		}
 		::slotted(a:not(:last-child)) {
@@ -187,6 +186,15 @@ nav.tabs {
 			::slotted(a:active),
 			::slotted(a.active) {
 				background-color: #f9f9f9;
+			}
+		}
+		&.vertical {
+			::slotted(a) {
+				padding-bottom: remy(11);
+				border: 1px solid #ddd;
+			}
+			::slotted(a:not(:last-child)) {
+				margin-bottom: remy(3);
 			}
 		}
 	}
