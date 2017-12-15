@@ -22,7 +22,6 @@ export class RbNav extends Activity(PolymerElement) {
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		this.detachActivityEvents()
 	}
 
 	/* Properties

@@ -3,6 +3,11 @@
  ******************/
 const ACTIVE_CLASS = 'active';
 const Activity = superClass => class extends superClass {
+	disconnectedCallback() {
+		super.disconnectedCallback();
+		this.detachActivityEvents();
+	}
+
 	/*************
 	 * PUBLIC API
 	 *************/
