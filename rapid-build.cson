@@ -11,7 +11,11 @@ common:
 		default:
 			client:
 				files: true
-
+		from:
+			minFile:
+				scripts: [
+					'scripts/activity.js'
+				]
 	extra:
 		copy:
 			client: [

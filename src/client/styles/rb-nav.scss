@@ -63,7 +63,7 @@ nav.default {
 	::slotted(a.active) {
 		color: indianred !important;
 	}
-	::slotted(a:active) {
+	::slotted(a:active:not(.active)) {
 		color: darken(indianred, 15%) !important;
 	}
 
