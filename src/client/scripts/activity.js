@@ -101,19 +101,9 @@ const Activity = superClass => class extends superClass {
 				this._addEvent('hashchange', '_setActiveHash');
 				window.addEventListener('hashchange', this._events.hashchange);
 				break;
-		}
-	}
-
-	_setActiveHash(e) { // :void
-		var hash = location.hash;
-		if (!hash) return;
-		for (let link of this.links) {
-			let href = link.getAttribute('href');
-			if (!href || !href.includes(hash)) continue;
-			if (this._isActiveLink(link)) return;
-			this._deactivateLinks();
-			this._activateLink(link);
-			break;
+			case 'path':
+				this._setActivePath(e);
+				break;
 		}
 	}
 
@@ -123,6 +113,34 @@ const Activity = superClass => class extends superClass {
 		if (this._isActiveLink(link)) return;
 		this._deactivateLinks();
 		this._activateLink(link);
+	}
+
+	_setActiveHash(e) { // :void
+		var hash = location.hash;
+		if (!hash) return;
+		hash = hash.toLowerCase();
+		for (let link of this.links) {
+			let href = link.getAttribute('href');
+			if (!href || !href.toLowerCase().includes(hash)) continue;
+			if (this._isActiveLink(link)) return;
+			this._deactivateLinks();
+			this._activateLink(link);
+			break;
+		}
+	}
+
+	_setActivePath(e) { // :void (TODO: support hrefs with ..)
+		var path = location.pathname.toLowerCase();
+		for (let link of this.links) {
+			let href = link.getAttribute('href');
+			if (!href) continue;
+			href = href.toLowerCase().split('?')[0].split('#')[0];
+			if (!href.includes(path)) continue;
+			if (this._isActiveLink(link)) return;
+			this._deactivateLinks();
+			this._activateLink(link);
+			break;
+		}
 	}
 
 }
