@@ -14,10 +14,8 @@ export class RbNav extends Activity(PolymerElement) {
 	}
 	connectedCallback() {
 		super.connectedCallback();
-		this._slot = this.root.querySelector('slot');
+		if (!this._slot) this._slot = this.root.querySelector('slot');
 		this.setTabIndexes();
-		this.setActivity()
-		this.attachActivityEvents();
 		// console.log(this.activity);
 	}
 	disconnectedCallback() {
