@@ -65,6 +65,7 @@ const Activity = superClass => class extends superClass {
 		this.removeEventListener('click', this._setActiveClick);
 		this._slot.removeEventListener('slotchange', this._events.slotchange);
 		window.removeEventListener('hashchange', this._events.hashchange);
+		this._pathObserver && this._pathObserver.disconnect();
 		return this;
 	}
 	_attachActivityEvents() { // :this
@@ -102,7 +103,17 @@ const Activity = superClass => class extends superClass {
 				window.addEventListener('hashchange', this._events.hashchange);
 				break;
 			case 'path':
+				if (this.pathObserver) break;
 				this._setActivePath(e);
+				var oldPath = location.pathname;
+				this._pathObserver = new MutationObserver(() => {
+					let newPath = location.pathname;
+					if (oldPath === newPath) return;
+					this._setActivePath(e);
+					oldPath = newPath;
+				});
+				var opts = { childList: true, subtree: true };
+				this._pathObserver.observe(document.body, opts);
 				break;
 		}
 	}
