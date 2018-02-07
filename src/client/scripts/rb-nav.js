@@ -10,7 +10,6 @@ import template from '../views/rb-nav.html';
 export class RbNav extends Activity(PolymerElement) {
 	constructor() {
 		super();
-		this.importPath = '/node_modules/@rapid-build-ui/rb-nav';
 	}
 	connectedCallback() {
 		super.connectedCallback();
