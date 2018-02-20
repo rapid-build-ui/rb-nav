@@ -25,11 +25,11 @@ const Activity = superClass => class extends superClass {
  	static get properties() {
  		return {
  			active: {
-				type: String, // :boolean | string | object
+				type: Object, // :boolean | string | object
  				value: true
  			},
 			activity: {
-				type: String,
+				type: Object, // :boolean | string
 				readOnly: true,
 				computed: 'getActivity(active)'
 			},
@@ -41,38 +41,35 @@ const Activity = superClass => class extends superClass {
  		}
  	}
 
-	getActivity(active) { // :string (activity type)
-		switch(active) {
-			case 'false': active = false;  break;
-			case 'hash':  active = 'hash'; break;
-			case 'path':  active = 'path'; break;
-			default:      active = 'default';
-		}
-		return active;
+	getActivity(active) { // :boolean | string (activity type)
+		if (active === false)         return false;
+		if (active === 'hash')        return 'hash';
+		if (active === 'path')        return 'path';
+		if (active && active.param)   return 'param';
+		if (active && active.segment) return 'segment';
+		return true;
 	}
 
 	/**********
 	 * PRIVATE
 	 **********/
 	// Event Handling
-	_addEvent(name, method) { // :this
+	_addEvent(name, method) { // :void
 		if (this._events[name]) return this;
 		this._events[name] = this._events[name] || this[method].bind(this);
-		return this;
 	}
-	_detachActivityEvents() { // :this
+	_detachActivityEvents() { // :void
 		if (!this.activity) return this;
 		this.removeEventListener('click', this._setActiveClick);
 		this._slot.removeEventListener('slotchange', this._events.slotchange);
 		window.removeEventListener('hashchange', this._events.hashchange);
 		this._pathObserver && this._pathObserver.disconnect();
-		return this;
+		this._paramsInterval && clearInterval(this._paramsInterval);
 	}
-	_attachActivityEvents() { // :this
+	_attachActivityEvents() { // :void
 		if (!this.activity) return this;
 		this._addEvent('slotchange', '_slotchange');
 		this._slot.addEventListener('slotchange', this._events.slotchange);
-		return this;
 	}
 
 	// Link Helpers
@@ -96,24 +93,38 @@ const Activity = superClass => class extends superClass {
 	// Event Handlers
 	_slotchange(e) { // :void
 		this.addEventListener('click', this._setActiveClick);
+
 		switch(this.activity) {
 			case 'hash':
 				this._setActiveHash(e);
 				this._addEvent('hashchange', '_setActiveHash');
 				window.addEventListener('hashchange', this._events.hashchange);
 				break;
+
 			case 'path':
-				if (this.pathObserver) break;
+				if (this._pathObserver) break;
 				this._setActivePath(e);
 				var oldPath = location.pathname;
 				this._pathObserver = new MutationObserver(() => {
 					let newPath = location.pathname;
-					if (oldPath === newPath) return;
+					if (newPath === oldPath) return;
 					this._setActivePath(e);
 					oldPath = newPath;
 				});
 				var opts = { childList: true, subtree: true };
 				this._pathObserver.observe(document.body, opts);
+				break;
+
+			case 'param':
+				if (this._paramsInterval) break;
+				this._setActiveParam(e);
+				var oldParams = location.search;
+				this._paramsInterval = setInterval(() => {
+					let newParams = location.search;
+					if (newParams === oldParams) return;
+					oldParams = newParams;
+					this._setActiveParam(e);
+				}, 250);
 				break;
 		}
 	}
@@ -154,6 +165,30 @@ const Activity = superClass => class extends superClass {
 		}
 	}
 
+	_setActiveParam(e) { // :void
+		var locQS = location.search.slice(0);
+		if (!locQS) return;
+		locQS = locQS.toLowerCase();
+		var locParam = new URLSearchParams(locQS).getAll(this.active.param);
+		if (!locParam.length) return;
+		locParam = JSON.stringify(locParam);
+
+		for (let link of this.links) {
+			let href = link.getAttribute('href');
+			if (!href) continue;
+			let linkQS = href.toLowerCase().split('?')[1];
+			if (!linkQS) continue;
+			linkQS = linkQS.split('#')[0];
+			let linkParam = new URLSearchParams(linkQS).getAll(this.active.param);
+			if (!linkParam.length) continue;
+			linkParam = JSON.stringify(linkParam);
+			if (linkParam != locParam) continue;
+			if (this._isActiveLink(link)) return;
+			this._deactivateLinks();
+			this._activateLink(link);
+			break;
+		}
+	}
 }
 
 /* Export it!
