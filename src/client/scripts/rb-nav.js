@@ -2,8 +2,6 @@
  * RB-NAV
  *********/
 import { Element as PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-// import { DomRepeat as DomRepeat } from '../../../@polymer/polymer/lib/elements/dom-repeat.js';
-// import { DomBind as DomBind } from '../../../@polymer/polymer/lib/elements/dom-bind.js';
 import Activity from './activity.js';
 import template from '../views/rb-nav.html';
 

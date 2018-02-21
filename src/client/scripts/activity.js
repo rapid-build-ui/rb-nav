@@ -21,7 +21,6 @@ const Activity = superClass => class extends superClass {
 	/*************
 	 * PUBLIC API
 	 *************/
-	// Properties
  	static get properties() {
  		return {
  			active: {
@@ -42,18 +41,19 @@ const Activity = superClass => class extends superClass {
  	}
 
 	getActivity(active) { // :boolean | string (activity type)
-		if (active === false)         return false;
-		if (active === 'hash')        return 'hash';
-		if (active === 'path')        return 'path';
-		if (active && active.param)   return 'param';
-		if (active && active.segment) return 'segment';
+		if (active === false)       return false;
+		if (active === 'hash')      return 'hash';
+		if (active === 'path')      return 'path';
+		if (active && active.param) return 'param';
+		if (active && typeof active.segment == 'number') return 'segment';
 		return true;
 	}
 
 	/**********
 	 * PRIVATE
 	 **********/
-	// Event Handling
+	/* Event Management
+	 *****************/
 	_addEvent(name, method) { // :void
 		if (this._events[name]) return this;
 		this._events[name] = this._events[name] || this[method].bind(this);
@@ -65,6 +65,7 @@ const Activity = superClass => class extends superClass {
 		window.removeEventListener('hashchange', this._events.hashchange);
 		this._pathObserver && this._pathObserver.disconnect();
 		this._paramsInterval && clearInterval(this._paramsInterval);
+		this._segmentObserver && this._segmentObserver.disconnect();
 	}
 	_attachActivityEvents() { // :void
 		if (!this.activity) return this;
@@ -72,7 +73,8 @@ const Activity = superClass => class extends superClass {
 		this._slot.addEventListener('slotchange', this._events.slotchange);
 	}
 
-	// Link Helpers
+	/* Link Helpers
+	 ***************/
 	_activateLink(link) { // :void
 		link.classList.add(ACTIVE_CLASS);
 	}
@@ -90,7 +92,8 @@ const Activity = superClass => class extends superClass {
 		return link.classList.contains(ACTIVE_CLASS);
 	}
 
-	// Event Handlers
+	/* Event Handlers
+	 *****************/
 	_slotchange(e) { // :void
 		this.addEventListener('click', this._setActiveClick);
 
@@ -126,6 +129,20 @@ const Activity = superClass => class extends superClass {
 					this._setActiveParam(e);
 				}, 250);
 				break;
+
+			case 'segment':
+				if (this._segmentObserver) break;
+				this._setActiveSegment(e);
+				var oldSegment = location.pathname;
+				this._segmentObserver = new MutationObserver(() => {
+					let newSegment = location.pathname;
+					if (newSegment === oldSegment) return;
+					this._setActiveSegment(e);
+					oldSegment = newSegment;
+				});
+				var opts = { childList: true, subtree: true };
+				this._segmentObserver.observe(document.body, opts);
+				break;
 		}
 	}
 
@@ -144,7 +161,7 @@ const Activity = superClass => class extends superClass {
 		for (let link of this.links) {
 			let href = link.getAttribute('href');
 			if (!href || !href.toLowerCase().includes(hash)) continue;
-			if (this._isActiveLink(link)) return;
+			if (this._isActiveLink(link)) break;
 			this._deactivateLinks();
 			this._activateLink(link);
 			break;
@@ -157,8 +174,9 @@ const Activity = superClass => class extends superClass {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			href = href.toLowerCase().split('?')[0].split('#')[0];
+			if (!href) continue;
 			if (!href.includes(path)) continue;
-			if (this._isActiveLink(link)) return;
+			if (this._isActiveLink(link)) break;
 			this._deactivateLinks();
 			this._activateLink(link);
 			break;
@@ -169,7 +187,8 @@ const Activity = superClass => class extends superClass {
 		var locQS = location.search.slice(0);
 		if (!locQS) return;
 		locQS = locQS.toLowerCase();
-		var locParam = new URLSearchParams(locQS).getAll(this.active.param);
+		var activeParam = this.active.param,
+			locParam    = new URLSearchParams(locQS).getAll(activeParam);
 		if (!locParam.length) return;
 		locParam = JSON.stringify(locParam);
 
@@ -179,11 +198,35 @@ const Activity = superClass => class extends superClass {
 			let linkQS = href.toLowerCase().split('?')[1];
 			if (!linkQS) continue;
 			linkQS = linkQS.split('#')[0];
-			let linkParam = new URLSearchParams(linkQS).getAll(this.active.param);
+			let linkParam = new URLSearchParams(linkQS).getAll(activeParam);
 			if (!linkParam.length) continue;
 			linkParam = JSON.stringify(linkParam);
 			if (linkParam != locParam) continue;
-			if (this._isActiveLink(link)) return;
+			if (this._isActiveLink(link)) break;
+			this._deactivateLinks();
+			this._activateLink(link);
+			break;
+		}
+	}
+
+	_setActiveSegment(e) { // :void
+		var locSegs = location.pathname.toLowerCase().split('/');
+		locSegs.shift();
+		if (!locSegs[0].trim()) return;
+		var activeSeg = this.active.segment - 1;
+		if (locSegs.length < activeSeg + 1) return;
+
+		for (let link of this.links) {
+			let href = link.getAttribute('href');
+			if (!href) continue;
+			href = href.toLowerCase().split('?')[0].split('#')[0];
+			if (!href) continue;
+			let linkSegs = href.toLowerCase().split('/');
+			linkSegs.shift();
+			if (!linkSegs[0].trim()) continue;
+			if (linkSegs.length < activeSeg + 1) continue;
+			if (linkSegs[activeSeg] !== locSegs[activeSeg]) continue;
+			if (this._isActiveLink(link)) break;
 			this._deactivateLinks();
 			this._activateLink(link);
 			break;
