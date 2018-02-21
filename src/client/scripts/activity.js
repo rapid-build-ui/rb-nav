@@ -62,7 +62,7 @@ const Activity = superClass => class extends superClass {
 		if (!this.activity) return this;
 		this.removeEventListener('click', this._setActiveClick);
 		this._slot.removeEventListener('slotchange', this._events.slotchange);
-		window.removeEventListener('hashchange', this._events.hashchange);
+		this._hashInterval && clearInterval(this._hashInterval);
 		this._pathObserver && this._pathObserver.disconnect();
 		this._paramsInterval && clearInterval(this._paramsInterval);
 		this._segmentObserver && this._segmentObserver.disconnect();
@@ -108,9 +108,15 @@ const Activity = superClass => class extends superClass {
 
 		switch(this.activity) {
 			case 'hash':
+				if (this._hashInterval) break;
 				this._setActiveHash(e);
-				this._addEvent('hashchange', '_setActiveHash');
-				window.addEventListener('hashchange', this._events.hashchange);
+				var oldHash = location.hash;
+				this._hashInterval = setInterval(() => {
+					let newHash = location.hash;
+					if (newHash === oldHash) return;
+					oldHash = newHash;
+					this._setActiveHash(e);
+				}, 100);
 				break;
 
 			case 'path':
