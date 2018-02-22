@@ -23,9 +23,9 @@
 	::slotted(a:first-child) {
 		border-top: 1px solid mapGet($colors, dividers, vertical);
 	}
-	// ::slotted(a.active),
+	::slotted(a.active),
 	::slotted(a:hover),
-	::slotted(a:focus){
+	::slotted(a:focus) {
 		background-color: mapGet($colors, bg, vertical, links, active);
 	}
 }
