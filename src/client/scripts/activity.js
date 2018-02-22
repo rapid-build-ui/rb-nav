@@ -73,6 +73,15 @@ const Activity = superClass => class extends superClass {
 		this._slot.addEventListener('slotchange', this._events.slotchange);
 	}
 
+	/* Helpers
+	 **********/
+	__cleanArray(array) { // :[]
+		return array.filter(v => {
+			if (v === void 0) return false;
+			return v !== '';
+		});
+	}
+
 	/* Link Helpers
 	 ***************/
 	__activateLink(link) { // :void
@@ -225,18 +234,14 @@ const Activity = superClass => class extends superClass {
 
 	_setActiveSegment(e) { // :void
 		var activeSeg = this.active.segment - 1,
-			locSegs   = location.pathname.toLowerCase().split('/');
-		locSegs.shift();
+			locSegs   = this.__cleanArray(location.pathname.toLowerCase().split('/'));
 
 		for (let link of this.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			href = href.toLowerCase().split('?')[0].split('#')[0];
 			if (!href) continue;
-			let linkSegs = href.toLowerCase().split('/');
-			linkSegs.shift();
-			if (!linkSegs[0].trim()) continue;
-			if (linkSegs.length < activeSeg + 1) continue;
+			let linkSegs = this.__cleanArray(href.split('/'));
 			if (linkSegs[activeSeg] !== locSegs[activeSeg]) continue;
 			var deactivate = false;
 			this._activateLink(link);
