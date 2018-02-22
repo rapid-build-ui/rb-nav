@@ -1,6 +1,9 @@
 /******************
  * COLOR VARIABLES
  ******************/
+$LIGHTGREY:  darken(whitesmoke, .5%);   // #f4f4f4
+$XLIGHTGREY: lighten(whitesmoke, 1.5%); // #f9f9f9
+
 $colors: (
 	bg: (
 		vertical: (
@@ -31,6 +34,10 @@ $colors: (
 	dividers: (
 		tabs: gainsboro, // #dcdcdc
 		vertical: lighten(lightgrey, 6.4%), // #e3e3e3
+		caption: (
+			top:    #f2f2f2,
+			bottom: $XLIGHTGREY
+		),
 		horizontal: (
 			left:  $XLIGHTGREY,
 			right: lightslategray
@@ -38,7 +45,10 @@ $colors: (
 	),
 
 	text: (
-		caption: darken(slategrey, 8%), // #5e6c79
+		caption: (
+			default: darken(slategrey, 8%), // #5e6c79
+			shadow: white
+		),
 		links: (
 			default: lightslategray !important,
 			active:  indianred !important,
