@@ -22,29 +22,31 @@ h3 {
 	}
 }
 
-&.vertical {
+&.default.vertical {
 	h3 {
 		margin-bottom: remy(12);
 	}
 }
 
-&.tabs.vertical {
+&.default.vertical.dividers {
 	h3 {
-		margin-bottom: remy(11);
+		margin: 0;
+		padding: remy(10) remy(12);
+		border-bottom: 1px solid mapGet($colors, dividers, vertical);
+		// border-top: 1px solid mapGet($colors, dividers, vertical);
+		// background-color: mapGet($colors, bg, vertical, caption);
+		// text-shadow: 1px 1px 4px white;
 	}
 }
 
-&.vertical.dividers {
+&.tabs.vertical {
 	h3 {
-		margin: 0;
 		padding: remy(10) remy(12);
 	}
 }
 
-// &.default.vertical.dividers {
-// 	h3 {
-// 		border-top: 1px solid mapGet($colors, dividers, vertical);
-// 		background-color: mapGet($colors, bg, vertical, caption);
-// 		text-shadow: 1px 1px 4px white;
-// 	}
-// }
+&.tabs.horizontal.dividers {
+	h3 {
+		margin-right: remy(12);
+	}
+}

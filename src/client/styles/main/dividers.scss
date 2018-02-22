@@ -20,9 +20,9 @@
 		padding: remy(7) remy(12) remy(9);
 		border-bottom: 1px solid mapGet($colors, dividers, vertical);
 	}
-	::slotted(a:first-child) {
-		border-top: 1px solid mapGet($colors, dividers, vertical);
-	}
+	// ::slotted(a:first-child) {
+	// 	border-top: 1px solid mapGet($colors, dividers, vertical);
+	// }
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a.active) {
