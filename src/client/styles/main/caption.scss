@@ -4,7 +4,7 @@
 h3 {
 	position: relative;
 	margin: 0;
-	font-size: remy(14);
+	font-size: remy(13);
 	letter-spacing: .1px;
 	color: mapGet($colors, text, caption);
 	text-transform: uppercase;
@@ -31,11 +31,11 @@ h3 {
 &.default.vertical.dividers {
 	h3 {
 		margin: 0;
-		padding: remy(10) remy(12);
+		padding: remy(11) remy(12) remy(10);
+		border-top: 1px solid mapGet($colors, dividers, vertical);
 		border-bottom: 1px solid mapGet($colors, dividers, vertical);
-		// border-top: 1px solid mapGet($colors, dividers, vertical);
-		// background-color: mapGet($colors, bg, vertical, caption);
-		// text-shadow: 1px 1px 4px white;
+		background-color: mapGet($colors, bg, vertical, caption);
+		text-shadow: 1px 1px 4px white;
 	}
 }
 
