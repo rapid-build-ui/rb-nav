@@ -31,7 +31,7 @@ h3 {
 &.default.vertical.dividers {
 	h3 {
 		margin: 0;
-		padding: remy(11) remy(12) remy(10);
+		padding: remy(11) remy(12) remy(9);
 		border-top: 1px solid mapGet($colors, dividers, caption, top);
 		border-bottom: 1px solid mapGet($colors, dividers, caption, bottom);
 		background-color: mapGet($colors, bg, vertical, caption);
