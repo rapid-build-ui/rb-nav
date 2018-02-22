@@ -1,0 +1,21 @@
+/********
+ * KINDS
+ ********/
+&.default {
+	::slotted(a) {
+		color: mapGet($colors, text, links, default);
+	}
+	::slotted(a:not(:last-child)) {
+		margin-right: remy(15);
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a.active) {
+		color: mapGet($colors, text, links, active);
+	}
+	::slotted(a:active:not(.active)) {
+		color: mapGet($colors, text, links, click);
+	}
+}
+
+&.tabs {}

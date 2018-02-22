@@ -1,0 +1,19 @@
+/*********
+ * COMMON
+ *********/
+& {
+	position: relative;
+
+	::slotted(a) {
+		margin: 0;
+		box-sizing: border-box !important;
+		cursor: pointer !important;
+		text-decoration: none !important;
+	}
+	::slotted(a:focus) {
+		outline: none !important;
+	}
+	::slotted(a.active) {
+		cursor: default !important;
+	}
+}

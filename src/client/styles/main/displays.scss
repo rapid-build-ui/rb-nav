@@ -1,0 +1,10 @@
+/***********
+ * DISPLAYS
+ ***********/
+&.block { // default
+	display: flex;
+}
+
+&.inline {
+	display: inline-flex;
+}

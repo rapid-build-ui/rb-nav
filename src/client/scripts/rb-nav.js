@@ -2,6 +2,7 @@
  * RB-NAV
  *********/
 import { Element as PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
+import { DomIf as DomIf } from '../../../@polymer/polymer/lib/elements/dom-if.js';
 import Activity from './activity.js';
 import template from '../views/rb-nav.html';
 
@@ -25,6 +26,9 @@ export class RbNav extends Activity(PolymerElement) {
 		return {
 			/* API
 			 ******/
+			caption: {
+				type: String
+			},
 			dividers: {
 				type: Boolean,
 				value: false
@@ -37,48 +41,30 @@ export class RbNav extends Activity(PolymerElement) {
 				type: String,
 				value: 'default'
 			},
-			unresponsive: {
+			responsive: {
 				type: Boolean,
 				value: false
 			},
 			vertical: {
 				type: Boolean,
 				value: false
-			},
-			/* Computed
-			 ***********/
-			_display: {
-				type: String,
-				computed: 'getDisplay(inline)'
-			},
-			_dividers: {
-				type: String,
-				computed: 'getDividers(dividers)'
-			},
-			_layout: {
-				type: String,
-				computed: 'getLayout(vertical)'
-			},
-			_responsive: {
-				type: String,
-				computed: 'getResponsive(unresponsive)'
 			}
 		}
 	}
 
 	/* Computed Bindings
 	 ********************/
-	getDisplay(inline) { // :string
+	_display(inline) { // :string
 		return inline ? 'inline' : 'block';
 	}
-	getDividers(dividers) { // :string
-		return dividers ? 'dividers' : '';
+	_dividers(dividers) { // :string
+		return dividers ? 'dividers' : null;
 	}
-	getLayout(vertical) { // :string
+	_layout(vertical) { // :string
 		return vertical ? 'vertical' : 'horizontal';
 	}
-	getResponsive(unresponsive) { // :string
-		return unresponsive ? '' : 'responsive';
+	_responsive(responsive) { // :string
+		return responsive ? 'responsive' : null;
 	}
 
 	/* Getters

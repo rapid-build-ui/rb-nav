@@ -1,0 +1,50 @@
+/**********
+ * CAPTION
+ **********/
+h3 {
+	position: relative;
+	margin: 0;
+	font-size: remy(14);
+	letter-spacing: .1px;
+	color: mapGet($colors, text, caption);
+	text-transform: uppercase;
+}
+
+&.horizontal {
+	h3 {
+		margin-right: remy(15);
+		&::after {
+			position: relative;
+			margin: 0 0 0 1px;
+			top: -1.5px;
+			content: ':';
+		}
+	}
+}
+
+&.vertical {
+	h3 {
+		margin-bottom: remy(12);
+	}
+}
+
+&.tabs.vertical {
+	h3 {
+		margin-bottom: remy(11);
+	}
+}
+
+&.vertical.dividers {
+	h3 {
+		margin: 0;
+		padding: remy(10) remy(12);
+	}
+}
+
+// &.default.vertical.dividers {
+// 	h3 {
+// 		border-top: 1px solid mapGet($colors, dividers, vertical);
+// 		background-color: mapGet($colors, bg, vertical, caption);
+// 		text-shadow: 1px 1px 4px white;
+// 	}
+// }

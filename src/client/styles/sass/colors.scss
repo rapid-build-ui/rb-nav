@@ -1,0 +1,54 @@
+/******************
+ * COLOR VARIABLES
+ ******************/
+$colors: (
+	bg: (
+		vertical: (
+			caption: $LIGHTGREY,
+			links: (
+				active: $XLIGHTGREY
+			)
+		),
+		tabs: (
+			horizontal: (
+				links: (
+					active: white
+				),
+				dividers: (
+					links: (
+						active: $XLIGHTGREY
+					)
+				)
+			),
+			vertical: (
+				links: (
+					active: $XLIGHTGREY
+				)
+			)
+		)
+	),
+
+	dividers: (
+		tabs: gainsboro, // #dcdcdc
+		vertical: lighten(lightgrey, 6.4%), // #e3e3e3
+		horizontal: (
+			left:  $XLIGHTGREY,
+			right: lightslategray
+		)
+	),
+
+	text: (
+		caption: darken(slategrey, 8%), // #5e6c79
+		links: (
+			default: lightslategray !important,
+			active:  indianred !important,
+			click:   darken(indianred, 15%) !important // #a93434
+		),
+		tabs: (
+			links: (
+				default: lightslategray !important,
+				active:  dimgray !important
+			)
+		)
+	)
+);

@@ -1,0 +1,59 @@
+/***********
+ * DIVIDERS
+ ***********/
+&.default.dividers.horizontal {
+	::slotted(a:not(:last-child))::after {
+		top: 1px;
+		position: relative;
+		display: inline-block;
+		height: remy(12);
+		margin-left: remy(15);
+		border-left: 1px solid mapGet($colors, dividers, horizontal, left);
+		border-right: 1px solid mapGet($colors, dividers, horizontal, right);
+		content: '';
+	}
+}
+
+&.default.dividers.vertical {
+	::slotted(a) {
+		margin: 0;
+		padding: remy(7) remy(12) remy(9);
+		border-bottom: 1px solid mapGet($colors, dividers, vertical);
+	}
+	::slotted(a:first-child) {
+		border-top: 1px solid mapGet($colors, dividers, vertical);
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a.active) {
+		background-color: mapGet($colors, bg, vertical, links, active);
+	}
+}
+
+/* Tabs
+ *******/
+&.tabs.dividers {
+	::slotted(a) {
+		border: 1px solid mapGet($colors, dividers, tabs);
+	}
+}
+&.tabs.dividers.horizontal {
+	::slotted(a) {
+		border-bottom: none;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($colors, bg, tabs, horizontal, dividers, links, active);
+	}
+}
+
+&.tabs.dividers.vertical {
+	::slotted(a) {
+		padding-bottom: remy(11);
+	}
+	::slotted(a:not(:last-child)) {
+		margin-bottom: remy(3);
+	}
+}
