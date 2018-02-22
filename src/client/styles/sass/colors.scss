@@ -1,15 +1,16 @@
 /******************
  * COLOR VARIABLES
  ******************/
-$LIGHTGREY:  darken(whitesmoke, .5%);   // #f4f4f4
-$XLIGHTGREY: lighten(whitesmoke, 1.5%); // #f9f9f9
+$LIGHTGREY:   darken(whitesmoke, .5%);   // #f4f4f4
+$XLIGHTGREY:  lighten(whitesmoke, 1.5%); // #f9f9f9
+$XXLIGHTGREY: lighten(whitesmoke, 2%);   // #fafafa
 
 $colors: (
 	bg: (
 		vertical: (
 			caption: $LIGHTGREY,
 			links: (
-				active: $XLIGHTGREY
+				active: $XXLIGHTGREY
 			)
 		),
 		tabs: (
