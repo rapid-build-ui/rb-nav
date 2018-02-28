@@ -24,14 +24,8 @@
  *******/
 &.tabs.horizontal {
 	top: 1px; // to overlap bottom border of container
-
 	::slotted(a) {
 		padding: remy(10) remy(10) remy(18);
-		color: mapGet($colors, text, tabs, links, default);
-		font-size: remy(13) !important;
-		font-weight: 600 !important;
-		letter-spacing: .1px !important;
-		text-transform: uppercase !important;
 		border-radius: 10px 10px 0 0;
 		border: 1px solid transparent;
 		border-bottom: none;
@@ -46,20 +40,11 @@
 		border-color: mapGet($colors, dividers, tabs);
 		background-color: mapGet($colors, bg, tabs, horizontal, links, active);
 	}
-	::slotted(a:active),
-	::slotted(a.active) {
-		color: mapGet($colors, text, tabs, links, active);
-	}
 }
 
 &.tabs.vertical {
 	::slotted(a) {
 		padding: remy(11) remy(12) remy(12);
-		color: mapGet($colors, text, tabs, links, default);
-		font-size: remy(13) !important;
-		font-weight: 600 !important;
-		letter-spacing: .1px !important;
-		text-transform: uppercase !important;
 		border-radius: 10px;
 	}
 	::slotted(a:not(:last-child)) {
@@ -69,7 +54,6 @@
 	::slotted(a:focus),
 	::slotted(a:active),
 	::slotted(a.active) {
-		color: mapGet($colors, text, tabs, links, active);
 		background-color: mapGet($colors, bg, tabs, vertical, links, active);
 	}
 }

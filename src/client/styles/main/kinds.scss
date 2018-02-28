@@ -3,6 +3,7 @@
  ********/
 &.default {
 	::slotted(a) {
+		font-size: remy(16) !important;
 		color: mapGet($colors, text, links, default);
 	}
 	::slotted(a:not(:last-child)) {
@@ -18,4 +19,16 @@
 	}
 }
 
-&.tabs {}
+&.tabs {
+	::slotted(a) {
+		font-size: remy(13) !important;
+		font-weight: 600 !important;
+		letter-spacing: .1px !important;
+		text-transform: uppercase !important;
+		color: mapGet($colors, text, tabs, links, default);
+	}
+	::slotted(a:active),
+	::slotted(a.active) {
+		color: mapGet($colors, text, tabs, links, active);
+	}
+}
