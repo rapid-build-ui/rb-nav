@@ -14,7 +14,4 @@
 	::slotted(a:focus) {
 		outline: none !important;
 	}
-	::slotted(a.active) {
-		cursor: default !important;
-	}
 }
