@@ -13,11 +13,11 @@ export class RbNav extends Activity(PolymerElement) {
 	connectedCallback() {
 		super.connectedCallback();
 		if (!this._slot) this._slot = this.root.querySelector('slot');
-		this.setTabIndexes();
-		// console.log(this.activity);
+		this._attachEvents();
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
+		this._detachEvents();
 	}
 
 	/* Properties
@@ -76,15 +76,34 @@ export class RbNav extends Activity(PolymerElement) {
 			.filter(n => n.tagName.toLowerCase() === 'a');
 	}
 
-	/* Private
-	 **********/
-	setTabIndexes() { // :this
-		if (!this.links.length) return this;
+	/* Event Management
+	 *******************/
+	_attachEvents() { // :void
+		this._slot.addEventListener('slotchange', this._setTabIndexes.bind(this));
+		this._slot.addEventListener('slotchange', this._trimSlot.bind(this));
+	}
+	_detachEvents() { // :void
+		this._slot.removeEventListener('slotchange', this._setTabIndexes);
+		this._slot.removeEventListener('slotchange', this._trimSlot);
+	}
+
+	/* Event Handlers
+	 *****************/
+	_setTabIndexes() { // :void
+		if (!this.links.length) return;
 		for (let link of this.links) {
 			if (link.hasAttribute('tabindex')) continue;
 			link.setAttribute('tabindex', 0);
 		}
-		return this;
+	}
+	_trimSlot(e) { // :void (prevent extra white space)
+		if (!this.links.length) return;
+		for (let link of this.links) {
+			for (let child of link.childNodes) {
+				if (child.nodeType !== 3) continue;
+				child.textContent = child.textContent.trimLeft();
+			}
+		}
 	}
 
 	/* Template

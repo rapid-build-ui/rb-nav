@@ -49,14 +49,16 @@ const Activity = superClass => class extends superClass {
 		return true;
 	}
 
-	/**********
-	 * PRIVATE
-	 **********/
 	/* Event Management
-	 *****************/
+	 *******************/
 	_addEvent(name, method) { // :void
 		if (this._events[name]) return this;
 		this._events[name] = this._events[name] || this[method].bind(this);
+	}
+	_attachActivityEvents() { // :void
+		if (!this.activity) return this;
+		this._addEvent('slotchange', '_slotchange');
+		this._slot.addEventListener('slotchange', this._events.slotchange);
 	}
 	_detachActivityEvents() { // :void
 		if (!this.activity) return this;
@@ -66,11 +68,6 @@ const Activity = superClass => class extends superClass {
 		this._pathObserver && this._pathObserver.disconnect();
 		this._paramsInterval && clearInterval(this._paramsInterval);
 		this._segmentObserver && this._segmentObserver.disconnect();
-	}
-	_attachActivityEvents() { // :void
-		if (!this.activity) return this;
-		this._addEvent('slotchange', '_slotchange');
-		this._slot.addEventListener('slotchange', this._events.slotchange);
 	}
 
 	/* Helpers

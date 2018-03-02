@@ -2,12 +2,17 @@
  * DIVIDERS
  ***********/
 &.default.dividers.horizontal {
-	::slotted(a:not(:last-child))::after {
-		top: 1px;
-		position: relative;
+	::slotted(a) {
+		margin: 0;
+	}
+	::slotted(a:not(:first-child)) { padding-left:  remy(15); }
+	::slotted(a:not(:last-child))  { padding-right: remy(15); }
+	::slotted(a:not(:first-child))::before {
 		display: inline-block;
+		position: relative;
+		top: 1px;
+		right: remy(15);
 		height: remy(12);
-		margin-left: remy(15);
 		border-left: 1px solid mapGet($colors, dividers, horizontal, left);
 		border-right: 1px solid mapGet($colors, dividers, horizontal, right);
 		content: '';
