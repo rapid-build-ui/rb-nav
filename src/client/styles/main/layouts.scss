@@ -11,12 +11,43 @@
 
 /* Default
  **********/
-&.default.vertical {
-	::slotted(a) {
-		margin: 0;
+&.default.horizontal {
+	::slotted(h3) {
+		margin-right: remy(15) !important;
 	}
 	::slotted(a:not(:last-child)) {
-		margin-bottom: remy(10);
+		margin-right: remy(15) !important;
+	}
+}
+&.default.vertical {
+	::slotted(h3) {
+		margin-bottom: remy(12) !important;
+	}
+	::slotted(a:not(:last-child)) {
+		margin-bottom: remy(10) !important;
+	}
+	::slotted(a.rb-last:not(:last-child)) {
+		margin-bottom: remy(12) !important;
+	}
+}
+&.default.horizontal.dividers {
+	::slotted(a) {
+		margin-right: 0 !important;
+	}
+	::slotted(a:not(.rb-first)) { padding-left:  remy(15) !important; }
+	::slotted(a:not(.rb-last))  { padding-right: remy(15) !important; }
+	::slotted(a.rb-last:not(:last-child)) {
+		margin-right: remy(15) !important;
+	}
+}
+&.default.vertical.dividers {
+	::slotted(h3) {
+		margin: 0 !important;
+		padding: remy(11) remy(12) remy(9) !important;
+	}
+	::slotted(a) {
+		margin: 0 !important;
+		padding: remy(7) remy(12) remy(9) !important;
 	}
 }
 
@@ -24,36 +55,27 @@
  *******/
 &.tabs.horizontal {
 	top: 1px; // to overlap bottom border of container
+
+	::slotted(h3),
+	::slotted(a.rb-last:not(:last-child)) {
+		margin-right: remy(12) !important;
+	}
+	::slotted(a:not(.rb-last)) {
+		margin-right: remy(2) !important;
+	}
 	::slotted(a) {
-		padding: remy(10) remy(10) remy(18);
-		border-radius: 10px 10px 0 0;
-		border: 1px solid transparent;
-		border-bottom: none;
-	}
-	::slotted(a:not(:last-child)) {
-		margin-right: remy(2);
-	}
-	::slotted(a:hover),
-	::slotted(a:focus),
-	::slotted(a:active),
-	::slotted(a.active) {
-		border-color: mapGet($colors, dividers, tabs);
-		background-color: mapGet($colors, bg, tabs, horizontal, links, active);
+		padding: remy(10) remy(10) remy(18) !important;
 	}
 }
 
 &.tabs.vertical {
+	::slotted(h3) {
+		padding: remy(10) remy(12) !important;
+	}
 	::slotted(a) {
-		padding: remy(11) remy(12) remy(12);
-		border-radius: 10px;
+		padding: remy(11) remy(12) remy(12) !important;
 	}
-	::slotted(a:not(:last-child)) {
-		margin-bottom: remy(2);
-	}
-	::slotted(a:hover),
-	::slotted(a:focus),
-	::slotted(a:active),
-	::slotted(a.active) {
-		background-color: mapGet($colors, bg, tabs, vertical, links, active);
+	::slotted(a:not(.rb-last)) {
+		margin-bottom: remy(2) !important;
 	}
 }

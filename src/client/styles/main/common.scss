@@ -4,14 +4,38 @@
 & {
 	position: relative;
 	line-height: 1.5;
+}
 
-	::slotted(a) {
-		margin: 0;
-		box-sizing: border-box !important;
-		cursor: pointer !important;
-		text-decoration: none !important;
-	}
-	::slotted(a:focus) {
-		outline: none !important;
+::slotted(h3) {
+	letter-spacing: .1px;
+	text-transform: uppercase;
+	font-weight: 700 !important;
+	font-size: remy(13) !important;
+	color: mapGet($colors, text, caption, default) !important;
+}
+
+::slotted(a) {
+	box-sizing: border-box !important;
+	cursor: pointer !important;
+	text-decoration: none !important;
+}
+::slotted(a:focus) {
+	outline: none !important;
+}
+
+::slotted(a),
+::slotted(h3) {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+&.horizontal {
+	::slotted(h3) {
+		&::after {
+			position: relative;
+			margin: 0 0 0 1px;
+			top: -1.5px;
+			content: ':';
+		}
 	}
 }

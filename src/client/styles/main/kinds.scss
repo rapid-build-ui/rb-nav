@@ -6,9 +6,6 @@
 		font-size: remy(16) !important;
 		color: mapGet($colors, text, links, default);
 	}
-	::slotted(a:not(:last-child)) {
-		margin-right: remy(15);
-	}
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a.active) {
@@ -32,3 +29,31 @@
 		color: mapGet($colors, text, tabs, links, active);
 	}
 }
+
+&.tabs.horizontal {
+	::slotted(a) {
+		border-radius: 10px 10px 0 0;
+		border: 1px solid transparent;
+		border-bottom: none;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		border-color: mapGet($colors, dividers, tabs);
+		background-color: mapGet($colors, bg, tabs, horizontal, links, active);
+	}
+}
+
+&.tabs.vertical {
+	::slotted(a) {
+		border-radius: 10px;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($colors, bg, tabs, vertical, links, active);
+	}
+}
+

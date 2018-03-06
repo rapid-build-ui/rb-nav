@@ -26,9 +26,6 @@ export class RbNav extends Activity(PolymerElement) {
 		return {
 			/* API
 			 ******/
-			caption: {
-				type: String
-			},
 			dividers: {
 				type: Boolean,
 				value: false
@@ -81,10 +78,12 @@ export class RbNav extends Activity(PolymerElement) {
 	_attachEvents() { // :void
 		this._slot.addEventListener('slotchange', this._setTabIndexes.bind(this));
 		this._slot.addEventListener('slotchange', this._trimSlot.bind(this));
+		this._slot.addEventListener('slotchange', this._addFirstAndLastClasses.bind(this));
 	}
 	_detachEvents() { // :void
 		this._slot.removeEventListener('slotchange', this._setTabIndexes);
 		this._slot.removeEventListener('slotchange', this._trimSlot);
+		this._slot.removeEventListener('slotchange', this._addFirstAndLastClasses);
 	}
 
 	/* Event Handlers
@@ -103,6 +102,19 @@ export class RbNav extends Activity(PolymerElement) {
 				if (child.nodeType !== 3) continue;
 				child.textContent = child.textContent.trimLeft();
 			}
+		}
+	}
+	_addFirstAndLastClasses(e) { // :void
+		if (!this.links.length) return;
+		const FIRST = 'rb-first';
+		const LAST  = 'rb-last';
+		for (let link of this.links) {
+			let prevElm = link.previousElementSibling;
+			let nextElm = link.nextElementSibling;
+			if (!prevElm || prevElm.tagName.toLowerCase() === 'h3')
+				link.classList.add(FIRST);
+			if (!nextElm || nextElm.tagName.toLowerCase() === 'h3')
+				link.classList.add(LAST);
 		}
 	}
 

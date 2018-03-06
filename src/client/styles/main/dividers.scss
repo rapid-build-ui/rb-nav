@@ -2,12 +2,7 @@
  * DIVIDERS
  ***********/
 &.default.dividers.horizontal {
-	::slotted(a) {
-		margin: 0;
-	}
-	::slotted(a:not(:first-child)) { padding-left:  remy(15); }
-	::slotted(a:not(:last-child))  { padding-right: remy(15); }
-	::slotted(a:not(:first-child))::before {
+	::slotted(a:not(.rb-first))::before {
 		display: inline-block;
 		position: relative;
 		top: 1px;
@@ -20,13 +15,17 @@
 }
 
 &.default.dividers.vertical {
-	::slotted(a) {
-		margin: 0;
-		padding: remy(7) remy(12) remy(9);
-		border-bottom: 1px solid mapGet($colors, dividers, vertical);
+	::slotted(h3) {
+		background-color: mapGet($colors, bg, vertical, caption);
+		border-top: 1px solid mapGet($colors, dividers, caption, top);
+		border-bottom: 1px solid mapGet($colors, dividers, caption, bottom);
+		text-shadow: 1px 1px 4px mapGet($colors, text, caption, shadow);
 	}
-	::slotted(a:first-child) {
+	::slotted(a) {
 		border-top: 1px solid mapGet($colors, dividers, vertical);
+	}
+	::slotted(a:last-child) {
+		border-bottom: 1px solid mapGet($colors, dividers, vertical);
 	}
 	::slotted(a:hover),
 	::slotted(a:focus) {
@@ -53,14 +52,5 @@
 	::slotted(a:active),
 	::slotted(a.active) {
 		background-color: mapGet($colors, bg, tabs, horizontal, dividers, links, active);
-	}
-}
-
-&.tabs.dividers.vertical {
-	::slotted(a) {
-		padding-bottom: remy(11);
-	}
-	::slotted(a:not(:last-child)) {
-		margin-bottom: remy(3);
 	}
 }
