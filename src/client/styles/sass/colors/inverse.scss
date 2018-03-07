@@ -1,0 +1,62 @@
+/*****************
+ * INVERSE COLORS
+ *****************/
+$inverse: (
+	bg: (
+		vertical: (
+			caption: mapGet($palette, transparent),
+			links: (
+				hover: mapGet($palette, xDark),
+				active: mapGet($palette, transparent)
+			)
+		),
+		tabs: (
+			horizontal: (
+				links: (
+					active: mapGet($palette, xDark)
+				),
+				dividers: (
+					links: (
+						active: mapGet($palette, xDark)
+					)
+				)
+			),
+			vertical: (
+				links: (
+					active: mapGet($palette, xDark)
+				)
+			)
+		)
+	),
+
+	dividers: (
+		tabs: mapGet($palette, greyDark),
+		vertical: mapGet($palette, greyDark),
+		caption: (
+			top:    mapGet($palette, transparent),
+			bottom: mapGet($palette, dark)
+		),
+		horizontal: (
+			left:  mapGet($palette, dark),
+			right: mapGet($palette, greyDark)
+		)
+	),
+
+	text: (
+		caption: (
+			default: mapGet($palette, xGreyLight),
+			shadow: mapGet($palette, dark)
+		),
+		links: (
+			default: mapGet($palette, grey),
+			active:  mapGet($palette, xxGreyLight),
+			click:   mapGet($palette, grey)
+		),
+		tabs: (
+			links: (
+				default: mapGet($palette, grey),
+				active:  mapGet($palette, xGreyLight)
+			)
+		)
+	)
+);

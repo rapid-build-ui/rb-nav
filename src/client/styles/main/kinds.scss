@@ -4,15 +4,15 @@
 &.default {
 	::slotted(a) {
 		font-size: remy(16) !important;
-		color: mapGet($colors, text, links, default);
+		color: mapGet($colors, text, links, default) !important;
 	}
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a.active) {
-		color: mapGet($colors, text, links, active);
+		color: mapGet($colors, text, links, active) !important;
 	}
 	::slotted(a:active:not(.active)) {
-		color: mapGet($colors, text, links, click);
+		color: mapGet($colors, text, links, click) !important;
 	}
 }
 
@@ -22,11 +22,11 @@
 		font-weight: 600 !important;
 		letter-spacing: .1px !important;
 		text-transform: uppercase !important;
-		color: mapGet($colors, text, tabs, links, default);
+		color: mapGet($colors, text, tabs, links, default) !important;
 	}
 	::slotted(a:active),
 	::slotted(a.active) {
-		color: mapGet($colors, text, tabs, links, active);
+		color: mapGet($colors, text, tabs, links, active) !important;
 	}
 }
 

@@ -1,0 +1,62 @@
+/*****************
+ * DEFAULT COLORS
+ *****************/
+$colors: (
+	bg: (
+		vertical: (
+			caption: mapGet($palette, xxxLight),
+			links: (
+				hover: mapGet($palette, xxxxxLight),
+				active: mapGet($palette, transparent)
+			)
+		),
+		tabs: (
+			horizontal: (
+				links: (
+					active: mapGet($palette, white)
+				),
+				dividers: (
+					links: (
+						active: mapGet($palette, xxxxLight)
+					)
+				)
+			),
+			vertical: (
+				links: (
+					active: mapGet($palette, xxxxLight)
+				)
+			)
+		)
+	),
+
+	dividers: (
+		tabs: mapGet($palette, xLight),
+		vertical: mapGet($palette, xxLight),
+		caption: (
+			top:    mapGet($palette, xxLight),
+			bottom: mapGet($palette, xxxxLight)
+		),
+		horizontal: (
+			left:  mapGet($palette, xxxxLight),
+			right: mapGet($palette, blueGreyLight)
+		)
+	),
+
+	text: (
+		caption: (
+			default: mapGet($palette, blueGreyDark),
+			shadow: mapGet($palette, white)
+		),
+		links: (
+			default: mapGet($palette, blueGreyLight),
+			active:  mapGet($palette, red),
+			click:   mapGet($palette, redDark)
+		),
+		tabs: (
+			links: (
+				default: mapGet($palette, blueGreyLight),
+				active:  mapGet($palette, greyDark)
+			)
+		)
+	)
+);

@@ -3,7 +3,9 @@
  ****************************/
 // Sassy Goodness
 @import 'sass/functions.scss';
-@import 'sass/colors.scss';
+@import 'sass/colors/palette.scss';
+@import 'sass/colors/colors.scss';
+@import 'sass/colors/inverse.scss';
 
 // The Component
 nav {
@@ -12,4 +14,9 @@ nav {
 	@import 'main/displays.scss';
 	@import 'main/layouts.scss';
 	@import 'main/dividers.scss';
+}
+
+// Inverse Colors
+nav.inverse {
+	@import 'main/inverse.scss';
 }

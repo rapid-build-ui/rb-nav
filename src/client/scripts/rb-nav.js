@@ -34,6 +34,10 @@ export class RbNav extends Activity(PolymerElement) {
 				type: Boolean,
 				value: false
 			},
+			inverse: {
+				type: Boolean,
+				value: false
+			},
 			kind: {
 				type: String,
 				value: 'default'
@@ -56,6 +60,9 @@ export class RbNav extends Activity(PolymerElement) {
 	}
 	_dividers(dividers) { // :string
 		return dividers ? 'dividers' : null;
+	}
+	_inverse(inverse) { // :string
+		return inverse ? 'inverse' : null;
 	}
 	_layout(vertical) { // :string
 		return vertical ? 'vertical' : 'horizontal';

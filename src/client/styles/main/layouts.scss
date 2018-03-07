@@ -54,8 +54,6 @@
 /* Tabs
  *******/
 &.tabs.horizontal {
-	top: 1px; // to overlap bottom border of container
-
 	::slotted(h3),
 	::slotted(a.rb-last:not(:last-child)) {
 		margin-right: remy(12) !important;

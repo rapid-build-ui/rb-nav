@@ -2,13 +2,13 @@
  * COMMON
  *********/
 & {
-	position: relative;
 	line-height: 1.5;
 }
 
 ::slotted(h3) {
-	letter-spacing: .1px;
-	text-transform: uppercase;
+	letter-spacing: .1px !important;
+	text-transform: uppercase !important;
+	text-shadow: none !important;
 	font-weight: 700 !important;
 	font-size: remy(13) !important;
 	color: mapGet($colors, text, caption, default) !important;

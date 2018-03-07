@@ -19,7 +19,7 @@
 		background-color: mapGet($colors, bg, vertical, caption);
 		border-top: 1px solid mapGet($colors, dividers, caption, top);
 		border-bottom: 1px solid mapGet($colors, dividers, caption, bottom);
-		text-shadow: 1px 1px 4px mapGet($colors, text, caption, shadow);
+		text-shadow: 1px 1px 4px mapGet($colors, text, caption, shadow) !important;
 	}
 	::slotted(a) {
 		border-top: 1px solid mapGet($colors, dividers, vertical);
@@ -29,10 +29,10 @@
 	}
 	::slotted(a:hover),
 	::slotted(a:focus) {
-		background-color: mapGet($colors, bg, vertical, links, active);
+		background-color: mapGet($colors, bg, vertical, links, hover);
 	}
 	::slotted(a.active) {
-		background-color: transparent;
+		background-color: mapGet($colors, bg, vertical, links, active);
 	}
 }
 
