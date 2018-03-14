@@ -40,8 +40,10 @@ $palette: (
 	xxxxxLight:      lighten($LIGHT, 15.2%),    // fafafa
 
 	// Reds
-	redDark:         darken($RED, 15%),         // a93434
-	red:             indianred,                 // cd5c5c
+	xRedDark:        darken($RED, 15%),         // a93434
+	redDark:         darken($RED, 10%),         // bc3a3a
+	red:             $RED,                      // cd5c5c
+	redLight:        lighten($RED, 5%),         // d37070
 
 	// Transparent
 	transparent:     transparent,

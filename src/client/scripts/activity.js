@@ -6,7 +6,6 @@ const ACTIVE_CLASS = 'active';
 const Activity = superClass => class extends superClass {
 	constructor() {
 		super();
-		this._events = {};
 	}
 	connectedCallback() {
 		super.connectedCallback();
@@ -51,19 +50,15 @@ const Activity = superClass => class extends superClass {
 
 	/* Event Management
 	 *******************/
-	_addEvent(name, method) { // :void
-		if (this._events[name]) return this;
-		this._events[name] = this._events[name] || this[method].bind(this);
-	}
 	_attachActivityEvents() { // :void
-		if (!this.activity) return this;
-		this._addEvent('slotchange', '_slotchange');
-		this._slot.addEventListener('slotchange', this._events.slotchange);
+		if (!this.activity) return;
+		this._addEvent(this, 'this', 'click', '_setActiveClick'); // test this (use to be _slotchange)
+		this._addEvent(this._slot, 'slot', 'slotchange', '_slotchange');
 	}
 	_detachActivityEvents() { // :void
-		if (!this.activity) return this;
-		this.removeEventListener('click', this._setActiveClick);
-		this._slot.removeEventListener('slotchange', this._events.slotchange);
+		if (!this.activity) return;
+		this._removeEvent(this, 'this', 'click', '_setActiveClick');
+		this._removeEvent(this._slot, 'slot', 'slotchange', '_slotchange');
 		this._hashInterval && clearInterval(this._hashInterval);
 		this._pathObserver && this._pathObserver.disconnect();
 		this._paramsInterval && clearInterval(this._paramsInterval);
@@ -110,8 +105,6 @@ const Activity = superClass => class extends superClass {
 	/* Event Handlers
 	 *****************/
 	_slotchange(e) { // :void
-		this.addEventListener('click', this._setActiveClick);
-
 		switch(this.activity) {
 			case 'hash':
 				if (this._hashInterval) break;

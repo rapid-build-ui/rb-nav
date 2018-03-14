@@ -2,9 +2,18 @@
  * COMMON
  *********/
 & {
+	position: relative;
 	line-height: 1.5;
 }
 
+/* Responsive
+ *************/
+.trigger {
+	display: none;
+}
+
+/* Slot Content
+ ***************/
 ::slotted(h3) {
 	letter-spacing: .1px !important;
 	text-transform: uppercase !important;

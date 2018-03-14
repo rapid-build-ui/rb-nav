@@ -1,10 +1,12 @@
 /***********
  * DISPLAYS
  ***********/
-&.block {
+&.block,
+&.block .nav {
 	display: flex;
 }
 
-&.inline {
+&.inline,
+&.inline .nav {
 	display: inline-flex;
 }

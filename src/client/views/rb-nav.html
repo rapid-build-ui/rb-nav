@@ -5,7 +5,16 @@
 	[[_layout(vertical)]]
 	[[_dividers(dividers)]]
 	[[_responsive(responsive)]]">
-	<slot></slot>
+	<button
+		type="button"
+		class="trigger">
+		<b class="top"></b>
+		<b class="middle"></b>
+		<b class="bottom"></b>
+	</button>
+	<div class="nav">
+		 <slot></slot>
+	</div>
 </nav>
 
 <link rel="stylesheet" href="../styles/rb-nav.css">

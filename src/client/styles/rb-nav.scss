@@ -7,7 +7,10 @@
 @import 'sass/colors/colors.scss';
 @import 'sass/colors/inverse.scss';
 
-// The Component
+// Host
+@import 'main/host.scss';
+
+// Nav
 nav {
 	@import 'main/common.scss';
 	@import 'main/kinds.scss';
@@ -18,5 +21,11 @@ nav {
 
 // Inverse Colors
 nav.inverse {
-	@import 'main/inverse.scss';
+	@import 'inverse/inverse.scss';
+}
+
+// Responsive
+nav.responsive {
+	@import 'responsive/trigger.scss';
+	@import 'responsive/responsive.scss';
 }

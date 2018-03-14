@@ -4,9 +4,10 @@
 import { Element as PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
 import { DomIf as DomIf } from '../../../@polymer/polymer/lib/elements/dom-if.js';
 import Activity from './activity.js';
+import Responsive from './responsive.js';
 import template from '../views/rb-nav.html';
 
-export class RbNav extends Activity(PolymerElement) {
+export class RbNav extends Activity(Responsive(PolymerElement)) {
 	constructor() {
 		super();
 	}
@@ -21,7 +22,7 @@ export class RbNav extends Activity(PolymerElement) {
 	}
 
 	/* Properties
-	 ************/
+	 *************/
 	static get properties() {
 		return {
 			/* API
@@ -41,10 +42,6 @@ export class RbNav extends Activity(PolymerElement) {
 			kind: {
 				type: String,
 				value: 'default'
-			},
-			responsive: {
-				type: Boolean,
-				value: false
 			},
 			vertical: {
 				type: Boolean,
@@ -67,9 +64,6 @@ export class RbNav extends Activity(PolymerElement) {
 	_layout(vertical) { // :string
 		return vertical ? 'vertical' : 'horizontal';
 	}
-	_responsive(responsive) { // :string
-		return responsive ? 'responsive' : null;
-	}
 
 	/* Getters
 	 **********/
@@ -82,20 +76,35 @@ export class RbNav extends Activity(PolymerElement) {
 
 	/* Event Management
 	 *******************/
+	_addEvent(target, targetName, eventName, eventHandler) { // :void
+		if (!this._events) this._events = {};
+		if (!this._events[targetName]) this._events[targetName] = {};
+		if (this._events[targetName][eventHandler]) return;
+		this._events[targetName][eventHandler] =
+			target === this ? this[eventHandler] : this[eventHandler].bind(this);
+		target.addEventListener(eventName, this._events[targetName][eventHandler]);
+	}
+	_removeEvent(target, targetName, eventName, eventHandler) { // :void
+		if (!this._events) return;
+		if (!this._events[targetName]) return;
+		if (!this._events[targetName][eventHandler]) return;
+		target.removeEventListener(eventName, this._events[targetName][eventHandler]);
+		delete this._events[targetName][eventHandler];
+	}
 	_attachEvents() { // :void
-		this._slot.addEventListener('slotchange', this._setTabIndexes.bind(this));
-		this._slot.addEventListener('slotchange', this._trimSlot.bind(this));
-		this._slot.addEventListener('slotchange', this._addFirstAndLastClasses.bind(this));
+		this._addEvent(this._slot, 'slot', 'slotchange', '_setTabIndexes');
+		this._addEvent(this._slot, 'slot', 'slotchange', '_trimSlot');
+		this._addEvent(this._slot, 'slot', 'slotchange', '_addFirstAndLastClasses');
 	}
 	_detachEvents() { // :void
-		this._slot.removeEventListener('slotchange', this._setTabIndexes);
-		this._slot.removeEventListener('slotchange', this._trimSlot);
-		this._slot.removeEventListener('slotchange', this._addFirstAndLastClasses);
+		this._removeEvent(this._slot, 'slot', 'slotchange', '_setTabIndexes');
+		this._removeEvent(this._slot, 'slot', 'slotchange', '_trimSlot');
+		this._removeEvent(this._slot, 'slot', 'slotchange', '_addFirstAndLastClasses');
 	}
 
 	/* Event Handlers
 	 *****************/
-	_setTabIndexes() { // :void
+	_setTabIndexes(e) { // :void
 		if (!this.links.length) return;
 		for (let link of this.links) {
 			if (link.hasAttribute('tabindex')) continue;

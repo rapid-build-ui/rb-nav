@@ -1,31 +1,28 @@
 /**********
  * LAYOUTS
  **********/
-&.horizontal { // default
+&.horizontal .nav {
 	flex-flow: row wrap;
 	align-items: baseline;
 }
-&.vertical {
+&.vertical .nav {
 	flex-flow: column nowrap;
+	flex: 1 1 auto;
 }
 
 /* Default
  **********/
 &.default.horizontal {
-	::slotted(h3) {
-		margin-right: remy(15) !important;
-	}
+	::slotted(h3),
 	::slotted(a:not(:last-child)) {
 		margin-right: remy(15) !important;
 	}
 }
 &.default.vertical {
-	::slotted(h3) {
-		margin-bottom: remy(12) !important;
-	}
 	::slotted(a:not(:last-child)) {
 		margin-bottom: remy(10) !important;
 	}
+	::slotted(h3),
 	::slotted(a.rb-last:not(:last-child)) {
 		margin-bottom: remy(12) !important;
 	}
@@ -41,13 +38,14 @@
 	}
 }
 &.default.vertical.dividers {
-	::slotted(h3) {
+	::slotted(*) {
 		margin: 0 !important;
-		padding: remy(11) remy(12) remy(9) !important;
+	}
+	::slotted(h3) {
+		padding: remy(11) remy(14) remy(9) remy(12) !important;
 	}
 	::slotted(a) {
-		margin: 0 !important;
-		padding: remy(7) remy(12) remy(9) !important;
+		padding: remy(7) remy(14) remy(9) remy(12) !important;
 	}
 }
 
@@ -68,10 +66,10 @@
 
 &.tabs.vertical {
 	::slotted(h3) {
-		padding: remy(10) remy(12) !important;
+		padding: remy(10) remy(14) remy(10) remy(12) !important;
 	}
 	::slotted(a) {
-		padding: remy(11) remy(12) remy(12) !important;
+		padding: remy(11) remy(14) remy(12) remy(12) !important;
 	}
 	::slotted(a:not(.rb-last)) {
 		margin-bottom: remy(2) !important;
