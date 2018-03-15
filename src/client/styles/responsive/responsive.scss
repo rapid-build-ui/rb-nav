@@ -1,72 +1,63 @@
 /*********************
  * RESPONSIVE LAYOUTS
  *********************/
-@media (max-width: 768px) {
-	& {
-		width: fit-content;
-	}
-	.trigger {
-		display: inline-flex;
-		flex-direction: column;
-		align-items: stretch;
-		align-self: flex-start;
-		&:focus + .nav {
-			transition: all .25s ease-in-out;
-		}
-	}
-	&.closed .nav {
-		opacity: 0;
-		visibility: hidden;
-	}
-	.nav {
-		position: absolute;
-		z-index: 3;
-		top: 34px;
-		&:not(.left) {
-			left: 0;
-			border-radius: 0 5px 5px 5px;
-		}
-		&.left {
-			right: 0;
-			border-radius: 5px 0 5px 5px;
-		}
-	}
+& {
+	width: fit-content;
+}
 
-	.nav {
-		overflow: auto;
-		border: 1px solid mapGet($palette, xGreyLight);
-		background-color: mapGet($palette, white);
-		::slotted(*) {
-			border-radius: 0;
-			border-left: none !important;
-			border-right: none !important;
-		}
-		::slotted(:first-child) {
-			border-top: none !important;
-		}
-		::slotted(:last-child) {
-			border-bottom: none !important;
-		}
-	}
+&.closed .nav {
+	opacity: 0;
+	visibility: hidden;
+}
 
-	&.tabs.vertical {
-		::slotted(a) {
-			padding-top: remy(14) !important;
-			padding-bottom: remy(13) !important;
-		}
-		::slotted(:last-child) {
-			padding-bottom: remy(14) !important;
-		}
-		::slotted(a) {
-			font-size: remy(12) !important;
-		}
-		::slotted(a:not(.rb-last)) {
-			margin-bottom: 0 !important;
-			border-bottom: none !important;
-		}
-		::slotted(h3) {
-			background-color: mapGet($colors, bg, vertical, caption);
-			text-shadow: 1px 1px 4px mapGet($colors, text, caption, shadow) !important;
-		}
+.nav {
+	position: absolute;
+	z-index: 3;
+	top: 34px;
+	&:not(.left) {
+		left: 0;
+		border-radius: 0 5px 5px 5px;
+	}
+	&.left {
+		right: 0;
+		border-radius: 5px 0 5px 5px;
+	}
+}
+
+.nav {
+	overflow: auto;
+	border: 1px solid mapGet($palette, xGreyLight);
+	background-color: mapGet($palette, white);
+	::slotted(*) {
+		border-radius: 0;
+		border-left: none !important;
+		border-right: none !important;
+	}
+	::slotted(:first-child) {
+		border-top: none !important;
+	}
+	::slotted(:last-child) {
+		border-bottom: none !important;
+	}
+}
+
+&.tabs.vertical {
+	::slotted(a) {
+		padding-top: remy(14) !important;
+		padding-bottom: remy(13) !important;
+	}
+	::slotted(:last-child) {
+		padding-bottom: remy(14) !important;
+	}
+	::slotted(a) {
+		font-size: remy(12) !important;
+	}
+	::slotted(a:not(.rb-last)) {
+		margin-bottom: 0 !important;
+		border-bottom: none !important;
+	}
+	::slotted(h3) {
+		background-color: mapGet($colors, bg, vertical, caption);
+		text-shadow: 1px 1px 4px mapGet($colors, text, caption, shadow) !important;
 	}
 }

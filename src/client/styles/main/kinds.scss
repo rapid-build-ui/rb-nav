@@ -7,7 +7,9 @@
 		color: mapGet($colors, text, links, default) !important;
 	}
 	::slotted(a:hover),
-	::slotted(a:focus),
+	::slotted(a:focus) {
+		color: mapGet($colors, text, links, hover) !important;
+	}
 	::slotted(a.active) {
 		color: mapGet($colors, text, links, active) !important;
 	}

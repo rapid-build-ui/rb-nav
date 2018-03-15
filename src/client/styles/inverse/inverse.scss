@@ -13,7 +13,9 @@
 		color: mapGet($inverse, text, links, default) !important;
 	}
 	::slotted(a:hover),
-	::slotted(a:focus),
+	::slotted(a:focus) {
+		color: mapGet($inverse, text, links, hover) !important;
+	}
 	::slotted(a.active) {
 		color: mapGet($inverse, text, links, active) !important;
 	}

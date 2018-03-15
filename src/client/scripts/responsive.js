@@ -4,6 +4,7 @@
 const LEFT_CLASS       = 'left';
 const CLOSED_CLASS     = 'closed';
 const RESPONSIVE_CLASS = 'responsive';
+const RESPONSIVE_AT    = 768; // pixels
 
 const Responsive = superClass => class extends superClass {
 	constructor() {
@@ -14,7 +15,7 @@ const Responsive = superClass => class extends superClass {
 		if (!this.responsive) return;
 		this.__setInitialProps();
 		this._nav     = this.root.querySelector('nav');
-		this._navMenu = this.root.querySelector('.nav');
+		this._menu    = this.root.querySelector('.nav'); // .nav menu
 		this._trigger = this.root.querySelector('.trigger');
 		this.__makeNavViewable();
 		this._attachResponsiveEvents()
@@ -30,16 +31,26 @@ const Responsive = superClass => class extends superClass {
 	static get properties() {
 		return {
 			responsive: {
-				type: Boolean,
-				value: false
+				type: Object, // :boolean | object { closeOnClick: boolean = true }
+				value: false,
+				observer: '__updateResponsive'
 			}
 		}
+	}
+
+	/* Observers
+	 ************/
+	__updateResponsive(newVal, oldVal) { // :void
+		if (newVal === false) return;
+		if (!!newVal) return; // newVal is options {}
+		this.responsive = {}; // for valueless attr
 	}
 
 	/* Computed Bindings
 	 ********************/
 	_responsive(responsive) { // :string
-		return responsive ? `${RESPONSIVE_CLASS} ${CLOSED_CLASS}` : null;
+		if (!this.responsive) return;
+		return `${RESPONSIVE_CLASS} ${CLOSED_CLASS}`
 	}
 
 	/* Helpers
@@ -60,14 +71,14 @@ const Responsive = superClass => class extends superClass {
 	}
 	__makeNavViewable() { // :void
 		let winWidth = window.innerWidth;
-		let navRect  = this._navMenu.getBoundingClientRect();
+		let navRect  = this._menu.getBoundingClientRect();
 		let navX     = navRect.x;
 		let navWidth = navRect.width;
 		let navTotal = navX + navWidth;
 		let isNavViewable = winWidth > navTotal;
-		// console.log({ isNavViewable, navTotal, winWidth, navX, navWidth });
-		if (isNavViewable) return this._navMenu.classList.remove(LEFT_CLASS);
-		this._navMenu.classList.add(LEFT_CLASS);
+		// console.log({ isNavViewable, winWidth, navTotal, navWidth, navX });
+		if (isNavViewable) return this._menu.classList.remove(LEFT_CLASS);
+		this._menu.classList.add(LEFT_CLASS);
 	}
 
 	/* Event Management
@@ -75,12 +86,14 @@ const Responsive = superClass => class extends superClass {
 	_attachResponsiveEvents() { // :void
 		this._addEvent(window, 'window', 'click', '_windowClick');
 		this._addEvent(window, 'window', 'resize', '_windowResize');
+		this._addEvent(this._menu, 'menu', 'click', '_menuClick');
 		this._addEvent(this._trigger, 'trigger', 'click', '_triggerClick');
 		this._addEvent(this._trigger, 'trigger', 'mouseleave', '_triggerLeave');
 	}
 	_detachResponsiveEvents() { // :void
 		this._removeEvent(window, 'window', 'click', '_windowClick');
 		this._removeEvent(window, 'window', 'resize', '_windowResize');
+		this._removeEvent(this._menu, 'menu', 'click', '_menuClick');
 		this._removeEvent(this._trigger, 'trigger', 'click', '_triggerClick');
 		this._removeEvent(this._trigger, 'trigger', 'mouseleave', '_triggerLeave');
 	}
@@ -93,8 +106,15 @@ const Responsive = superClass => class extends superClass {
 		this._nav.classList.add(CLOSED_CLASS);
 	}
 	_windowResize(e) {
-		if (window.innerWidth <= 767) return;
+		if (window.innerWidth <= RESPONSIVE_AT) return;
 		this.__restoreInitialProps();
+		this._nav.classList.add(CLOSED_CLASS);
+	}
+
+	/* Menu Event Handlers
+	 **********************/
+	_menuClick(e) { // :void
+		if (this.responsive.closeOnClick === false) return;
 		this._nav.classList.add(CLOSED_CLASS);
 	}
 

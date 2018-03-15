@@ -49,6 +49,7 @@ $inverse: (
 		),
 		links: (
 			default: mapGet($palette, grey),
+			hover:   mapGet($palette, xxGreyLight),
 			active:  mapGet($palette, xxGreyLight),
 			click:   mapGet($palette, grey)
 		),

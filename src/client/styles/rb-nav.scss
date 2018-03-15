@@ -25,7 +25,9 @@ nav.inverse {
 }
 
 // Responsive
-nav.responsive {
-	@import 'responsive/trigger.scss';
-	@import 'responsive/responsive.scss';
+@media (max-width: 768px) {
+	nav.responsive {
+		@import 'responsive/trigger.scss';
+		@import 'responsive/responsive.scss';
+	}
 }
