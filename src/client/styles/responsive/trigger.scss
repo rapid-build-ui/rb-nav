@@ -42,19 +42,36 @@
 	}
 }
 
+/* Open Trigger
+ ***************/
 &:not(.closed) .trigger {
 	border-radius: 5px 5px 0 0;
 	b {
+		$scale: .8;
 		&.top {
 			top: 7px;
-			transform: rotate(45deg) scale(.8);
+			transform: rotate(45deg) scale($scale);
 		}
 		&.bottom {
 			top: -7px;
-			transform: rotate(-45deg) scale(.8);
+			transform: rotate(-45deg) scale($scale);
 		}
 		&.middle {
 			opacity: 0;
+		}
+	}
+}
+
+/* Kinds
+ ********/
+&.default {
+	&.closed .trigger {
+		opacity: .6;
+	}
+	.trigger {
+		&:hover,
+		&:focus {
+			opacity: 1;
 		}
 	}
 }

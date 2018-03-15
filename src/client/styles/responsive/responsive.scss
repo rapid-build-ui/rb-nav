@@ -41,7 +41,7 @@
 	}
 }
 
-&.tabs.vertical {
+&.tabs {
 	::slotted(a) {
 		padding-top: remy(14) !important;
 		padding-bottom: remy(13) !important;

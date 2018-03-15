@@ -50,7 +50,7 @@ $colors: (
 		links: (
 			default: mapGet($palette, blueGreyLight),
 			hover:   mapGet($palette, red),
-			active:  mapGet($palette, xRedDark),
+			active:  mapGet($palette, red),
 			click:   mapGet($palette, xRedDark)
 		),
 		tabs: (
