@@ -70,15 +70,18 @@ const Responsive = superClass => class extends superClass {
 			this[key] = val;
 	}
 	__makeNavViewable() { // :void
-		let winWidth = window.innerWidth;
-		let navRect  = this._menu.getBoundingClientRect();
-		let navX     = navRect.x;
-		let navWidth = navRect.width;
-		let navTotal = navX + navWidth;
-		let isNavViewable = winWidth > navTotal;
-		// console.log({ isNavViewable, winWidth, navTotal, navWidth, navX });
-		if (isNavViewable) return this._menu.classList.remove(LEFT_CLASS);
-		this._menu.classList.add(LEFT_CLASS);
+		let winWidth  = window.innerWidth,
+			menuRect  = this._menu.getBoundingClientRect(),
+			menuClass = this._menu.classList,
+			menuX     = menuRect.x,
+			menuWidth = menuRect.width,
+			menuTotal = menuX + menuWidth;
+		if (menuClass.contains(LEFT_CLASS))
+			menuTotal +=  menuWidth; // left class changes position of menu's x
+		let isNavViewable = winWidth > menuTotal;
+		// console.log({ isNavViewable, winWidth, menuTotal, menuWidth, menuX });
+		if (isNavViewable) return menuClass.remove(LEFT_CLASS);
+		menuClass.add(LEFT_CLASS);
 	}
 
 	/* Event Management
@@ -100,13 +103,14 @@ const Responsive = superClass => class extends superClass {
 
 	/* Window Event Handlers
 	 ************************/
-	_windowClick(e) {
+	_windowClick(e) { // :void
 		if (this._nav.classList.contains(CLOSED_CLASS)) return;
 		if (e.path.includes(this._nav)) return;
 		this._nav.classList.add(CLOSED_CLASS);
 	}
-	_windowResize(e) {
-		if (window.innerWidth <= RESPONSIVE_AT) return;
+	_windowResize(e) { // :void
+		if (window.innerWidth <= RESPONSIVE_AT)
+			return this.__makeNavViewable();
 		this.__restoreInitialProps();
 		this._nav.classList.add(CLOSED_CLASS);
 	}
