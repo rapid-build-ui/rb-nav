@@ -10,7 +10,7 @@ $inverse: (
 				active: mapGet($palette, transparent)
 			)
 		),
-		tabs: (
+		primary: (
 			horizontal: (
 				links: (
 					active: mapGet($palette, xDark)
@@ -30,7 +30,7 @@ $inverse: (
 	),
 
 	dividers: (
-		tabs: mapGet($palette, greyDark),
+		primary: mapGet($palette, greyDark),
 		vertical: mapGet($palette, greyDark),
 		caption: (
 			top:    mapGet($palette, transparent),
@@ -53,7 +53,7 @@ $inverse: (
 			active:  mapGet($palette, xxGreyLight),
 			click:   mapGet($palette, grey)
 		),
-		tabs: (
+		primary: (
 			links: (
 				default: mapGet($palette, grey),
 				active:  mapGet($palette, xGreyLight)

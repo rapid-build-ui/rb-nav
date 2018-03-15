@@ -10,7 +10,7 @@ $colors: (
 				active: mapGet($palette, xxxxLight)
 			)
 		),
-		tabs: (
+		primary: (
 			horizontal: (
 				links: (
 					active: mapGet($palette, white)
@@ -30,7 +30,7 @@ $colors: (
 	),
 
 	dividers: (
-		tabs: mapGet($palette, xLight),
+		primary: mapGet($palette, xLight),
 		vertical: mapGet($palette, xxLight),
 		caption: (
 			top:    mapGet($palette, xxLight),
@@ -53,7 +53,7 @@ $colors: (
 			active:  mapGet($palette, red),
 			click:   mapGet($palette, xRedDark)
 		),
-		tabs: (
+		primary: (
 			links: (
 				default: mapGet($palette, blueGreyLight),
 				active:  mapGet($palette, greyDark)

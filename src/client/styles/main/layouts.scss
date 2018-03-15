@@ -49,9 +49,9 @@
 	}
 }
 
-/* Tabs
- *******/
-&.tabs.horizontal {
+/* Primary
+ **********/
+&.primary.horizontal {
 	::slotted(h3),
 	::slotted(a.rb-last:not(:last-child)) {
 		margin-right: remy(12) !important;
@@ -64,7 +64,7 @@
 	}
 }
 
-&.tabs.vertical {
+&.primary.vertical {
 	::slotted(h3) {
 		padding: remy(10) remy(14) remy(10) remy(12) !important;
 	}

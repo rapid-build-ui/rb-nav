@@ -24,31 +24,31 @@
 	}
 }
 
-&.tabs {
+&.primary {
 	::slotted(a) {
-		color: mapGet($inverse, text, tabs, links, default) !important;
+		color: mapGet($inverse, text, primary, links, default) !important;
 	}
 	::slotted(a:active),
 	::slotted(a.active) {
-		color: mapGet($inverse, text, tabs, links, active) !important;
+		color: mapGet($inverse, text, primary, links, active) !important;
 	}
 }
 
-&.tabs.horizontal {
+&.primary.horizontal {
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a:active),
 	::slotted(a.active) {
-		border-color: mapGet($inverse, dividers, tabs);
-		background-color: mapGet($inverse, bg, tabs, horizontal, links, active);
+		border-color: mapGet($inverse, dividers, primary);
+		background-color: mapGet($inverse, bg, primary, horizontal, links, active);
 	}
 }
-&.tabs.vertical {
+&.primary.vertical {
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a:active),
 	::slotted(a.active) {
-		background-color: mapGet($inverse, bg, tabs, vertical, links, active);
+		background-color: mapGet($inverse, bg, primary, vertical, links, active);
 	}
 }
 
@@ -86,12 +86,12 @@
 	}
 }
 
-&.tabs.dividers {
+&.primary.dividers {
 	::slotted(a) {
-		border: 1px solid mapGet($inverse, dividers, tabs);
+		border: 1px solid mapGet($inverse, dividers, primary);
 	}
 }
-&.tabs.dividers.horizontal {
+&.primary.dividers.horizontal {
 	::slotted(a) {
 		border-bottom: none;
 	}
@@ -99,6 +99,6 @@
 	::slotted(a:focus),
 	::slotted(a:active),
 	::slotted(a.active) {
-		background-color: mapGet($inverse, bg, tabs, horizontal, dividers, links, active);
+		background-color: mapGet($inverse, bg, primary, horizontal, dividers, links, active);
 	}
 }

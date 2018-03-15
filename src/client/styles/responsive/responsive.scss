@@ -41,16 +41,13 @@
 	}
 }
 
-&.tabs {
+&.primary {
 	::slotted(a) {
 		padding-top: remy(14) !important;
 		padding-bottom: remy(13) !important;
 	}
 	::slotted(:last-child) {
 		padding-bottom: remy(14) !important;
-	}
-	::slotted(a) {
-		font-size: remy(12) !important;
 	}
 	::slotted(a:not(.rb-last)) {
 		margin-bottom: 0 !important;

@@ -36,14 +36,14 @@
 	}
 }
 
-/* Tabs
- *******/
-&.tabs.dividers {
+/* Primary
+ **********/
+&.primary.dividers {
 	::slotted(a) {
-		border: 1px solid mapGet($colors, dividers, tabs);
+		border: 1px solid mapGet($colors, dividers, primary);
 	}
 }
-&.tabs.dividers.horizontal {
+&.primary.dividers.horizontal {
 	::slotted(a) {
 		border-bottom: none;
 	}
@@ -51,6 +51,6 @@
 	::slotted(a:focus),
 	::slotted(a:active),
 	::slotted(a.active) {
-		background-color: mapGet($colors, bg, tabs, horizontal, dividers, links, active);
+		background-color: mapGet($colors, bg, primary, horizontal, dividers, links, active);
 	}
 }
