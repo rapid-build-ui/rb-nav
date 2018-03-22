@@ -54,9 +54,17 @@ $colors: (
 			click:   mapGet($palette, xRedDark)
 		),
 		primary: (
-			links: (
-				default: mapGet($palette, blueGreyLight),
-				active:  mapGet($palette, greyDark)
+			horizontal: (
+				links: (
+					default: mapGet($palette, blueGreyLight),
+					active:  mapGet($palette, greyDark)
+				)
+			),
+			vertical: (
+				links: (
+					default: mapGet($palette, blueGreyLight),
+					active:  mapGet($palette, red)
+				)
 			)
 		)
 	)

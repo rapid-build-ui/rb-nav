@@ -54,9 +54,17 @@ $inverse: (
 			click:   mapGet($palette, grey)
 		),
 		primary: (
-			links: (
-				default: mapGet($palette, grey),
-				active:  mapGet($palette, xGreyLight)
+			horizontal: (
+				links: (
+					default: mapGet($palette, grey),
+					active:  mapGet($palette, xGreyLight)
+				)
+			),
+			vertical: (
+				links: (
+					default: mapGet($palette, grey),
+					active:  mapGet($palette, xGreyLight)
+				)
 			)
 		)
 	)

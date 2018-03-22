@@ -45,7 +45,7 @@
 		padding: remy(11) remy(15) remy(9) remy(12) !important;
 	}
 	::slotted(a) {
-		padding: remy(7) remy(15) remy(9) remy(14) !important;
+		padding: remy(7) remy(15) remy(9) !important;
 	}
 }
 
@@ -69,7 +69,7 @@
 		padding: remy(10) remy(15) remy(10) remy(12) !important;
 	}
 	::slotted(a) {
-		padding: remy(11) remy(15) remy(12) remy(14) !important;
+		padding: remy(11) remy(16) remy(12) remy(15) !important;
 	}
 	::slotted(a:not(.rb-last)) {
 		margin-bottom: remy(2) !important;

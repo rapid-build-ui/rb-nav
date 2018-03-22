@@ -24,17 +24,14 @@
 	}
 }
 
-&.primary {
+&.primary.horizontal {
 	::slotted(a) {
-		color: mapGet($inverse, text, primary, links, default) !important;
+		color: mapGet($inverse, text, primary, horizontal, links, default) !important;
 	}
 	::slotted(a:active),
 	::slotted(a.active) {
-		color: mapGet($inverse, text, primary, links, active) !important;
+		color: mapGet($inverse, text, primary, horizontal, links, active) !important;
 	}
-}
-
-&.primary.horizontal {
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a:active),
@@ -44,6 +41,13 @@
 	}
 }
 &.primary.vertical {
+	::slotted(a) {
+		color: mapGet($inverse, text, primary, vertical, links, default) !important;
+	}
+	::slotted(a:active),
+	::slotted(a.active) {
+		color: mapGet($inverse, text, primary, vertical, links, active) !important;
+	}
 	::slotted(a:hover),
 	::slotted(a:focus),
 	::slotted(a:active),
