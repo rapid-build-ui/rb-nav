@@ -1,8 +1,7 @@
 /*********
  * RB-NAV
  *********/
-import { Element as PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
-import { DomIf as DomIf } from '../../../@polymer/polymer/lib/elements/dom-if.js';
+import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
 import Activity from './activity.js';
 import Responsive from './responsive.js';
 import template from '../views/rb-nav.html';
@@ -137,7 +136,7 @@ export class RbNav extends Activity(Responsive(PolymerElement)) {
 	/* Template
 	 ***********/
 	static get template() { // :template literal
-		return template;
+		return html template;
 	}
 }
 
