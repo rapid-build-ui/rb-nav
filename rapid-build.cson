@@ -15,6 +15,7 @@ common:
 			minFile:
 				scripts: [
 					'scripts/activity.js'
+					'scripts/responsive.js'
 				]
 	extra:
 		copy:
