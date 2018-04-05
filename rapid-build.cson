@@ -41,7 +41,11 @@ common:
 		client:
 			js:
 				es6: true
+				enable: false # temporarily until build is fixed
 				fileName: 'rb-nav.js'
+		server:
+			js:
+				es6: true
 
 demo:
 	build: server: true
