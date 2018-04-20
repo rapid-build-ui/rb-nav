@@ -130,6 +130,7 @@ const Responsive = superClass => class extends superClass {
 	_triggerClick(e) { // :void
 		this.__setResponsiveProps({ dividers: true, vertical: true });
 		this._nav.classList.toggle(CLOSED_CLASS);
+		this.__makeNavViewable();
 	}
 }
 
