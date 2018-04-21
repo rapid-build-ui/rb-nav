@@ -61,9 +61,9 @@ publish:
 			]
 
 # TODO:
-# USE COMPONENT FROM THIS SERVER
-# ==============================
-online:
+# HOST COMPONENT FROM THIS SERVER
+# ===============================
+host:
 	build: server: true
 	browser: open: true, reload: true
 
