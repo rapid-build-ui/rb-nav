@@ -48,7 +48,22 @@ common:
 			js:
 				es6: true
 
-demo:
+# RUN BEFORE NPM PUBLISH!!
+# rapid-build prod publish
+# ========================
+publish:
+	extra:
+		copy:
+			client: [
+				'.npmignore'
+				'CHANGELOG.md'
+				'README.md'
+			]
+
+# TODO:
+# USE COMPONENT FROM THIS SERVER
+# ==============================
+online:
 	build: server: true
 	browser: open: true, reload: true
 
