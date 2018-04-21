@@ -1,7 +1,7 @@
 {
 	"name": "rb-nav-proj",
 	"version": "0.0.0",
-	"description": "Rapid Build UI - Component Project: rb-nav",
+	"description": "Rapid Build UI Web Component Project: rb-nav",
 	"license": "MIT",
 	"engines": {
 		"npm": "5.x",

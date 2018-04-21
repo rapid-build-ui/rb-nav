@@ -2,7 +2,7 @@
 	"name": "@rapid-build-ui/rb-nav",
 	"version": "0.0.0",
 	"main": "scripts/rb-nav.js",
-	"description": "Rapid Build UI Component: rb-nav",
+	"description": "Rapid Build UI Web Component: rb-nav",
 	"license": "MIT",
 	"engines": {
 		"npm": "5.x",
