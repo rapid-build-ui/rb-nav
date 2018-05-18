@@ -31,7 +31,7 @@ cache:
 # ===========================
 before_install:
   - echo $RB_COMPONENT_DIR
-  - echo $TRAVIS_TOKEN
+  - echo $NPM_TOKEN
   - echo $RB_REPO_NAME
   - if [[ $(npm -v) != $NPM_VERSION ]]; then npm install -g npm@${NPM_VERSION}; fi # version check
   - if [[ -z $(command -v rapid-build) ]]; then npm install -g rapid-build@5; fi   # if not installed
