@@ -30,7 +30,7 @@ const Steps = paths => { // :{}
 				body: {
 					request: {
 						branch:  'continuous',
-						message: `REBUILD TRIGGERED - ${REPO_NAME}`
+						message: `REBUILD TRIGGERED FROM - ${REPO_NAME}`
 					}
 				}
 			};
