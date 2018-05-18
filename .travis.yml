@@ -1,0 +1,74 @@
+# ==============================
+# COMMON SETUP
+# ==============================
+# Travis only runs on:
+# Commit to "continuous" branch.
+# Valid semver tag is created.
+# ==============================
+language: node_js
+
+node_js:
+  - '8'
+
+env:
+  global:
+    # Versions
+    - NPM_VERSION="6.0.1"
+    # Directories
+    - RB_COMPONENT_DIR="$TRAVIS_BUILD_DIR"
+    - RB_REPO_NAME="$TRAVIS_REPO_SLUG"
+    # TOKENS (in order): TRAVIS_TOKEN, NPM_TOKEN
+    - secure: LOjeRXmiId1WmLPGyghNrcHeIe56d6E/Z1k9mLLA86KA3lSqfvvIiscrVH3ml2qDTzSLEOw3JibckvMWWVftrd4fsBL4xisMqfwzDQgzDohXynCjsjH37FicGaoLrnFmdsOS/TgCF/YdlT0eKxJxcLazOazL1QOpijFBE3qQDvKtvhyRd5gGdtutN4OH1wDR9k1zp3QONSyHMsDcJguDcwioRl5OELxjB9GYsZ5yf3hpv7ppigDSfUAgIPwFp4d4lVrHQQRldF1pwy7oqhh6kLwb0f1Gj0+3Opi5JyOZeOMTiiY7Ky1nY7hzMWI7S4XTy9FEkSpWgX3cwFXWkHTzHjqgXiA9Bt29RMuDgXVHM3aJMit9Po9aFtAH1XU+dzyoMjpBfNv9SM3w4mk4uXuXv7g/c7Zwb7TgJ4oqwy4MAlVccOCH2RNHWQA4P/p8cBk4fo0MyyV6xL8OE7yohHswU0nAOPF9Pv38vwPJdDtVWKuVcJm30muDCkUjkWtvsbweuLrhZ91732w2TI7HltG5jnZCP9hZ0onIQIno4wq+MVypf+Fy1/PKuoCea5OIq8+8KmQ5Fvlwig2C7gYEfdWkioreUcbUgNIW3jQ5VNruqvz/T7DhCf2IbPk/2ox27OxvcdjsqbKJRAHz4G+qLKwbB14mg8An05OefPQVBQmJQ40=
+    - secure: MqG/SqF6dhPU/KjhrrZIjIQSFNIlj4cWsfE+cL4FrbKlaofryq62JsPcjXZ73KEQem4TnMtiGVNOUy/82Kz4tsLODeJ5dILKVtY65fLYrPDmyocdsUWmZOkRNAuDzvygrKVlUIIV9A/SDXzydyBRHNUnfess4tEI9cXBpze1Blt6qinqH63cCI+klhZ0nbmQlGNk9fBZQfm7oWMLlC4pTaqj1zSK7blS6pk7MDVv4f68sLfxgyOkhErdSkU8X92WVsCqSYN0VEoi/avaIE0ojWv+Sgw+i7leUWXVlWn6t/DMFZAuWKo8+DdUgaeOX/yn8Mz6wzoA9lpS9aU5ScXIDNafB6k4Y2ehz4Tr20NAAephJQw4VpcEfFzUJs3FXGj0t3qxuH3UOQcqf9LIw1SO3hYj3EcNjpMYNqZ6xy7eOGwLuGaW7eXoNXXMz4DvH02heRU85EGEZP9eMnJtWdNME0congeWsPP5M5u+3XfpZqKoX6iNC/W8PPcKDjjajg/s5IcIMewJQG+CgrNjF1LjxakTwT8r4S+06Eup6tiSCcw8zSnqnaWKzf99y+LckovhF+kp4C33lkuKR84PLkTA7yzeP/T/RY6vD9nUUC62QTTBYoznXDvjqItT2ulicu5ge29xfkkbNJySc5nqJEGf7L8mwTOhck47dJkEGbCEV9Q=
+
+cache:
+  directories:
+    - node_modules     # repo root node_modules
+    - "$(npm root -g)" # global node_modules directory
+    - "$(npm bin -g)/rapid-build"
+
+# Install Global Dependencies
+# ===========================
+before_install:
+  - if [[ $(npm -v) != $NPM_VERSION ]]; then npm install -g npm@${NPM_VERSION}; fi # version check
+  - if [[ -z $(command -v rapid-build) ]]; then npm install -g rapid-build@5; fi   # if not installed
+
+# ===================================
+# SPECIFIC JOBS
+# ===================================
+# - before_script:
+#   Runs after npm install.
+#   Stops build immediately on error.
+# - Release Job:
+#   Must be a valid semver tag.
+#   Examples: v1.0.0 or v1.0.0-beta.1
+# ===================================
+jobs:
+  include:
+    # Continuous
+    # ==========
+    - if: branch = continuous
+      before_script:
+        # STEPS (in order)
+        # ================
+        # Build Component
+        # Trigger Showcase Build
+        - rapid-build prod publish
+        - node scripts/travis/continuous $RB_COMPONENT_DIR $TRAVIS_TOKEN $RB_REPO_NAME
+
+    # Release
+    # =======
+    - if: tag =~ ^v(\d+\.)(\d+\.)(\d+)(-([A-Za-z]+\.)?(\d+\.)?(\d+\.)?(\d+))?$
+      before_script:
+        - rapid-build prod publish
+      before_deploy:
+        - cd $RB_COMPONENT_DIR/dist/client/ # run npm publish from here
+      after_deploy:
+        - cd $RB_COMPONENT_DIR
+      deploy:
+        provider: npm
+        skip_cleanup: true
+        email: rapidbuildui@yahoo.com
+        on:
+          tags: true
+        api_key: $NPM_TOKEN
