@@ -14,8 +14,7 @@ common:
 		from:
 			minFile:
 				scripts: [
-					'scripts/activity.js'
-					'scripts/responsive.js'
+					'scripts/!(rb-*.js)'
 				]
 	extra:
 		copy:

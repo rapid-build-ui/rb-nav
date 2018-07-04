@@ -1,109 +1,70 @@
 /*********
  * RB-NAV
  *********/
-import { PolymerElement, html } from '../../../@polymer/polymer/polymer-element.js';
+import { props, withComponent } from '../../../skatejs/dist/esnext/index.js';
+import { html, withRenderer } from './renderer.js';
+import EventService from './event-service.js';
 import Activity from './activity.js';
 import Responsive from './responsive.js';
 import template from '../views/rb-nav.html';
 
-export class RbNav extends Activity(Responsive(PolymerElement)) {
+export class RbNav extends Activity(Responsive(withComponent(withRenderer()))) {
+	/* Lifecycle
+	 ************/
 	constructor() {
 		super();
+		this.rbEvent = EventService.call(this);
 	}
-	connectedCallback() {
-		super.connectedCallback();
-		if (!this._slot) this._slot = this.root.querySelector('slot');
-		this._attachEvents();
+	connected() {
+		setTimeout(() => { // (timeout to ensure template is rendered)
+			this._slot = this.shadowRoot.querySelector('slot');
+			this._attachEvents();
+		});
 	}
-	disconnectedCallback() {
-		super.disconnectedCallback();
+	disconnected() {
 		this._detachEvents();
 	}
 
 	/* Properties
 	 *************/
-	static get properties() {
+	static get props() {
 		return {
-			/* API
-			 ******/
-			dividers: {
-				type: Boolean,
-				value: false
-			},
-			inline: {
-				type: Boolean,
-				value: false
-			},
-			inverse: {
-				type: Boolean,
-				value: false
-			},
-			kind: {
-				type: String,
-				value: 'default'
-			},
-			vertical: {
-				type: Boolean,
-				value: false
-			}
+			...super.props,
+			dividers: props.boolean,
+			inline: props.boolean,
+			inverse: props.boolean,
+			kind: props.string,
+			vertical: props.boolean
 		}
-	}
-
-	/* Computed Bindings
-	 ********************/
-	_display(inline) { // :string
-		return inline ? 'inline' : 'block';
-	}
-	_dividers(dividers) { // :string
-		return dividers ? 'dividers' : null;
-	}
-	_inverse(inverse) { // :string
-		return inverse ? 'inverse' : null;
-	}
-	_layout(vertical) { // :string
-		return vertical ? 'vertical' : 'horizontal';
-	}
-
-	/* Getters
-	 **********/
-	get links() { // :element[]
-		return this._slot
-			.assignedNodes({flatten:true})
-			.filter(n => n.nodeType === Node.ELEMENT_NODE)
-			.filter(n => n.tagName.toLowerCase() === 'a');
 	}
 
 	/* Event Management
 	 *******************/
-	_addEvent(target, targetName, eventName, eventHandler) { // :void
-		if (!this._events) this._events = {};
-		if (!this._events[targetName]) this._events[targetName] = {};
-		if (this._events[targetName][eventHandler]) return;
-		this._events[targetName][eventHandler] =
-			target === this ? this[eventHandler] : this[eventHandler].bind(this);
-		target.addEventListener(eventName, this._events[targetName][eventHandler]);
-	}
-	_removeEvent(target, targetName, eventName, eventHandler) { // :void
-		if (!this._events) return;
-		if (!this._events[targetName]) return;
-		if (!this._events[targetName][eventHandler]) return;
-		target.removeEventListener(eventName, this._events[targetName][eventHandler]);
-		delete this._events[targetName][eventHandler];
-	}
 	_attachEvents() { // :void
-		this._addEvent(this._slot, 'slot', 'slotchange', '_setTabIndexes');
-		this._addEvent(this._slot, 'slot', 'slotchange', '_trimSlot');
-		this._addEvent(this._slot, 'slot', 'slotchange', '_addFirstAndLastClasses');
+		this._setLinks();
+		this.rbEvent.add(this._slot, 'slot', 'slotchange', '_setLinks');
 	}
 	_detachEvents() { // :void
-		this._removeEvent(this._slot, 'slot', 'slotchange', '_setTabIndexes');
-		this._removeEvent(this._slot, 'slot', 'slotchange', '_trimSlot');
-		this._removeEvent(this._slot, 'slot', 'slotchange', '_addFirstAndLastClasses');
+		this.rbEvent.remove(this._slot, 'slot', 'slotchange', '_setLinks');
 	}
 
 	/* Event Handlers
 	 *****************/
+	_setLinks(e) { // :void (links = element[])
+		this.links = this._slot
+			.assignedNodes({flatten:true})
+			.filter(n => n.nodeType === Node.ELEMENT_NODE)
+			.filter(n => n.tagName.toLowerCase() === 'a');
+		// console.log('SET LINKS:  ', this.links);
+		this._setTabIndexes();
+		this._trimSlot();
+		this._addFirstAndLastClasses();
+		this.rbEvent.emit(this, 'links-changed', {
+			detail: { length: this.links.length }
+		});
+	}
 	_setTabIndexes(e) { // :void
+		// console.log('TAB INDEXES:', this.links);
 		if (!this.links.length) return;
 		for (let link of this.links) {
 			if (link.hasAttribute('tabindex')) continue;
@@ -111,6 +72,7 @@ export class RbNav extends Activity(Responsive(PolymerElement)) {
 		}
 	}
 	_trimSlot(e) { // :void (prevent extra white space)
+		// console.log('TRIM SLOT:  ', this.links);
 		if (!this.links.length) return;
 		for (let link of this.links) {
 			for (let child of link.childNodes) {
@@ -120,10 +82,12 @@ export class RbNav extends Activity(Responsive(PolymerElement)) {
 		}
 	}
 	_addFirstAndLastClasses(e) { // :void
+		// console.log('ADD CLASSES:', this.links);
 		if (!this.links.length) return;
 		const FIRST = 'rb-first';
 		const LAST  = 'rb-last';
 		for (let link of this.links) {
+			link.classList.remove(FIRST, LAST);
 			let prevElm = link.previousElementSibling;
 			let nextElm = link.nextElementSibling;
 			if (!prevElm || prevElm.tagName.toLowerCase() === 'h3')
@@ -135,7 +99,7 @@ export class RbNav extends Activity(Responsive(PolymerElement)) {
 
 	/* Template
 	 ***********/
-	static get template() { // :template literal
+	render({ props }) { // :string
 		return html template;
 	}
 }
