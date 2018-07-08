@@ -44,7 +44,7 @@
 
 /* Open Trigger
  ***************/
-&:not(.closed) .trigger {
+&:not(.menu-closed) .trigger {
 	border-radius: 5px 5px 0 0;
 	b {
 		$scale: .8;
@@ -65,7 +65,7 @@
 /* Kinds
  ********/
 &.default {
-	&.closed .trigger {
+	&.menu-closed .trigger {
 		opacity: .5;
 	}
 	.trigger {

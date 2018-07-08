@@ -1,68 +1,51 @@
 /******************
  * ACTIVITY MODULE
  ******************/
+import { props } from '../../../skatejs/dist/esnext/index.js';
 const ACTIVE_CLASS = 'active';
 
 const Activity = superClass => class extends superClass {
-	constructor() {
-		super();
-	}
+	/* Lifecycle
+	 ************/
 	connectedCallback() {
 		super.connectedCallback();
-		if (!this._slot) this._slot = this.root.querySelector('slot');
+		if (!this.props.active) return;
 		this._attachActivityEvents()
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
+		if (!this.props.active) return;
 		this._detachActivityEvents();
 	}
 
-	/*************
-	 * PUBLIC API
+	/* Properties
 	 *************/
- 	static get properties() {
- 		return {
- 			active: {
-				type: Object, // :boolean | string | object
- 				value: true
- 			},
-			activity: {
-				type: Object, // :boolean | string
-				readOnly: true,
-				computed: 'getActivity(active)'
-			},
-			activeClass: {
-				type: String,
-				readOnly: true,
- 				value: ACTIVE_CLASS
- 			}
- 		}
- 	}
-
-	getActivity(active) { // :boolean | string (activity type)
-		if (active === false)       return false;
-		if (active === 'hash')      return 'hash';
-		if (active === 'path')      return 'path';
-		if (active && active.param) return 'param';
-		if (active && typeof active.segment == 'number') return 'segment';
-		return true;
-	}
-
-	/* Event Management
-	 *******************/
-	_attachActivityEvents() { // :void
-		if (!this.activity) return;
-		this._addEvent(this, 'this', 'click', '_setActiveClick'); // test this (use to be _slotchange)
-		this._addEvent(this._slot, 'slot', 'slotchange', '_slotchange');
-	}
-	_detachActivityEvents() { // :void
-		if (!this.activity) return;
-		this._removeEvent(this, 'this', 'click', '_setActiveClick');
-		this._removeEvent(this._slot, 'slot', 'slotchange', '_slotchange');
-		this._hashInterval && clearInterval(this._hashInterval);
-		this._pathObserver && this._pathObserver.disconnect();
-		this._paramsInterval && clearInterval(this._paramsInterval);
-		this._segmentObserver && this._segmentObserver.disconnect();
+	static get props() {
+		return {
+			...super.props,
+			active: Object.assign({}, props.any, {
+				default: true,
+				deserialize(val) { // :boolean | string | object (val :string)
+					val = val.trim();
+					let newVal;
+					switch (true) {
+						case /^(?:hash|path)$/i.test(val):
+							newVal = val;
+							break;
+						case /^(?:true|false)$/i.test(val):
+							newVal = /^true$/i.test(val);
+							break;
+						case /^{[^]*}$/.test(val):
+							newVal = JSON.parse(val);
+							break;
+						default:
+							newVal = true;
+					}
+					// console.log('ACTIVE:', { oldVal: val, newVal });
+					return newVal;
+				}
+			})
+		}
 	}
 
 	/* Helpers
@@ -88,7 +71,6 @@ const Activity = superClass => class extends superClass {
 		for (let link of this.links)
 			this.__deactivateLink(link);
 	}
-
 	_isActiveLink(link) { // :boolean
 		return link.classList.contains(ACTIVE_CLASS);
 	}
@@ -102,14 +84,33 @@ const Activity = superClass => class extends superClass {
 		this.__deactivateLinks();
 	}
 
+	/* Event Management
+	 *******************/
+	_attachActivityEvents() { // :void
+		this.rbEvent.add(this, 'links', 'links-changed', '_activateLinks');
+		this.rbEvent.add(this, 'links', 'links-changed', '_setActiveObserver');
+	}
+	_detachActivityEvents() { // :void
+		this.rbEvent.remove(this, 'links', 'links-changed', '_activateLinks');
+		this.rbEvent.remove(this, 'links', 'links-changed', '_setActiveObserver');
+		this.rbEvent.remove(this.links, 'links', 'click', '_activeLinkClick');
+		this._hashInterval && clearInterval(this._hashInterval);
+		this._pathObserver && this._pathObserver.disconnect();
+		this._paramsInterval && clearInterval(this._paramsInterval);
+		this._segmentObserver && this._segmentObserver.disconnect();
+	}
+
 	/* Event Handlers
 	 *****************/
-	_slotchange(e) { // :void
-		switch(this.activity) {
-			case 'hash':
+	_activateLinks(e) { // :void
+		this.rbEvent.add(this.links, 'links', 'click', '_activeLinkClick');
+	}
+	_setActiveObserver(e) { // :void
+		switch(true) {
+			case this.active === 'hash':
 				if (this._hashInterval) break;
 				this._setActiveHash(e);
-				var oldHash = location.hash;
+				let oldHash = location.hash;
 				this._hashInterval = setInterval(() => {
 					let newHash = location.hash;
 					if (newHash === oldHash) return;
@@ -118,24 +119,25 @@ const Activity = superClass => class extends superClass {
 				}, 100);
 				break;
 
-			case 'path':
+			case this.active === 'path':
 				if (this._pathObserver) break;
 				this._setActivePath(e);
-				var oldPath = location.pathname;
+				let oldPath = location.pathname;
 				this._pathObserver = new MutationObserver(() => {
 					let newPath = location.pathname;
 					if (newPath === oldPath) return;
 					this._setActivePath(e);
 					oldPath = newPath;
 				});
-				var opts = { childList: true, subtree: true };
-				this._pathObserver.observe(document.body, opts);
+				this._pathObserver.observe(document.body, {
+					childList: true, subtree: true
+				});
 				break;
 
-			case 'param':
+			case !!this.active.param:
 				if (this._paramsInterval) break;
 				this._setActiveParam(e);
-				var oldParams = location.search;
+				let oldParams = location.search;
 				this._paramsInterval = setInterval(() => {
 					let newParams = location.search;
 					if (newParams === oldParams) return;
@@ -144,68 +146,66 @@ const Activity = superClass => class extends superClass {
 				}, 100);
 				break;
 
-			case 'segment':
+			case !!this.active.segment:
 				if (this._segmentObserver) break;
 				this._setActiveSegment(e);
-				var oldSegment = location.pathname;
+				let oldSegment = location.pathname;
 				this._segmentObserver = new MutationObserver(() => {
 					let newSegment = location.pathname;
 					if (newSegment === oldSegment) return;
 					this._setActiveSegment(e);
 					oldSegment = newSegment;
 				});
-				var opts = { childList: true, subtree: true };
-				this._segmentObserver.observe(document.body, opts);
+				this._segmentObserver.observe(document.body, {
+					childList: true, subtree: true
+				});
 				break;
 		}
 	}
 
-	_setActiveClick(e) { // :void
-		let link = e.composedPath()[0];
-		if (link.tagName.toLowerCase() !== 'a') return;
-		this._activateLink(link);
+	/* Link Activity Events
+	 ***********************/
+	_activeLinkClick(e) { // :void
+		this._activateLink(e.currentTarget);
 	}
-
 	_setActiveHash(e) { // :void
-		var locHash = location.hash.split('#')[1];
+		let deactivate;
+		let locHash = location.hash.split('#')[1];
 		locHash = locHash && locHash.toLowerCase();
-
-		for (let link of this.links) {
+		for (const link of this.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
-			let linkHash = href.toLowerCase().split('#')[1];
+			const linkHash = href.toLowerCase().split('#')[1];
 			if (!linkHash) continue;
 			if (linkHash !== locHash) continue;
-			var deactivate = false;
+			deactivate = false;
 			this._activateLink(link);
 			break;
 		}
 		this._deactivateLinks(deactivate);
 	}
-
 	_setActivePath(e) { // :void (TODO: support hrefs with ..)
-		var locPath = location.pathname.toLowerCase();
-
-		for (let link of this.links) {
+		let deactivate;
+		const locPath = location.pathname.toLowerCase();
+		for (const link of this.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			href = href.toLowerCase().split('?')[0].split('#')[0];
 			if (!href) continue;
 			if (href !== locPath) continue;
-			var deactivate = false;
+			deactivate = false;
 			this._activateLink(link);
 			break;
 		}
 		this._deactivateLinks(deactivate);
 	}
-
 	_setActiveParam(e) { // :void
-		var activeParam = this.active.param,
-			locQS       = location.search.slice(0),
-			locParam    = new URLSearchParams(locQS.toLowerCase()).getAll(activeParam);
-		locParam = JSON.stringify(locParam);
-
-		for (let link of this.links) {
+		let deactivate;
+		const activeParam = this.active.param;
+		const locQS       = location.search.slice(0);
+		let locParam = new URLSearchParams(locQS.toLowerCase()).getAll(activeParam);
+			locParam = JSON.stringify(locParam);
+		for (const link of this.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			let linkQS = href.toLowerCase().split('?')[1];
@@ -215,25 +215,24 @@ const Activity = superClass => class extends superClass {
 			if (!linkParam.length) continue;
 			linkParam = JSON.stringify(linkParam);
 			if (linkParam !== locParam) continue;
-			var deactivate = false;
+			deactivate = false;
 			this._activateLink(link);
 			break;
 		}
 		this._deactivateLinks(deactivate);
 	}
-
 	_setActiveSegment(e) { // :void
-		var activeSeg = this.active.segment - 1,
-			locSegs   = this.__cleanArray(location.pathname.toLowerCase().split('/'));
-
-		for (let link of this.links) {
+		let deactivate;
+		const activeSeg = this.active.segment - 1;
+		const locSegs   = this.__cleanArray(location.pathname.toLowerCase().split('/'));
+		for (const link of this.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			href = href.toLowerCase().split('?')[0].split('#')[0];
 			if (!href) continue;
-			let linkSegs = this.__cleanArray(href.split('/'));
+			const linkSegs = this.__cleanArray(href.split('/'));
 			if (linkSegs[activeSeg] !== locSegs[activeSeg]) continue;
-			var deactivate = false;
+			deactivate = false;
 			this._activateLink(link);
 			break;
 		}

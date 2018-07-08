@@ -5,7 +5,7 @@
 	width: fit-content;
 }
 
-&.closed .nav {
+&.menu-closed .nav {
 	width: 0;
 	height: 0;
 	opacity: 0;
@@ -17,13 +17,26 @@
 	position: absolute;
 	z-index: 3;
 	top: 34px;
-	&:not(.left) {
-		left: 0;
-		border-radius: 0 5px 5px 5px;
-	}
-	&.left {
+	// &:not(.left) {
+	// 	left: 0;
+	// 	border-radius: 0 5px 5px 5px;
+	// }
+	// &.left {
+	// 	right: 0;
+	// 	border-radius: 5px 0 5px 5px;
+	// }
+}
+
+&.menu-left {
+	.nav {
 		right: 0;
 		border-radius: 5px 0 5px 5px;
+	}
+}
+&:not(.menu-left) {
+	.nav {
+		left: 0;
+		border-radius: 0 5px 5px 5px;
 	}
 }
 

@@ -1,135 +1,103 @@
 /********************
  * RESPONSIVE MODULE
  ********************/
-const LEFT_CLASS       = 'left';
-const CLOSED_CLASS     = 'closed';
-const RESPONSIVE_CLASS = 'responsive';
-const RESPONSIVE_AT    = 768; // pixels
+import { props } from '../../../skatejs/dist/esnext/index.js';
+const RESPONSIVE_AT = 768; // pixels
 
 const Responsive = superClass => class extends superClass {
-	constructor() {
-		super();
-	}
+	/* Lifecycle
+	 ************/
 	connectedCallback() {
 		super.connectedCallback();
-		if (!this.responsive) return;
-		this.__setInitialProps();
-		this._nav     = this.root.querySelector('nav');
-		this._menu    = this.root.querySelector('.nav'); // .nav menu
-		this._trigger = this.root.querySelector('.trigger');
-		this.__makeNavViewable();
-		this._attachResponsiveEvents()
+		if (!this.props.responsive) return;
+		setTimeout(() => { // (timeout to ensure template is rendered)
+			this._nav     = this.shadowRoot.querySelector('nav');
+			this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
+			this._trigger = this.shadowRoot.querySelector('.trigger');
+			this._attachResponsiveEvents()
+		});
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		if (!this.responsive) return;
+		if (!this.props.responsive) return;
 		this._detachResponsiveEvents();
 	}
 
 	/* Properties
 	 *************/
-	static get properties() {
+	static get props() {
 		return {
-			responsive: {
-				type: Object, // :boolean | object { closeOnClick: boolean = true }
-				value: false,
-				observer: '__updateResponsive'
-			}
+			...super.props,
+			responsive: Object.assign({}, props.boolean, { // :boolean | object
+				deserialize(val) {
+					const enabled = !val; // valueless attr = true
+					const defaults = {
+						enabled: true,
+						closed: true,
+						left: false
+					};
+					if (enabled) return defaults;
+					return Object.assign(defaults, JSON.parse(val));
+				}
+			})
 		}
-	}
-
-	/* Observers
-	 ************/
-	__updateResponsive(newVal, oldVal) { // :void
-		if (newVal === false) return;
-		if (!!newVal) return; // newVal is options {}
-		this.responsive = {}; // for valueless attr
-	}
-
-	/* Computed Bindings
-	 ********************/
-	_responsive(responsive) { // :string
-		if (!this.responsive) return;
-		return `${RESPONSIVE_CLASS} ${CLOSED_CLASS}`
 	}
 
 	/* Helpers
 	 **********/
-	__setInitialProps() { // :void
-		this.__initialProps = {
-			dividers: this.dividers,
-			vertical: this.vertical
-		}
-	}
-	__restoreInitialProps() { // :void
-		this.__setResponsiveProps(this.__initialProps);
-	}
-	__setResponsiveProps(props) { // :void
-		if (typeof props !== 'object') return;
-		for (const [key, val] of Object.entries(props))
-			this[key] = val;
+	__setResponsive(opts={}) { // :void
+		Object.assign(this.responsive, opts);
+		this.triggerUpdate();
 	}
 	__makeNavViewable() { // :void
-		let winWidth  = window.innerWidth,
-			menuRect  = this._menu.getBoundingClientRect(),
-			menuClass = this._menu.classList,
-			menuX     = menuRect.x,
-			menuWidth = menuRect.width,
-			menuTotal = menuX + menuWidth;
-		if (menuClass.contains(LEFT_CLASS))
-			menuTotal +=  menuWidth; // left class changes position of menu's x
-		let isNavViewable = winWidth > menuTotal;
-		// console.log({ isNavViewable, winWidth, menuTotal, menuWidth, menuX });
-		if (isNavViewable) return menuClass.remove(LEFT_CLASS);
-		menuClass.add(LEFT_CLASS);
+		setTimeout(() => { // (timeout to ensure menu has dimensions)
+			const winWidth  = window.innerWidth;
+			const menuRect  = this._menu.getBoundingClientRect();
+			const menuX     = menuRect.x;
+			const menuWidth = menuRect.width;
+			let menuTotal = menuX + menuWidth;
+			if (this.responsive.left)
+				menuTotal +=  menuWidth; // left changes position of menu's x coordinate
+			const isNavViewable = winWidth > menuTotal;
+			// console.log({ isNavViewable, winWidth, menuTotal, menuWidth, menuX });
+			if (isNavViewable) return this.__setResponsive({ left: false });
+			this.__setResponsive({ left: true });
+		});
 	}
 
 	/* Event Management
 	 *******************/
 	_attachResponsiveEvents() { // :void
-		this._addEvent(window, 'window', 'click', '_windowClick');
-		this._addEvent(window, 'window', 'resize', '_windowResize');
-		this._addEvent(this._menu, 'menu', 'click', '_menuClick');
-		this._addEvent(this._trigger, 'trigger', 'click', '_triggerClick');
-		this._addEvent(this._trigger, 'trigger', 'mouseleave', '_triggerLeave');
+		this.rbEvent.add(window, 'window', 'click', '_windowClick');
+		this.rbEvent.add(window, 'window', 'resize', '_windowResize');
 	}
 	_detachResponsiveEvents() { // :void
-		this._removeEvent(window, 'window', 'click', '_windowClick');
-		this._removeEvent(window, 'window', 'resize', '_windowResize');
-		this._removeEvent(this._menu, 'menu', 'click', '_menuClick');
-		this._removeEvent(this._trigger, 'trigger', 'click', '_triggerClick');
-		this._removeEvent(this._trigger, 'trigger', 'mouseleave', '_triggerLeave');
+		this.rbEvent.remove(window, 'window', 'click', '_windowClick');
+		this.rbEvent.remove(window, 'window', 'resize', '_windowResize');
 	}
 
-	/* Window Event Handlers
-	 ************************/
+	/* Event Handlers
+	 *****************/
 	_windowClick(e) { // :void
-		if (this._nav.classList.contains(CLOSED_CLASS)) return;
-		if (e.path.includes(this._nav)) return;
-		this._nav.classList.add(CLOSED_CLASS);
+		if (this.responsive.closed) return;
+		const path = e.composedPath();
+		if (path.includes(this._nav)) return;
+		this.__setResponsive({ closed: true });
 	}
 	_windowResize(e) { // :void
 		if (window.innerWidth <= RESPONSIVE_AT)
 			return this.__makeNavViewable();
-		this.__restoreInitialProps();
-		this._nav.classList.add(CLOSED_CLASS);
+		this.__setResponsive({ closed: true });
 	}
-
-	/* Menu Event Handlers
-	 **********************/
 	_menuClick(e) { // :void
 		if (this.responsive.closeOnClick === false) return;
-		this._nav.classList.add(CLOSED_CLASS);
+		this.__setResponsive({ closed: true });
 	}
-
-	/* Trigger Event Handlers
-	 *************************/
 	_triggerLeave(e) { // :void
 		this._trigger.blur();
 	}
 	_triggerClick(e) { // :void
-		this.__setResponsiveProps({ dividers: true, vertical: true });
-		this._nav.classList.toggle(CLOSED_CLASS);
+		this.__setResponsive({ closed: !this.responsive.closed });
 		this.__makeNavViewable();
 	}
 }
