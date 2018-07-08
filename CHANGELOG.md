@@ -1,3 +1,16 @@
+## [0.0.4](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.3...v0.0.4) (2018-07-08)
+
+
+Release switches web components library Polymer 3 to [SkateJS](http://skatejs.netlify.com/) and view renderer [lit-html](https://polymer.github.io/lit-html/).
+
+
+### Bug Fixes
+
+* **safari:** not setting the observable active link ([426fdba](https://github.com/rapid-build-ui/rb-nav/commit/426fdba))
+* **safari and firefox:** not closing the responsive nav menu on window click ([426fdba](https://github.com/rapid-build-ui/rb-nav/commit/426fdba))
+
+
+
 ## 0.0.3 (2018-06-22)
 
 
