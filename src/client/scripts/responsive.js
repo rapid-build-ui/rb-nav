@@ -7,15 +7,13 @@ const RESPONSIVE_AT = 768; // pixels
 const Responsive = superClass => class extends superClass {
 	/* Lifecycle
 	 ************/
-	connectedCallback() {
-		super.connectedCallback();
+	viewReady() {
+		super.viewReady && super.viewReady();
 		if (!this.props.responsive) return;
-		setTimeout(() => { // (timeout to ensure template is rendered)
-			this._nav     = this.shadowRoot.querySelector('nav');
-			this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
-			this._trigger = this.shadowRoot.querySelector('.trigger');
-			this._attachResponsiveEvents()
-		});
+		this._nav     = this.shadowRoot.querySelector('nav');
+		this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
+		this._trigger = this.shadowRoot.querySelector('.trigger');
+		this._attachResponsiveEvents()
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();

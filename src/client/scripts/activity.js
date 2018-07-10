@@ -7,8 +7,8 @@ const ACTIVE_CLASS = 'active';
 const Activity = superClass => class extends superClass {
 	/* Lifecycle
 	 ************/
-	connectedCallback() {
-		super.connectedCallback();
+	viewReady() {
+		super.viewReady && super.viewReady();
 		if (!this.props.active) return;
 		this._attachActivityEvents()
 	}
