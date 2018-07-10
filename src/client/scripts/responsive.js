@@ -68,11 +68,11 @@ const Responsive = superClass => class extends superClass {
 	/* Event Management
 	 *******************/
 	_attachResponsiveEvents() { // :void
-		this.rbEvent.add(window, 'window', 'click', '_windowClick');
+		this.rbEvent.add(window, 'window', 'click touchstart', '_windowClick');
 		this.rbEvent.add(window, 'window', 'resize', '_windowResize');
 	}
 	_detachResponsiveEvents() { // :void
-		this.rbEvent.remove(window, 'window', 'click', '_windowClick');
+		this.rbEvent.remove(window, 'window', 'click touchstart', '_windowClick');
 		this.rbEvent.remove(window, 'window', 'resize', '_windowResize');
 	}
 
