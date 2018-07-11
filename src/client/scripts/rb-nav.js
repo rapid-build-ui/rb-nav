@@ -15,11 +15,10 @@ export class RbNav extends Activity(Responsive(withComponent(withRenderer()))) {
 		super();
 		this.rbEvent = EventService.call(this);
 	}
-	connected() {
-		setTimeout(() => { // (timeout to ensure template is rendered)
-			this._slot = this.shadowRoot.querySelector('slot');
-			this._attachEvents();
-		});
+	viewReady() {
+		super.viewReady && super.viewReady();
+		this._slot = this.shadowRoot.querySelector('slot');
+		this._attachEvents();
 	}
 	disconnected() {
 		this._detachEvents();

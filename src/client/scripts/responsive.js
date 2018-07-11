@@ -7,15 +7,13 @@ const RESPONSIVE_AT = 768; // pixels
 const Responsive = superClass => class extends superClass {
 	/* Lifecycle
 	 ************/
-	connectedCallback() {
-		super.connectedCallback();
+	viewReady() {
+		super.viewReady && super.viewReady();
 		if (!this.props.responsive) return;
-		setTimeout(() => { // (timeout to ensure template is rendered)
-			this._nav     = this.shadowRoot.querySelector('nav');
-			this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
-			this._trigger = this.shadowRoot.querySelector('.trigger');
-			this._attachResponsiveEvents()
-		});
+		this._nav     = this.shadowRoot.querySelector('nav');
+		this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
+		this._trigger = this.shadowRoot.querySelector('.trigger');
+		this._attachResponsiveEvents()
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
@@ -68,11 +66,11 @@ const Responsive = superClass => class extends superClass {
 	/* Event Management
 	 *******************/
 	_attachResponsiveEvents() { // :void
-		this.rbEvent.add(window, 'window', 'click', '_windowClick');
+		this.rbEvent.add(window, 'window', 'click touchstart', '_windowClick');
 		this.rbEvent.add(window, 'window', 'resize', '_windowResize');
 	}
 	_detachResponsiveEvents() { // :void
-		this.rbEvent.remove(window, 'window', 'click', '_windowClick');
+		this.rbEvent.remove(window, 'window', 'click touchstart', '_windowClick');
 		this.rbEvent.remove(window, 'window', 'resize', '_windowResize');
 	}
 
