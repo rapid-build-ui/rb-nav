@@ -1,3 +1,12 @@
+## [0.0.5](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.4...v0.0.5) (2018-07-11)
+
+
+### Bug Fixes
+
+* **mobile:** not closing the nav menu on clickaway ([34be703](https://github.com/rapid-build-ui/rb-nav/commit/34be703))
+
+
+
 ## [0.0.4](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.3...v0.0.4) (2018-07-08)
 
 
