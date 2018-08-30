@@ -1,7 +1,7 @@
 /********************
  * RESPONSIVE MODULE
  ********************/
-import { props } from '../../../skatejs/dist/esnext/index.js';
+import { props } from '../../rb-base/scripts/rb-base.js';
 const RESPONSIVE_AT = 768; // pixels
 
 const Responsive = superClass => class extends superClass {
@@ -14,11 +14,6 @@ const Responsive = superClass => class extends superClass {
 		this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
 		this._trigger = this.shadowRoot.querySelector('.trigger');
 		this._attachResponsiveEvents()
-	}
-	disconnectedCallback() {
-		super.disconnectedCallback();
-		if (!this.props.responsive) return;
-		this._detachResponsiveEvents();
 	}
 
 	/* Properties
@@ -66,12 +61,8 @@ const Responsive = superClass => class extends superClass {
 	/* Event Management
 	 *******************/
 	_attachResponsiveEvents() { // :void
-		this.rbEvent.add(window, 'window', 'click touchstart', '_windowClick');
-		this.rbEvent.add(window, 'window', 'resize', '_windowResize');
-	}
-	_detachResponsiveEvents() { // :void
-		this.rbEvent.remove(window, 'window', 'click touchstart', '_windowClick');
-		this.rbEvent.remove(window, 'window', 'resize', '_windowResize');
+		this.rb.events.add(window, 'click touchstart', this._windowClick);
+		this.rb.events.add(window, 'resize', this._windowResize);
 	}
 
 	/* Event Handlers

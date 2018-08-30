@@ -1,7 +1,7 @@
 /******************
  * ACTIVITY MODULE
  ******************/
-import { props } from '../../../skatejs/dist/esnext/index.js';
+import { props } from '../../rb-base/scripts/rb-base.js';
 const ACTIVE_CLASS = 'active';
 
 const Activity = superClass => class extends superClass {
@@ -87,13 +87,10 @@ const Activity = superClass => class extends superClass {
 	/* Event Management
 	 *******************/
 	_attachActivityEvents() { // :void
-		this.rbEvent.add(this, 'links', 'links-changed', '_activateLinks');
-		this.rbEvent.add(this, 'links', 'links-changed', '_setActiveObserver');
+		this.rb.events.add(this, 'links-changed', this._activateLinks);
+		this.rb.events.add(this, 'links-changed', this._setActiveObserver);
 	}
 	_detachActivityEvents() { // :void
-		this.rbEvent.remove(this, 'links', 'links-changed', '_activateLinks');
-		this.rbEvent.remove(this, 'links', 'links-changed', '_setActiveObserver');
-		this.rbEvent.remove(this.links, 'links', 'click', '_activeLinkClick');
 		this._hashInterval && clearInterval(this._hashInterval);
 		this._pathObserver && this._pathObserver.disconnect();
 		this._paramsInterval && clearInterval(this._paramsInterval);
@@ -103,7 +100,7 @@ const Activity = superClass => class extends superClass {
 	/* Event Handlers
 	 *****************/
 	_activateLinks(e) { // :void
-		this.rbEvent.add(this.links, 'links', 'click', '_activeLinkClick');
+		this.rb.events.add(this.links, 'click', this._activeLinkClick);
 	}
 	_setActiveObserver(e) { // :void
 		switch(true) {
