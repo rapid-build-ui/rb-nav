@@ -1,27 +1,18 @@
 /*********
  * RB-NAV
  *********/
-import { props, withComponent } from '../../../skatejs/dist/esnext/index.js';
-import { html, withRenderer } from './renderer.js';
-import EventService from './event-service.js';
+import { props, html, RbBase } from '../../rb-base/scripts/rb-base.js';
 import Activity from './activity.js';
 import Responsive from './responsive.js';
 import template from '../views/rb-nav.html';
 
-export class RbNav extends Activity(Responsive(withComponent(withRenderer()))) {
+export class RbNav extends Activity(Responsive(RbBase())) {
 	/* Lifecycle
 	 ************/
-	constructor() {
-		super();
-		this.rbEvent = EventService.call(this);
-	}
 	viewReady() {
 		super.viewReady && super.viewReady();
 		this._slot = this.shadowRoot.querySelector('slot');
 		this._attachEvents();
-	}
-	disconnected() {
-		this._detachEvents();
 	}
 
 	/* Properties
@@ -41,10 +32,7 @@ export class RbNav extends Activity(Responsive(withComponent(withRenderer()))) {
 	 *******************/
 	_attachEvents() { // :void
 		this._setLinks();
-		this.rbEvent.add(this._slot, 'slot', 'slotchange', '_setLinks');
-	}
-	_detachEvents() { // :void
-		this.rbEvent.remove(this._slot, 'slot', 'slotchange', '_setLinks');
+		this.rb.events.add(this._slot, 'slotchange', this._setLinks);
 	}
 
 	/* Event Handlers
@@ -58,7 +46,7 @@ export class RbNav extends Activity(Responsive(withComponent(withRenderer()))) {
 		this._setTabIndexes();
 		this._trimSlot();
 		this._addFirstAndLastClasses();
-		this.rbEvent.emit(this, 'links-changed', {
+		this.rb.events.emit(this, 'links-changed', {
 			detail: { length: this.links.length }
 		});
 	}
