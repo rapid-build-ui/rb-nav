@@ -1,3 +1,12 @@
+## [0.0.6](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.5...v0.0.6) (2018-08-30)
+
+
+### Dependency Updates
+
+* **rb-base:** replace deps lit-html and skatejs with @rapid-build-ui/rb-base and make corresponding updates ([8aaac5a](https://github.com/rapid-build-ui/rb-nav/commit/8aaac5a))
+
+
+
 ## [0.0.5](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.4...v0.0.5) (2018-07-11)
 
 
