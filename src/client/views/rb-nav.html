@@ -1,4 +1,4 @@
-<nav class$="
+<nav class="
 	${props.kind || 'default'}
 	${props.inline ? 'inline' : 'block'}
 	${props.inverse ? 'inverse' : ''}
@@ -15,15 +15,15 @@
 			<button
 				type="button"
 				class="trigger"
-				on-click="${this._triggerClick.bind(this)}"
-				on-mouseleave="${this._triggerLeave.bind(this)}">
+				@click="${this._triggerClick.bind(this)}"
+				@mouseleave="${this._triggerLeave.bind(this)}">
 				<b class="top"></b>
 				<b class="middle"></b>
 				<b class="bottom"></b>
 			</button>`
 		: null
 	}
-	<div class="nav" on-click="${props.responsive.enabled && this._menuClick.bind(this)}">
+	<div class="nav" @click="${props.responsive.enabled && this._menuClick.bind(this)}">
 		 <slot></slot>
 	</div>
 </nav>
