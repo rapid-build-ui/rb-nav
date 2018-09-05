@@ -1,3 +1,18 @@
+## [0.0.7](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.6...v0.0.7) (2018-09-05)
+
+
+### Bug Fixes
+
+* **safari:** remove border radius on nav links when primary and responsive option is enabled ([e8b8f83](https://github.com/rapid-build-ui/rb-nav/commit/e8b8f83))
+* **safari:** remove extra space when dividers or responsive option is enabled ([6acb512](https://github.com/rapid-build-ui/rb-nav/commit/6acb512))
+
+
+### Dependency Updates
+
+* **rb-base:** bump to v0.0.2 ([4ae37b9](https://github.com/rapid-build-ui/rb-nav/commit/4ae37b9))
+
+
+
 ## [0.0.6](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.5...v0.0.6) (2018-08-30)
 
 
