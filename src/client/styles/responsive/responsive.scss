@@ -43,7 +43,7 @@
 .nav {
 	overflow: auto;
 	::slotted(*) {
-		border-radius: 0;
+		border-radius: 0 !important;
 		border-left: none !important;
 		border-right: none !important;
 	}

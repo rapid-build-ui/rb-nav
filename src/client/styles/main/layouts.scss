@@ -12,13 +12,13 @@
 
 /* Default
  **********/
-&.default.horizontal {
+&.default.horizontal:not(.dividers) {
 	::slotted(h3),
 	::slotted(a:not(:last-child)) {
 		margin-right: remy(15) !important;
 	}
 }
-&.default.vertical {
+&.default.vertical:not(.dividers) {
 	::slotted(a:not(:last-child)) {
 		margin-bottom: remy(10) !important;
 	}
