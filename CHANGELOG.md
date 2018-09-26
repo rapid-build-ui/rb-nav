@@ -1,7 +1,16 @@
+## [0.0.9](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.8...v0.0.9) (2018-09-26)
+
+
+### Dependencies
+
+* **bump:** dep rb-base v0.0.4 ([58ccfa4](https://github.com/rapid-build-ui/rb-nav/commit/58ccfa4))
+
+
+
 ## [0.0.8](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.7...v0.0.8) (2018-09-14)
 
 
-### Dependency Updates
+### Dependencies
 
 * **rb-base:** bump to v0.0.3 ([053e714](https://github.com/rapid-build-ui/rb-nav/commit/053e714))
 
@@ -16,7 +25,7 @@
 * **safari:** remove extra space when dividers or responsive option is enabled ([6acb512](https://github.com/rapid-build-ui/rb-nav/commit/6acb512))
 
 
-### Dependency Updates
+### Dependencies
 
 * **rb-base:** bump to v0.0.2 ([4ae37b9](https://github.com/rapid-build-ui/rb-nav/commit/4ae37b9))
 
@@ -25,7 +34,7 @@
 ## [0.0.6](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.5...v0.0.6) (2018-08-30)
 
 
-### Dependency Updates
+### Dependencies
 
 * **rb-base:** replace deps lit-html and skatejs with @rapid-build-ui/rb-base and make corresponding updates ([8aaac5a](https://github.com/rapid-build-ui/rb-nav/commit/8aaac5a))
 
