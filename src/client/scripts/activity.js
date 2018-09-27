@@ -68,7 +68,7 @@ const Activity = superClass => class extends superClass {
 		link.blur(); // remove focus incase :focus and ACTIVE_CLASS are styled same
 	}
 	__deactivateLinks() { // :void
-		for (let link of this.links)
+		for (let link of this.rb.elms.links)
 			this.__deactivateLink(link);
 	}
 	_isActiveLink(link) { // :boolean
@@ -100,7 +100,7 @@ const Activity = superClass => class extends superClass {
 	/* Event Handlers
 	 *****************/
 	_activateLinks(e) { // :void
-		this.rb.events.add(this.links, 'click', this._activeLinkClick);
+		this.rb.events.add(this.rb.elms.links, 'click', this._activeLinkClick);
 	}
 	_setActiveObserver(e) { // :void
 		switch(true) {
@@ -169,7 +169,7 @@ const Activity = superClass => class extends superClass {
 		let deactivate;
 		let locHash = location.hash.split('#')[1];
 		locHash = locHash && locHash.toLowerCase();
-		for (const link of this.links) {
+		for (const link of this.rb.elms.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			const linkHash = href.toLowerCase().split('#')[1];
@@ -184,7 +184,7 @@ const Activity = superClass => class extends superClass {
 	_setActivePath(e) { // :void (TODO: support hrefs with ..)
 		let deactivate;
 		const locPath = location.pathname.toLowerCase();
-		for (const link of this.links) {
+		for (const link of this.rb.elms.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			href = href.toLowerCase().split('?')[0].split('#')[0];
@@ -202,7 +202,7 @@ const Activity = superClass => class extends superClass {
 		const locQS       = location.search.slice(0);
 		let locParam = new URLSearchParams(locQS.toLowerCase()).getAll(activeParam);
 			locParam = JSON.stringify(locParam);
-		for (const link of this.links) {
+		for (const link of this.rb.elms.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			let linkQS = href.toLowerCase().split('?')[1];
@@ -222,7 +222,7 @@ const Activity = superClass => class extends superClass {
 		let deactivate;
 		const activeSeg = this.active.segment - 1;
 		const locSegs   = this.__cleanArray(location.pathname.toLowerCase().split('/'));
-		for (const link of this.links) {
+		for (const link of this.rb.elms.links) {
 			let href = link.getAttribute('href');
 			if (!href) continue;
 			href = href.toLowerCase().split('?')[0].split('#')[0];
