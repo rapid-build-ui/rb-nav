@@ -10,9 +10,11 @@ const Responsive = superClass => class extends superClass {
 	viewReady() {
 		super.viewReady && super.viewReady();
 		if (!this.props.responsive) return;
-		this._nav     = this.shadowRoot.querySelector('nav');
-		this._menu    = this.shadowRoot.querySelector('.nav'); // .nav menu
-		this._trigger = this.shadowRoot.querySelector('.trigger');
+		Object.assign(this.rb.elms, {
+			nav:     this.shadowRoot.querySelector('nav'),
+			menu:    this.shadowRoot.querySelector('.nav'),
+			trigger: this.shadowRoot.querySelector('.trigger')
+		});
 		this._attachResponsiveEvents()
 	}
 
@@ -45,7 +47,7 @@ const Responsive = superClass => class extends superClass {
 	__makeNavViewable() { // :void
 		setTimeout(() => { // (timeout to ensure menu has dimensions)
 			const winWidth  = window.innerWidth;
-			const menuRect  = this._menu.getBoundingClientRect();
+			const menuRect  = this.rb.elms.menu.getBoundingClientRect();
 			const menuX     = menuRect.x;
 			const menuWidth = menuRect.width;
 			let menuTotal = menuX + menuWidth;
@@ -70,7 +72,7 @@ const Responsive = superClass => class extends superClass {
 	_windowClick(e) { // :void
 		if (this.responsive.closed) return;
 		const path = e.composedPath();
-		if (path.includes(this._nav)) return;
+		if (path.includes(this.rb.elms.nav)) return;
 		this.__setResponsive({ closed: true });
 	}
 	_windowResize(e) { // :void
@@ -83,7 +85,7 @@ const Responsive = superClass => class extends superClass {
 		this.__setResponsive({ closed: true });
 	}
 	_triggerLeave(e) { // :void
-		this._trigger.blur();
+		this.rb.elms.trigger.blur();
 	}
 	_triggerClick(e) { // :void
 		this.__setResponsive({ closed: !this.responsive.closed });
