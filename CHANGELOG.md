@@ -1,3 +1,22 @@
+## [0.0.11](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.10...v0.0.11) (2018-12-05)
+
+
+### Features
+
+* **hidden attribute:** display style that respects the hidden attribute ([469349e](https://github.com/rapid-build-ui/rb-nav/commit/469349e))
+
+
+### Performance Improvements
+
+* **css:** improve browser performance by adding css contain property ([27e7816](https://github.com/rapid-build-ui/rb-nav/commit/27e7816))
+
+
+### Dependencies
+
+* **bump:** dep rb-base v0.0.6 ([f1408a4](https://github.com/rapid-build-ui/rb-nav/commit/f1408a4))
+
+
+
 ## [0.0.10](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.9...v0.0.10) (2018-11-13)
 
 
