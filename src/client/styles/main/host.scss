@@ -12,3 +12,10 @@
 :host([hidden]) {
 	display: none;
 }
+:host(:not([inline])) {
+	display: block;
+}
+:host([inline]) {
+	display: inline-block;
+	vertical-align: bottom;
+}
