@@ -1,0 +1,32 @@
+/***********************
+ * RESPONSIVE SCROLLING
+ ***********************/
+// extra small screens (includes iphone landscape)
+@media (max-height: 375px) {
+	&.default .nav { max-height: 228px; }
+	&.primary .nav { max-height: 214px; }
+}
+
+// small screens (includes iphone plus landscape)
+@media (min-height: 376px) and (max-height: 414px) {
+	&.default .nav { max-height: 269px; }
+	&.primary .nav { max-height: 261px; }
+}
+
+// medium screens (phones)
+@media (min-height: 415px) and (max-height: 823px) {
+	&.default .nav { max-height: 311px; }
+	&.primary .nav { max-height: 309px; }
+}
+
+// large screens (tablets)
+@media (min-height: 824px) and (max-height: 1024px) {
+	&.default .nav { max-height: 351px; }
+	&.primary .nav { max-height: 355px; }
+}
+
+// extra large screens (desktops)
+@media (min-height: 1025px) {
+	&.default .nav { max-height: 392px; }
+	&.primary .nav { max-height: 402px; }
+}

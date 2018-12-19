@@ -45,6 +45,7 @@ const Responsive = superClass => class extends superClass {
 		this.triggerUpdate();
 	}
 	__makeNavViewable() { // :void
+		if (this.responsive.closed) return;
 		setTimeout(() => { // (timeout to ensure menu has dimensions)
 			const winWidth  = window.innerWidth;
 			const menuRect  = this.rb.elms.menu.getBoundingClientRect();
@@ -58,6 +59,14 @@ const Responsive = superClass => class extends superClass {
 			if (isNavViewable) return this.__setResponsive({ left: false });
 			this.__setResponsive({ left: true });
 		});
+	}
+
+	__scrollToActive() { // :void
+		if (this.responsive.closed) return;
+		const activeLink = this.rb.elms.links.find(link => link.classList.contains('active'));
+		if (!activeLink) return;
+		const borderTop = parseInt(getComputedStyle(activeLink).borderTopWidth.slice(0,-2)); // slice removes 'px'
+		this.rb.elms.menu.scrollTop = activeLink.offsetTop + borderTop; // (scroll past top border)
 	}
 
 	/* Event Management
@@ -89,6 +98,7 @@ const Responsive = superClass => class extends superClass {
 	}
 	_triggerClick(e) { // :void
 		this.__setResponsive({ closed: !this.responsive.closed });
+		this.__scrollToActive();
 		this.__makeNavViewable();
 	}
 }

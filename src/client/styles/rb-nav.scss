@@ -26,5 +26,6 @@ nav.inverse {
 	nav.responsive {
 		@import 'responsive/trigger.scss';
 		@import 'responsive/responsive.scss';
+		@import 'responsive/scrolling.scss';
 	}
 }
