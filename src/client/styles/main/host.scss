@@ -3,11 +3,6 @@
  *******/
 :host {
 	contain: layout style; // paint causes responsive menu to not show up
-	position: relative;
-	z-index: 4;
-	@-moz-document url-prefix() {
-		z-index: auto;
-	}
 }
 :host([hidden]) {
 	display: none;

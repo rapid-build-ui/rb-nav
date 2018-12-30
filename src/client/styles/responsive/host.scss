@@ -1,0 +1,10 @@
+/******************
+ * RESPONSIVE HOST
+ ******************/
+:host {
+	position: relative;
+	z-index: 4;
+	@-moz-document url-prefix() {
+		z-index: auto;
+	}
+}

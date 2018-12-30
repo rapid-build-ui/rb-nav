@@ -23,6 +23,7 @@ nav.inverse {
 
 // Responsive
 @media (max-width: 768px) {
+	@import 'responsive/host.scss';
 	nav.responsive {
 		@import 'responsive/trigger.scss';
 		@import 'responsive/responsive.scss';
