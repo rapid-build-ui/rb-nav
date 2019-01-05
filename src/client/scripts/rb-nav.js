@@ -1,10 +1,10 @@
 /*********
  * RB-NAV
  *********/
-import { props, html, RbBase } from '../../rb-base/scripts/rb-base.js';
-import Activity from './activity.js';
-import Responsive from './responsive.js';
-import template from '../views/rb-nav.html';
+import { RbBase, props, html } from '../../rb-base/scripts/rb-base.js';
+import Activity                from './private/mixins/activity.js';
+import Responsive              from './private/mixins/responsive.js';
+import template                from '../views/rb-nav.html';
 
 export class RbNav extends Activity(Responsive(RbBase())) {
 	/* Lifecycle

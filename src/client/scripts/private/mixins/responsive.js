@@ -1,10 +1,10 @@
 /********************
  * RESPONSIVE MODULE
  ********************/
-import { props } from '../../rb-base/scripts/rb-base.js';
+import { props } from '../../../../rb-base/scripts/rb-base.js';
 const RESPONSIVE_AT = 768; // pixels
 
-const Responsive = superClass => class extends superClass {
+const Responsive = BaseElm => class extends BaseElm {
 	/* Lifecycle
 	 ************/
 	viewReady() {
