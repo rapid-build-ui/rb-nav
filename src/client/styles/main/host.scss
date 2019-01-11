@@ -2,6 +2,7 @@
  * HOST
  *******/
 :host {
+	all: initial; // reset all styles first
 	contain: layout style; // paint causes responsive menu to not show up
 }
 :host([hidden]) {

@@ -33,9 +33,12 @@
 }
 
 ::slotted(a),
-::slotted(h3) {
+::slotted(h3) { // mac: helvetica | windows: segoe
 	margin: 0 !important;
 	padding: 0 !important;
+	font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 &.horizontal {
