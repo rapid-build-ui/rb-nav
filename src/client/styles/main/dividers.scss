@@ -2,15 +2,8 @@
  * DIVIDERS
  ***********/
 &.default.dividers.horizontal {
-	::slotted(a:not(.rb-first))::before {
-		display: inline-block;
-		position: relative;
-		top: 1px;
-		right: remy(15);
-		height: remy(12);
-		border-left: 1px solid mapGet($colors, dividers, horizontal, left);
-		border-right: 1px solid mapGet($colors, dividers, horizontal, right);
-		content: '';
+	::slotted(a:not(.rb-first)) {
+		box-shadow: -7px 1px 0 -6px mapGet($colors, dividers, horizontal);
 	}
 }
 

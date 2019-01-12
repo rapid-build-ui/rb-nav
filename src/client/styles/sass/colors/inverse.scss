@@ -32,13 +32,10 @@ $inverse: (
 	dividers: (
 		primary: mapGet($palette, greyDark),
 		vertical: mapGet($palette, greyDark),
+		horizontal: mapGet($palette, greyDark),
 		caption: (
 			top:    mapGet($palette, transparent),
 			bottom: mapGet($palette, dark)
-		),
-		horizontal: (
-			left:  mapGet($palette, dark),
-			right: mapGet($palette, greyDark)
 		)
 	),
 

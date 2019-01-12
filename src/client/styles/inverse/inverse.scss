@@ -59,9 +59,8 @@
 /* Dividers
  ***********/
 &.default.dividers.horizontal {
-	::slotted(a:not(.rb-first))::before {
-		border-left: 1px solid mapGet($inverse, dividers, horizontal, left);
-		border-right: 1px solid mapGet($inverse, dividers, horizontal, right);
+	::slotted(a:not(.rb-first)) {
+		box-shadow: -7px 1px 0 -6px mapGet($inverse, dividers, horizontal);
 	}
 }
 

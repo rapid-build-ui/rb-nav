@@ -32,13 +32,10 @@ $colors: (
 	dividers: (
 		primary: mapGet($palette, xLight),
 		vertical: mapGet($palette, xxLight),
+		horizontal: mapGet($palette, blueGreyLight),
 		caption: (
 			top:    mapGet($palette, xxLight),
 			bottom: mapGet($palette, xxxxLight)
-		),
-		horizontal: (
-			left:  mapGet($palette, xxxxLight),
-			right: mapGet($palette, blueGreyLight)
 		)
 	),
 
