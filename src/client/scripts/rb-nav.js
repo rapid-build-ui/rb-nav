@@ -23,10 +23,10 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 	static get props() {
 		return {
 			...super.props,
+			dark:     props.boolean,
 			dividers: props.boolean,
-			inline: props.boolean,
-			inverse: props.boolean,
-			kind: props.string,
+			inline:   props.boolean,
+			kind:     props.string,
 			vertical: props.boolean
 		}
 	}

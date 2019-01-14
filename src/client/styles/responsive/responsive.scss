@@ -90,7 +90,7 @@
 
 /* Colors
  *********/
-&:not(.inverse) {
+&:not(.dark) {
 	.nav {
 		background-color: mapGet($palette, white);
 		border: 1px solid mapGet($palette, xGreyLight);
@@ -103,11 +103,11 @@
 	}
 }
 
-&.inverse {
+&.dark {
 	.trigger,
 	.nav {
 		background-color: mapGet($palette, dark);
-		border: 1px solid mapGet($inverse, dividers, vertical);
+		border: 1px solid mapGet($dark, dividers, vertical);
 	}
 	.trigger {
 		b {

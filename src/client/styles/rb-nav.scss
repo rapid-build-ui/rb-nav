@@ -4,7 +4,7 @@
 @import 'sass/functions.scss';
 @import 'sass/colors/palette.scss';
 @import 'sass/colors/colors.scss';
-@import 'sass/colors/inverse.scss';
+@import 'sass/colors/dark.scss';
 @import 'main/host.scss';
 
 // Nav
@@ -16,9 +16,9 @@ nav {
 	@import 'main/dividers.scss';
 }
 
-// Inverse Colors
-nav.inverse {
-	@import 'inverse/inverse.scss';
+// Dark Theme
+nav.dark {
+	@import 'dark/dark.scss';
 }
 
 // Responsive

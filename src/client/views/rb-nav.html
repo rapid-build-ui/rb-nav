@@ -1,7 +1,7 @@
 <nav class="
 	${props.kind || 'default'}
+	${props.dark ? 'dark' : ''}
 	${props.inline ? 'inline' : 'block'}
-	${props.inverse ? 'inverse' : ''}
 	${props.dividers || (props.responsive.enabled && !props.responsive.closed) ? 'dividers' : ''}
 	${props.vertical || (props.responsive.enabled && !props.responsive.closed) ? 'vertical' : 'horizontal'}
 	${props.responsive.enabled

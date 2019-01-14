@@ -1,0 +1,107 @@
+/**************
+ * DARK COLORS
+ **************/
+::slotted(h3) {
+	color: mapGet($dark, text, caption, default) !important;
+	text-shadow: 0 1px 2px mapGet($dark, text, caption, shadow) !important;
+}
+
+/* Kinds
+ ********/
+&.default {
+	::slotted(a) {
+		color: mapGet($dark, text, links, default) !important;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus) {
+		color: mapGet($dark, text, links, hover) !important;
+	}
+	::slotted(a.active) {
+		color: mapGet($dark, text, links, active) !important;
+	}
+	::slotted(a:active:not(.active)) {
+		color: mapGet($dark, text, links, click) !important;
+	}
+}
+
+&.primary.horizontal {
+	::slotted(a) {
+		color: mapGet($dark, text, primary, horizontal, links, default) !important;
+	}
+	::slotted(a:active),
+	::slotted(a.active) {
+		color: mapGet($dark, text, primary, horizontal, links, active) !important;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		border-color: mapGet($dark, dividers, primary);
+		background-color: mapGet($dark, bg, primary, horizontal, links, active);
+	}
+}
+&.primary.vertical {
+	::slotted(a) {
+		color: mapGet($dark, text, primary, vertical, links, default) !important;
+	}
+	::slotted(a:active),
+	::slotted(a.active) {
+		color: mapGet($dark, text, primary, vertical, links, active) !important;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($dark, bg, primary, vertical, links, active);
+	}
+}
+
+/* Dividers
+ ***********/
+&.default.dividers.horizontal {
+	::slotted(a:not(.rb-first)) {
+		box-shadow: -7px 1px 0 -6px mapGet($dark, dividers, horizontal);
+	}
+}
+
+&.default.dividers.vertical {
+	::slotted(h3) {
+		background-color: mapGet($dark, bg, vertical, caption);
+		border-top: 1px solid mapGet($dark, dividers, caption, top);
+		border-bottom: 1px solid mapGet($dark, dividers, caption, bottom);
+		text-shadow: 0 1px 2px mapGet($dark, text, caption, shadow) !important;
+	}
+	::slotted(a) {
+		border-top: 1px solid mapGet($dark, dividers, vertical);
+	}
+	::slotted(a.rb-last) { // differ (:last-child)
+		border-bottom: 1px solid mapGet($dark, dividers, vertical);
+	}
+	::slotted(a:hover),
+	::slotted(a:focus) {
+		background-color: mapGet($dark, bg, vertical, links, hover);
+	}
+	::slotted(a.active) {
+		background-color: mapGet($dark, bg, vertical, links, active);
+	}
+	::slotted(a:active) { // differ (added)
+		color: mapGet($dark, text, links, active) !important;
+	}
+}
+
+&.primary.dividers {
+	::slotted(a) {
+		border: 1px solid mapGet($dark, dividers, primary);
+	}
+}
+&.primary.dividers.horizontal {
+	::slotted(a) {
+		border-bottom: none;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($dark, bg, primary, horizontal, dividers, links, active);
+	}
+}
