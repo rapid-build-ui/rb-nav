@@ -1,0 +1,58 @@
+/***************
+ * LIGHT COLORS
+ ***************/
+::slotted(h3) {
+	color: mapGet($light, text, caption, default) !important;
+	text-shadow: none !important;
+}
+
+/* Kinds
+ ********/
+&.default {
+	::slotted(a) {
+		color: mapGet($light, text, links, default) !important;
+	}
+	::slotted(a:hover),
+	::slotted(a:focus) {
+		color: mapGet($light, text, links, hover) !important;
+	}
+	::slotted(a.active) {
+		color: mapGet($light, text, links, active) !important;
+	}
+	::slotted(a:active:not(.active)) {
+		color: mapGet($light, text, links, click) !important;
+	}
+}
+&.primary.horizontal {
+	::slotted(a) {
+		color: mapGet($light, text, primary, horizontal, links, default) !important;
+	}
+	::slotted(a:active),
+	::slotted(a.active) {
+		color: mapGet($light, text, primary, horizontal, links, active) !important;
+	}
+}
+&.primary.vertical {
+	::slotted(a) {
+		color: mapGet($light, text, primary, vertical, links, default) !important;
+	}
+	::slotted(a:active),
+	::slotted(a.active) {
+		color: mapGet($light, text, primary, vertical, links, active) !important;
+	}
+}
+&.default.vertical.dividers {
+	::slotted(h3) {
+		text-shadow: 1px 1px 4px mapGet($light, text, caption, shadow) !important;
+	}
+}
+
+/* Responsive
+ *************/
+@media (max-width: $RESPONSIVE) { &.responsive {
+	&.primary {
+		::slotted(h3) {
+			text-shadow: 1px 1px 4px mapGet($light, text, caption, shadow) !important;
+		}
+	}
+}}

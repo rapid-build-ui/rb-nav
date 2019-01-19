@@ -1,24 +1,35 @@
 /**********
  * LAYOUTS
  **********/
-&.horizontal .nav {
+.horizontal .nav {
 	flex-flow: row wrap;
 	align-items: baseline;
 }
-&.vertical .nav {
+.vertical .nav {
 	flex-flow: column nowrap;
 	flex: 1 1 auto;
 }
 
+/* Common
+ *********/
+.horizontal {
+	::slotted(h3)::after {
+		position: relative;
+		margin: 0 0 0 1px;
+		top: -1.5px;
+		content: ':';
+	}
+}
+
 /* Default
  **********/
-&.default.horizontal:not(.dividers) {
+.default.horizontal:not(.dividers) {
 	::slotted(h3),
 	::slotted(a:not(:last-child)) {
 		margin-right: remy(15) !important;
 	}
 }
-&.default.vertical:not(.dividers) {
+.default.vertical:not(.dividers) {
 	::slotted(a:not(:last-child)) {
 		margin-bottom: remy(10) !important;
 	}
@@ -27,17 +38,18 @@
 		margin-bottom: remy(12) !important;
 	}
 }
-&.default.horizontal.dividers {
+.default.horizontal.dividers {
 	::slotted(a) {
 		margin-right: 0 !important;
 	}
 	::slotted(a:not(.rb-first)) { padding-left:  remy(15) !important; }
 	::slotted(a:not(.rb-last))  { padding-right: remy(15) !important; }
+	::slotted(h3),
 	::slotted(a.rb-last:not(:last-child)) {
 		margin-right: remy(15) !important;
 	}
 }
-&.default.vertical.dividers {
+.default.vertical.dividers {
 	::slotted(*) {
 		margin: 0 !important;
 	}
@@ -51,7 +63,7 @@
 
 /* Primary
  **********/
-&.primary.horizontal {
+.primary.horizontal {
 	::slotted(h3),
 	::slotted(a.rb-last:not(:last-child)) {
 		margin-right: remy(12) !important;
@@ -64,7 +76,7 @@
 	}
 }
 
-&.primary.vertical {
+.primary.vertical {
 	::slotted(h3) {
 		padding: remy(10) remy(15) remy(10) remy(12) !important;
 	}

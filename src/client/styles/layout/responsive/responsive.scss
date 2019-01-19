@@ -1,0 +1,63 @@
+/*********************
+ * RESPONSIVE LAYOUTS
+ *********************/
+& {
+	width: fit-content;
+}
+
+&.menu-closed .nav {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.nav {
+	position: absolute;
+	z-index: 5;
+	top: 34px;
+}
+
+&.menu-left {
+	.nav {
+		right: 0;
+		border-radius: 5px 0 5px 5px;
+	}
+}
+&:not(.menu-left) {
+	.nav {
+		left: 0;
+		border-radius: 0 5px 5px 5px;
+	}
+}
+
+.nav {
+	overflow-y: auto;
+	overflow-x: hidden; // needed for firefox on windows
+	::slotted(*) {
+		border-radius: 0 !important;
+		border-left: none !important;
+		border-right: none !important;
+	}
+	::slotted(:first-child) {
+		border-top: none !important;
+	}
+	::slotted(:last-child) {
+		border-bottom: none !important;
+	}
+}
+
+&.primary {
+	::slotted(a) {
+		padding-top: remy(14) !important;
+		padding-bottom: remy(13) !important;
+	}
+	::slotted(:last-child) {
+		padding-bottom: remy(14) !important;
+	}
+	::slotted(a:not(.rb-last)) {
+		margin-bottom: 0 !important;
+		border-bottom: none !important;
+	}
+}

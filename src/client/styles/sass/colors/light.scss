@@ -1,7 +1,7 @@
-/*****************
- * DEFAULT COLORS
- *****************/
-$colors: (
+/**************
+ * LIGHT THEME
+ **************/
+$light: (
 	bg: (
 		vertical: (
 			caption: mapGet($palette, xxxLight),
@@ -28,7 +28,6 @@ $colors: (
 			)
 		)
 	),
-
 	dividers: (
 		primary: mapGet($palette, xLight),
 		vertical: mapGet($palette, xxLight),
@@ -38,7 +37,6 @@ $colors: (
 			bottom: mapGet($palette, xxxxLight)
 		)
 	),
-
 	text: (
 		caption: (
 			default: mapGet($palette, blueGreyDark),

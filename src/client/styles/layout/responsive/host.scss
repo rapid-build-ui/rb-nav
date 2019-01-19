@@ -1,7 +1,7 @@
 /******************
  * RESPONSIVE HOST
  ******************/
-:host {
+:host([responsive]) {
 	position: relative;
 	z-index: 4;
 	@-moz-document url-prefix() {

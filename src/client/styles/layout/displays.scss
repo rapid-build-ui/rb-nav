@@ -1,0 +1,14 @@
+/***********
+ * DISPLAYS
+ ***********/
+nav {
+	&.block,
+	&.block .nav {
+		display: flex;
+	}
+
+	&.inline,
+	&.inline .nav {
+		display: inline-flex;
+	}
+}

@@ -1,0 +1,47 @@
+/***************
+ * DARK BORDERS
+ ***************/
+&.default.horizontal.dividers {
+	::slotted(a:not(.rb-first)) { // the dividers
+		box-shadow: -7px 1px 0 -6px mapGet($dark, dividers, horizontal);
+	}
+}
+&.default.vertical.dividers {
+	::slotted(h3) {
+		border-top-color: mapGet($dark, dividers, caption, top);
+		border-bottom-color: mapGet($dark, dividers, caption, bottom);
+	}
+	::slotted(a) {
+		border-color: mapGet($dark, dividers, vertical);
+	}
+}
+&.primary.horizontal {
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		border-color: mapGet($dark, dividers, primary);
+	}
+}
+&.primary.vertical.dividers {
+	::slotted(a) {
+		border-color: mapGet($dark, dividers, primary);
+	}
+}
+
+/* Responsive
+ *************/
+@media (max-width: $RESPONSIVE) { &.responsive {
+	.nav,
+	.trigger {
+		border-color: mapGet($dark, dividers, vertical);
+	}
+}}
+
+/* Light Differs
+ ****************/
+&.default.vertical.dividers {
+	::slotted(a.rb-last) {
+		border-bottom: 1px solid mapGet($dark, dividers, vertical);
+	}
+}

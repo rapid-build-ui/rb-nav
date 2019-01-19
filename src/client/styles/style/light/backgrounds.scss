@@ -1,0 +1,62 @@
+/********************
+ * LIGHT BACKGROUNDS
+ ********************/
+&.default.vertical.dividers {
+	::slotted(h3) {
+		background-color: mapGet($light, bg, vertical, caption);
+	}
+	::slotted(a:hover),
+	::slotted(a:focus) {
+		background-color: mapGet($light, bg, vertical, links, hover);
+	}
+	::slotted(a.active) {
+		background-color: mapGet($light, bg, vertical, links, active);
+	}
+}
+&.primary.horizontal {
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($light, bg, primary, horizontal, links, active);
+	}
+}
+&.primary.vertical {
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($light, bg, primary, vertical, links, active);
+	}
+}
+&.primary.horizontal.dividers {
+	::slotted(a:hover),
+	::slotted(a:focus),
+	::slotted(a:active),
+	::slotted(a.active) {
+		background-color: mapGet($light, bg, primary, horizontal, dividers, links, active);
+	}
+}
+
+/* Responsive
+ *************/
+@media (max-width: $RESPONSIVE) { &.responsive {
+	.nav,
+	.trigger {
+		background-color: mapGet($palette, white);
+	}
+	.trigger { // the bars
+		b {
+			background-color: mapGet($palette, blueGreyDark);
+		}
+		&:focus b,
+		&:hover b {
+			background-color: mapGet($palette, redLight);
+		}
+	}
+	&.primary {
+		::slotted(h3) {
+			background-color: mapGet($light, bg, vertical, caption);
+		}
+	}
+}}

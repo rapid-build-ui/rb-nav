@@ -28,7 +28,6 @@ $dark: (
 			)
 		)
 	),
-
 	dividers: (
 		primary: mapGet($palette, greyDark),
 		vertical: mapGet($palette, greyDark),
@@ -38,7 +37,6 @@ $dark: (
 			bottom: mapGet($palette, dark)
 		)
 	),
-
 	text: (
 		caption: (
 			default: mapGet($palette, xGreyLight),

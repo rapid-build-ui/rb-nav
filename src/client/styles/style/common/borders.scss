@@ -1,0 +1,53 @@
+/*****************
+ * COMMON BORDERS
+ *****************/
+.default.vertical.dividers {
+	::slotted(h3) {
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+	}
+	::slotted(a) {
+		border-top-width: 1px;
+		border-top-style: solid;
+	}
+	::slotted(a:last-child) {
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+	}
+}
+.primary.horizontal {
+	::slotted(a) {
+		border-radius: 10px 10px 0 0;
+		border: 1px solid transparent;
+		border-bottom: none;
+	}
+}
+.primary.vertical {
+	::slotted(a) {
+		border-radius: 6px;
+	}
+}
+.primary.vertical.dividers {
+	::slotted(a) {
+		border-width: 1px;
+		border-style: solid;
+	}
+}
+
+/* Responsive
+ *************/
+@media (max-width: $RESPONSIVE) { .responsive {
+	.nav,
+	.trigger {
+		border-width: 1px;
+		border-style: solid;
+	}
+	.trigger {
+		border-radius: 5px;
+		b { // the bars
+			border-radius: 1px;
+		}
+	}
+}}
