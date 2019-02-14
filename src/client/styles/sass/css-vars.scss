@@ -1,0 +1,22 @@
+/********************
+ * CSS VARIABLES MAP
+ ********************/
+$lightCssVars: mergeMaps(
+	$lightCssBgVars,
+	$lightCssBorderVars,
+	$lightCssColorVars
+);
+
+$darkCssVars: mergeMaps(
+	$darkCssBgVars,
+	$darkCssBorderVars,
+	$darkCssColorVars
+);
+
+$prefix: '--rb-nav-';
+$darkSuffix: '-dark';
+$vars: (
+	common: getCssVarsMap($commonCssVars, $prefix),
+	light:  getCssVarsMap($lightCssVars, $prefix),
+	dark:   getCssVarsMap($darkCssVars, $prefix, $darkSuffix)
+);

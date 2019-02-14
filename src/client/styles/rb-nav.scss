@@ -3,42 +3,38 @@
  ****************************/
 @import 'sass/functions.scss';
 @import 'sass/variables.scss';
-@import 'sass/colors/palette.scss';
-@import 'sass/colors/light.scss';
-@import 'sass/colors/dark.scss';
 
 /* Layout
  *********/
 @import 'layout/host.scss';
 @import 'layout/common.scss';
-@import 'layout/common-slot.scss';
 @import 'layout/displays.scss';
 @import 'layout/layouts.scss';
-
-/* Style
- ********/
-@import 'style/variables.scss';
-@import 'style/common/borders.scss';
-@import 'style/common/fonts.scss';
-.light {
-	@import 'style/light/backgrounds.scss';
-	@import 'style/light/borders.scss';
-	@import 'style/light/colors.scss';
-}
-.dark {
-	@import 'style/dark/backgrounds.scss';
-	@import 'style/dark/borders.scss';
-	@import 'style/dark/colors.scss';
-}
 
 /* Responsive Layout
  ********************/
 @media (max-width: $RESPONSIVE) {
-	@import 'layout/responsive/host.scss';
-	.responsive {
-		@import 'layout/responsive/trigger.scss';
-		@import 'layout/responsive/responsive.scss';
-		@import 'layout/responsive/scrollbar.scss';
-		@import 'layout/responsive/scrolling.scss';
-	}
+	@import 'layout/responsive/responsive.scss';
+	@import 'layout/responsive/trigger.scss';
+	@import 'layout/responsive/scrollbar.scss';
+	@import 'layout/responsive/scrolling.scss';
 }
+
+/* CSS Style Variables
+ **********************/
+@import 'sass/palette.scss';
+@import 'variables/common.scss';
+@import 'variables/light/backgrounds.scss';
+@import 'variables/light/borders.scss';
+@import 'variables/light/colors.scss';
+@import 'variables/dark/backgrounds.scss';
+@import 'variables/dark/borders.scss';
+@import 'variables/dark/colors.scss';
+@import 'sass/css-vars.scss';
+
+/* Styles
+ *********/
+@import 'style/common.scss';
+@import 'style/backgrounds.scss';
+@import 'style/borders.scss';
+@import 'style/colors.scss';

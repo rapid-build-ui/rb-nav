@@ -4,6 +4,8 @@
 :host {
 	all: initial; // reset all styles first
 	contain: layout style; // paint causes responsive menu to not show up
+	line-height: inherit;
+	vertical-align: top;
 }
 :host([hidden]) {
 	display: none;
@@ -13,5 +15,14 @@
 }
 :host([inline]) {
 	display: inline-block;
-	vertical-align: bottom;
+}
+
+@media (max-width: $RESPONSIVE) {
+	:host([responsive]) {
+		position: relative;
+		z-index: 4;
+		@-moz-document url-prefix() {
+			z-index: auto;
+		}
+	}
 }

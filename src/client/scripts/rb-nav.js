@@ -74,8 +74,8 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 	_addFirstAndLastClasses(e) { // :void
 		// console.log('ADD CLASSES:', this.rb.elms.links);
 		if (!this.rb.elms.links.length) return;
-		const FIRST = 'rb-first';
-		const LAST  = 'rb-last';
+		const FIRST = 'first';
+		const LAST  = 'last';
 		for (let link of this.rb.elms.links) {
 			link.classList.remove(FIRST, LAST);
 			let prevElm = link.previousElementSibling;
@@ -89,7 +89,7 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 
 	/* Template
 	 ***********/
-	render({ props }) { // :string
+	render({ props, state }) { // :string
 		return html template;
 	}
 }

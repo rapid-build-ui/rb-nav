@@ -1,0 +1,20 @@
+/***************************
+ * DARK CSS COLOR VARIABLES
+ ***************************/
+$darkCssColorVars: (
+	// Default
+	default-heading-color:       mapGet($palette, greyLight),
+	default-heading-text-shadow: mapGet($palette, dark),
+	default-link-color:          mapGet($palette, grey),
+	default-link-color-hover:    mapGet($palette, greyLight),
+	default-link-color-click:    mapGet($palette, xGreyLight),
+	default-link-color-active:   mapGet($palette, xxGreyLight),
+
+	// Primary
+	primary-heading-color:       mapGet($palette, greyLight),
+	primary-heading-text-shadow: mapGet($palette, dark),
+	primary-link-color:          mapGet($palette, grey),
+	primary-link-color-hover:    mapGet($palette, greyLight),
+	primary-link-color-click:    mapGet($palette, xGreyLight),
+	primary-link-color-active:   mapGet($palette, xxGreyLight)
+);

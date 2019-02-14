@@ -7,83 +7,166 @@
 }
 .vertical .nav {
 	flex-flow: column nowrap;
+}
+.vertical.no-dividers .nav {
+	flex: 0 1 auto;
+}
+.vertical.dividers .nav {
 	flex: 1 1 auto;
 }
 
-/* Common
- *********/
-.horizontal {
-	::slotted(h3)::after {
-		position: relative;
-		margin: 0 0 0 1px;
-		top: -1.5px;
-		content: ':';
-	}
+/* Ensure accurate display.
+ * Set critical slot layout properties.
+ ***************************************/
+::slotted(a),
+::slotted(h3) {
+	margin: 0 !important;
+	padding: 0 !important;
+	line-height: 20px !important;
 }
 
 /* Default
  **********/
-.default.horizontal:not(.dividers) {
-	::slotted(h3),
-	::slotted(a:not(:last-child)) {
-		margin-right: remy(15) !important;
+.default {
+	&.horizontal {
+		$xSpace: 15px;
+		$vSpace: 5px;
+		&.no-dividers {
+			::slotted(h3),
+			::slotted(a),{
+				margin-bottom: $vSpace !important;
+			}
+			::slotted(h3:not(:last-child)),
+			::slotted(a:not(:last-child)) {
+				margin-right: $xSpace !important;
+			}
+		}
+		&.dividers {
+			::slotted(h3),
+			::slotted(a),{
+				margin-bottom: $vSpace !important;
+			}
+			::slotted(a:not(.first)) {
+				padding-left: $xSpace !important;
+			}
+			::slotted(a:not(.last))  {
+				padding-right: $xSpace !important;
+			}
+			::slotted(h3:not(:last-child)),
+			::slotted(a.last:not(:last-child)) {
+				margin-right: $xSpace !important;
+			}
+		}
 	}
-}
-.default.vertical:not(.dividers) {
-	::slotted(a:not(:last-child)) {
-		margin-bottom: remy(10) !important;
-	}
-	::slotted(h3),
-	::slotted(a.rb-last:not(:last-child)) {
-		margin-bottom: remy(12) !important;
-	}
-}
-.default.horizontal.dividers {
-	::slotted(a) {
-		margin-right: 0 !important;
-	}
-	::slotted(a:not(.rb-first)) { padding-left:  remy(15) !important; }
-	::slotted(a:not(.rb-last))  { padding-right: remy(15) !important; }
-	::slotted(h3),
-	::slotted(a.rb-last:not(:last-child)) {
-		margin-right: remy(15) !important;
-	}
-}
-.default.vertical.dividers {
-	::slotted(*) {
-		margin: 0 !important;
-	}
-	::slotted(h3) {
-		padding: remy(11) remy(15) remy(9) remy(12) !important;
-	}
-	::slotted(a) {
-		padding: remy(7) remy(16) remy(9) remy(15) !important;
+	&.vertical {
+		&.no-dividers {
+			::slotted(h3) {
+				padding: 10px 15px 5px 10px !important;
+			}
+			::slotted(a) {
+				padding: 8px 15px 8px 18px !important;
+			}
+			::slotted(:last-child) {
+				padding-bottom: 16px !important;
+			}
+			&:not(.responsive) {
+				::slotted(:first-child) {
+					padding-top: 0 !important;
+				}
+			}
+		}
+		&.dividers {
+			::slotted(h3) {
+				padding: 10px 15px 9px 11px !important;
+			}
+			::slotted(a) {
+				padding: 9px 15px 11px 13px !important;
+			}
+		}
 	}
 }
 
 /* Primary
  **********/
-.primary.horizontal {
-	::slotted(h3),
-	::slotted(a.rb-last:not(:last-child)) {
-		margin-right: remy(12) !important;
+.primary {
+	&.horizontal {
+		::slotted(a) {
+			padding: 9px 10px 18px !important;
+		}
+		::slotted(a:not(.last)) {
+			margin-right: 2px !important;
+		}
+		::slotted(h3:not(:last-child)),
+		::slotted(a.last:not(:last-child)) {
+			margin-right: 12px !important;
+		}
 	}
-	::slotted(a:not(.rb-last)) {
-		margin-right: remy(2) !important;
-	}
-	::slotted(a) {
-		padding: remy(10) remy(10) remy(18) !important;
+	&.vertical {
+		&.no-dividers {
+			::slotted(h3) {
+				padding: 10px 15px 5px 10px !important;
+			}
+			::slotted(a) {
+				padding: 8px 15px 8px 18px !important;
+			}
+			::slotted(:last-child) {
+				padding-bottom: 16px !important;
+			}
+			&:not(.responsive) {
+				::slotted(:first-child) {
+					padding-top: 0 !important;
+				}
+			}
+		}
+		&.dividers {
+			::slotted(h3) {
+				padding: 12px 15px 12px 12px !important;
+			}
+			::slotted(a) {
+				padding: 11px 16px 12px 15px !important;
+			}
+			::slotted(a:not(.last)) {
+				margin-bottom: 2px !important;
+			}
+			&:not(.responsive) {
+				::slotted(h3:first-child) {
+					padding-top: 0 !important;
+				}
+			}
+		}
 	}
 }
 
-.primary.vertical {
-	::slotted(h3) {
-		padding: remy(10) remy(15) remy(10) remy(12) !important;
+/* Responsive
+ *************/
+.responsive {
+	&.default {
+		&.vertical {
+			&.no-dividers {
+				::slotted(:first-child) {
+					padding-top: 13px !important;
+				}
+				::slotted(a) {
+					padding-right: 22px !important;
+				}
+			}
+		}
 	}
-	::slotted(a) {
-		padding: remy(11) remy(16) remy(12) remy(15) !important;
-	}
-	::slotted(a:not(.rb-last)) {
-		margin-bottom: remy(2) !important;
+	&.primary {
+		&.vertical {
+			&.no-dividers {
+				::slotted(:first-child) {
+					padding-top: 13px !important;
+				}
+				::slotted(a) {
+					padding-right: 22px !important;
+				}
+			}
+			&.dividers {
+				::slotted(a) {
+					margin-bottom: 0 !important;
+				}
+			}
+		}
 	}
 }

@@ -1,43 +1,35 @@
 /*********************
  * RESPONSIVE TRIGGER
  *********************/
-.trigger {
-	display: inline-flex;
-	flex-direction: column;
-	align-items: stretch;
-	align-self: flex-start;
-	width: 40px;
-	padding: 8px;
-	cursor: pointer;
-	transition: all .35s ease-in-out;
-
-	/* Trigger States
-	 *****************/
-	&:focus {
-		outline: none;
-		+ .nav {
-			transition: all .25s ease-in-out;
-		}
+.responsive {
+	.trigger {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: stretch;
+		align-self: flex-start;
+		width: 40px;
+		padding: 8px;
+		cursor: pointer;
+		transition: all .35s ease-in-out;
+		&:focus { outline: none; }
 	}
 
 	/* The Bars
 	 ***********/
-	b {
+	.trigger b {
 		position: relative;
 		top: 0;
 		height: 3px;
+		border-radius: 1px;
 		transition: all 0.5s ease-in-out;
 		&:not(:last-child) {
 			margin-bottom: 4px;
 		}
 	}
-}
 
-/* Open Trigger
- ***************/
-&:not(.menu-closed) .trigger {
-	border-radius: 5px 5px 0 0;
-	b {
+	/* Open Trigger Bars
+	 ********************/
+	&.menu-open .trigger b {
 		$scale: .8;
 		&.top {
 			top: 7px;
@@ -51,18 +43,26 @@
 			opacity: 0;
 		}
 	}
-}
 
-/* Kinds
- ********/
-&.default {
-	&.menu-closed .trigger {
-		opacity: .5;
-	}
-	.trigger {
-		&:hover,
-		&:focus {
-			opacity: 1;
+	/* Kinds
+	 ********/
+	&.default {
+		&.menu-closed {
+			&.light .trigger {
+				filter: brightness(115%);
+				b { filter: brightness(135%); } // the bars
+			}
+			&.dark .trigger {
+				filter: brightness(85%);
+			}
+		}
+		&.dark .trigger,
+		&.light .trigger {
+			&:hover,
+			&:focus {
+				filter: brightness(1);
+				b { filter: brightness(1); } // the bars
+			}
 		}
 	}
 }

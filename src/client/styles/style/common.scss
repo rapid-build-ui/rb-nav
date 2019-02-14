@@ -1,0 +1,46 @@
+/********************************************
+ * COMMON STYLES (for light and dark themes)
+ ********************************************/
+@mixin setCommonStyles() {
+	$kinds: default, primary;
+	$elms: heading, link;
+	@each $kind in $kinds {
+		@each $elm in $elms {
+			$tag: if($elm == heading, h3, a);
+			.#{$kind} ::slotted(#{$tag}) {
+				font-family:    mapGet($vars, common, #{$kind}-#{$elm}-font-family);
+				font-size:      mapGet($vars, common, #{$kind}-#{$elm}-font-size);
+				font-weight:    mapGet($vars, common, #{$kind}-#{$elm}-font-weight);
+				letter-spacing: mapGet($vars, common, #{$kind}-#{$elm}-letter-spacing);
+				text-transform: mapGet($vars, common, #{$kind}-#{$elm}-text-transform);
+			}
+		}
+	}
+	// Border Radius
+	.primary.horizontal {
+		::slotted(a) {
+			$r: mapGet($vars, common, primary-horizontal-link-border-radius);
+			$r: strReplace(#{$r}, ' !important', '');
+			border-radius: $r $r 0 0 !important;
+		}
+	}
+	.primary.vertical.dividers:not(.responsive) {
+		::slotted(a) {
+			border-radius: mapGet($vars, common, primary-vertical-dividers-link-border-radius);
+		}
+	}
+	@each $kind in $kinds {
+		.#{$kind}.responsive {
+			$rn: mapGet($vars, common, #{$kind}-responsive-nav-border-radius);
+			$rt: mapGet($vars, common, #{$kind}-responsive-trigger-border-radius);
+			$rn: strReplace(#{$rn}, ' !important', '');
+			$rt: strReplace(#{$rt}, ' !important', '');
+			&.menu-left .nav       { border-radius: $rn 0 $rn $rn !important; }
+			&.menu-right .nav      { border-radius: 0 $rn $rn $rn !important; }
+			&.menu-open .trigger   { border-radius: $rt $rt 0 0 !important; }
+			&.menu-closed .trigger { border-radius: $rt !important; }
+		}
+	}
+}
+
+@include setCommonStyles();

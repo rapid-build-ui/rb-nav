@@ -2,15 +2,15 @@
 	${props.kind || 'default'}
 	${props.dark ? 'dark' : 'light'}
 	${props.inline ? 'inline' : 'block'}
-	${props.dividers || (props.responsive.enabled && !props.responsive.closed) ? 'dividers' : ''}
-	${props.vertical || (props.responsive.enabled && !props.responsive.closed) ? 'vertical' : 'horizontal'}
-	${props.responsive.enabled
+	${props.vertical || state.responsive._active ? 'vertical' : 'horizontal'}
+	${props.dividers || state.responsive._active && state.responsive.dividers ? 'dividers' : 'no-dividers'}
+	${state.responsive.enabled && state.responsive._active
 		? 'responsive'
-			+ (props.responsive.closed ? ' menu-closed' : '')
-			+ (props.responsive.left ? ' menu-left' : '')
+			+ (state.responsive._left ? ' menu-left' : ' menu-right')
+			+ (state.responsive.show ? ' menu-open' : ' menu-closed')
 		: ''
 	}">
-	${props.responsive.enabled
+	${state.responsive.enabled
 		? html`
 			<button
 				type="button"
@@ -23,7 +23,7 @@
 			</button>`
 		: null
 	}
-	<div class="nav" @click="${props.responsive.enabled && this._menuClick.bind(this)}">
+	<div class="nav">
 		 <slot></slot>
 	</div>
 </nav>

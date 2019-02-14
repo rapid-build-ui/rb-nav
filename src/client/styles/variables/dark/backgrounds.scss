@@ -1,0 +1,36 @@
+/********************************
+ * DARK CSS BACKGROUND VARIABLES
+ ********************************/
+$darkCssBgVars: (
+	// Default
+	default-vertical-dividers-heading-bg:          mapGet($palette, xGreyDark),
+	default-vertical-dividers-link-bg:             mapGet($palette, dark),
+	default-vertical-dividers-link-bg-hover:       mapGet($palette, xDark),
+	default-vertical-dividers-link-bg-click:       mapGet($palette, xDark),
+	default-vertical-dividers-link-bg-active:      mapGet($palette, xDark),
+
+	// Primary
+	primary-horizontal-no-dividers-link-bg:        mapGet($palette, trans),
+	primary-horizontal-no-dividers-link-bg-hover:  mapGet($palette, xDark),
+	primary-horizontal-no-dividers-link-bg-click:  mapGet($palette, xDark),
+	primary-horizontal-no-dividers-link-bg-active: mapGet($palette, xDark),
+	primary-horizontal-dividers-link-bg:           mapGet($palette, dark),
+	primary-horizontal-dividers-link-bg-hover:     mapGet($palette, xDark),
+	primary-horizontal-dividers-link-bg-click:     mapGet($palette, xDark),
+	primary-horizontal-dividers-link-bg-active:    mapGet($palette, xDark),
+	primary-vertical-dividers-link-bg:             mapGet($palette, dark),
+	primary-vertical-dividers-link-bg-hover:       mapGet($palette, xDark),
+	primary-vertical-dividers-link-bg-click:       mapGet($palette, xDark),
+	primary-vertical-dividers-link-bg-active:      mapGet($palette, xDark),
+
+	// Responsive
+	default-responsive-nav-bg:                     mapGet($palette, dark),
+	default-responsive-trigger-bg:                 mapGet($palette, dark),
+	default-responsive-trigger-bars-bg:            mapGet($palette, grey),
+	default-responsive-trigger-bars-bg-hover:      mapGet($palette, greyLight),
+	primary-responsive-nav-bg:                     mapGet($palette, dark),
+	primary-responsive-trigger-bg:                 mapGet($palette, dark),
+	primary-responsive-trigger-bars-bg:            mapGet($palette, grey),
+	primary-responsive-trigger-bars-bg-hover:      mapGet($palette, greyLight),
+	primary-responsive-dividers-heading-bg:        mapGet($palette, xGreyDark)
+);

@@ -1,0 +1,62 @@
+/********************
+ * BACKGROUND STYLES
+ ********************/
+@mixin setBGs() {
+	$themes: light, dark;
+	$kinds: default, primary;
+	$layouts: horizontal-no-dividers, horizontal-dividers, vertical-dividers;
+	@each $theme in $themes {
+		@each $kind in $kinds {
+			@each $layout in $layouts {
+				$layoutSel:   if(str-index($layout,vertical), vertical, horizontal);
+				$dividersSel: if(str-index($layout,'no-dividers'), 'no-dividers', 'dividers');
+				.#{$theme}.#{$kind}.#{$layoutSel}.#{$dividersSel} {
+					::slotted(h3) {
+						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-heading-bg);
+					}
+					::slotted(a) {
+						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg);
+					}
+					::slotted(a:hover),
+					::slotted(a:focus) {
+						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-hover);
+					}
+					::slotted(a:active) {
+						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-click);
+					}
+					::slotted(a.active) {
+						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-active);
+					}
+				}
+			}
+		}
+	}
+}
+@mixin setResponsiveBGs() {
+	$themes: light, dark;
+	$kinds: default, primary;
+	@each $theme in $themes {
+		.#{$theme}.primary.vertical.dividers.responsive ::slotted(h3) {
+			background-color: mapGet($vars, $theme, primary-responsive-dividers-heading-bg);
+		}
+		@each $kind in $kinds {
+			.#{$theme}.#{$kind}.responsive {
+				.nav {
+					background-color: mapGet($vars, $theme, #{$kind}-responsive-nav-bg);
+				}
+				.trigger {
+					background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bg);
+					// the bars
+					b { background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg); }
+					&:focus b,
+					&:hover b {
+						background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg-hover);
+					}
+				}
+			}
+		}
+	}
+}
+
+@include setBGs();
+@include setResponsiveBGs();

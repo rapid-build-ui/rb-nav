@@ -3,11 +3,24 @@
  *********/
 nav {
 	position: relative;
-	line-height: 1.5;
+}
+.trigger { // responsive
+	display: none;
 }
 
-/* Responsive
- *************/
-.trigger {
-	display: none;
+/* Slot
+ *******/
+::slotted(a) {
+	box-sizing: border-box !important;
+	cursor: pointer !important;
+	text-decoration: none !important;
+}
+::slotted(a:focus) {
+	outline: none !important;
+}
+
+::slotted(a),
+::slotted(h3) {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
