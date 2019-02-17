@@ -13,10 +13,9 @@ $darkCssVars: mergeMaps(
 	$darkCssColorVars
 );
 
-$prefix: '--rb-nav-';
-$darkSuffix: '-dark';
+$component: 'rb-nav';
 $vars: (
-	common: getCssVarsMap($commonCssVars, $prefix),
-	light:  getCssVarsMap($lightCssVars, $prefix),
-	dark:   getCssVarsMap($darkCssVars, $prefix, $darkSuffix)
+	common: getCssVarsMap($component, $commonCssVars),
+	light:  getCssVarsMap($component, $lightCssVars, 'light'),
+	dark:   getCssVarsMap($component, $darkCssVars, 'dark')
 );
