@@ -10,39 +10,40 @@
 		}
 		.#{$theme}.default.horizontal.dividers {
 			::slotted(a:not(.first)) { // the dividers
-				box-shadow: -5px 1px 0 -4px mapGet($vars, $theme, default-horizontal-dividers-link-border-color);
+				box-shadow: -5px 1px 0 -4px mapGet($vars, $theme, default-horizontal-dividers-link-border-color) !important;
 			}
 		}
 		.#{$theme}.default.vertical.dividers {
 			::slotted(h3:not(:last-child)) {
-				border-bottom: mapGet($vars, $theme, default-vertical-dividers-heading-border-bottom);
+				border-bottom: mapGet($vars, $theme, default-vertical-dividers-heading-border-bottom) !important;
 			}
 			::slotted(a:not(:last-child)) {
-				border-bottom: mapGet($vars, $theme, default-vertical-dividers-link-border-bottom);
+				border-bottom: mapGet($vars, $theme, default-vertical-dividers-link-border-bottom) !important;
 			}
 		}
 		.#{$theme}.primary.horizontal.no-dividers {
 			::slotted(a) {
-				border: 1px solid transparent !important;
+				$trans: mapGet($palette, trans);
+				border: 1px solid $trans !important;
 				border-bottom: none !important;
 			}
 			::slotted(a:hover),
 			::slotted(a:focus),
 			::slotted(a:active),
 			::slotted(a.active) {
-				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border);
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border) !important;
 				border-bottom: none !important;
 			}
 		}
 		.#{$theme}.primary.horizontal.dividers {
 			::slotted(a) {
-				border: mapGet($vars, $theme, primary-horizontal-dividers-link-border);
+				border: mapGet($vars, $theme, primary-horizontal-dividers-link-border) !important;
 				border-bottom: none !important;
 			}
 		}
 		.#{$theme}.primary.vertical.dividers:not(.responsive) {
 			::slotted(a) {
-				border: mapGet($vars, $theme, primary-vertical-dividers-link-border);
+				border: mapGet($vars, $theme, primary-vertical-dividers-link-border) !important;
 			}
 		}
 	}
@@ -53,8 +54,12 @@
 	@each $theme in $themes {
 		.#{$theme}.primary.vertical.dividers.responsive {
 			$border: mapGet($vars, $theme, primary-vertical-dividers-link-border);
-			::slotted(a.first:not(:first-child)) { border-top: $border; }
-			::slotted(a:not(:last-child))        { border-bottom: $border; }
+			::slotted(a.first:not(:first-child)) {
+				border-top: $border !important;
+			}
+			::slotted(a:not(:last-child)) {
+				border-bottom: $border !important;
+			}
 		}
 	}
 	@each $theme in $themes {

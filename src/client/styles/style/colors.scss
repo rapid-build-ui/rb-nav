@@ -8,23 +8,22 @@
 		@each $kind in $kinds {
 			.#{$theme}.#{$kind} {
 				::slotted(h3) {
-					color: mapGet($vars, $theme, #{$kind}-heading-color);
-					$c: mapGet($vars, $theme, #{$kind}-heading-text-shadow);
-					$c: strReplace(#{$c}, ' !important', '');
-					text-shadow: -1px 0 $c, 0 1px $c, 1px 0 $c, 0 -1px $c !important;
+					$ts: mapGet($vars, $theme, #{$kind}-heading-text-shadow);
+					color: mapGet($vars, $theme, #{$kind}-heading-color) !important;
+					text-shadow: -1px 0 $ts, 0 1px $ts, 1px 0 $ts, 0 -1px $ts !important;
 				}
 				::slotted(a) {
-					color: mapGet($vars, $theme, #{$kind}-link-color);
+					color: mapGet($vars, $theme, #{$kind}-link-color) !important;
 				}
 				::slotted(a:hover),
 				::slotted(a:focus) {
-					color: mapGet($vars, $theme, #{$kind}-link-color-hover);
+					color: mapGet($vars, $theme, #{$kind}-link-color-hover) !important;
 				}
 				::slotted(a:active) {
-					color: mapGet($vars, $theme, #{$kind}-link-color-click);
+					color: mapGet($vars, $theme, #{$kind}-link-color-click) !important;
 				}
 				::slotted(a.active) {
-					color: mapGet($vars, $theme, #{$kind}-link-color-active);
+					color: mapGet($vars, $theme, #{$kind}-link-color-active) !important;
 				}
 			}
 		}

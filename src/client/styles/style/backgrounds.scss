@@ -10,22 +10,32 @@
 			@each $layout in $layouts {
 				$layoutSel:   if(str-index($layout,vertical), vertical, horizontal);
 				$dividersSel: if(str-index($layout,'no-dividers'), 'no-dividers', 'dividers');
-				.#{$theme}.#{$kind}.#{$layoutSel}.#{$dividersSel} {
+				.#{$theme}.#{$kind}.#{$layoutSel}.#{$dividersSel} { // null will not output selector
 					::slotted(h3) {
-						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-heading-bg);
+						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-heading-bg);
+						$bc: if($bc, $bc !important, null);
+						background-color: $bc;
 					}
 					::slotted(a) {
-						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg);
+						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg);
+						$bc: if($bc, $bc !important, null);
+						background-color: $bc;
 					}
 					::slotted(a:hover),
 					::slotted(a:focus) {
-						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-hover);
+						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-hover);
+						$bc: if($bc, $bc !important, null);
+						background-color: $bc;
 					}
 					::slotted(a:active) {
-						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-click);
+						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-click);
+						$bc: if($bc, $bc !important, null);
+						background-color: $bc;
 					}
 					::slotted(a.active) {
-						background-color: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-active);
+						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-active);
+						$bc: if($bc, $bc !important, null);
+						background-color: $bc;
 					}
 				}
 			}
@@ -37,7 +47,7 @@
 	$kinds: default, primary;
 	@each $theme in $themes {
 		.#{$theme}.primary.vertical.dividers.responsive ::slotted(h3) {
-			background-color: mapGet($vars, $theme, primary-responsive-dividers-heading-bg);
+			background-color: mapGet($vars, $theme, primary-responsive-dividers-heading-bg) !important;
 		}
 		@each $kind in $kinds {
 			.#{$theme}.#{$kind}.responsive {
@@ -47,7 +57,9 @@
 				.trigger {
 					background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bg);
 					// the bars
-					b { background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg); }
+					b {
+						background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg);
+					}
 					&:focus b,
 					&:hover b {
 						background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg-hover);

@@ -2,6 +2,9 @@
  * COLOR PALETTE
  ****************/
 $palette: (
+	// Transparent
+	trans: transparent,
+
 	// Blues
 	blue:           #4682b4,
 	blueLight:      #6798c1,
@@ -30,9 +33,6 @@ $palette: (
 	xLight:         #e3e3e3,
 	xxLight:        #f5f5f5,
 	xxxLight:       #f9f9f9,
-
-	// Transparent
-	trans:          transparent,
 
 	// White
 	white:          white
