@@ -77,6 +77,12 @@ const Responsive = BaseElm => class extends BaseElm {
 		// note: this.shadowRoot.styleSheets (doesn't work in safari)
 		return this.shadowRoot.querySelector('style').sheet.cssRules;
 	}
+	get __viewportWidth() { // :int (covers zooming in on devices, uses clientWidth)
+		return Math.max(
+			document.documentElement.clientWidth,
+			window.innerWidth || 0
+		);
+	}
 
 	/* Helpers
 	 **********/
@@ -155,7 +161,7 @@ const Responsive = BaseElm => class extends BaseElm {
 		this.__setResponsive({ show: false });
 	}
 	_windowResize(e) { // :void
-		if (window.innerWidth > this.state.responsive.at)
+		if (this.__viewportWidth > this.state.responsive.at)
 			return this.__setResponsive({ show: false, _active: false });
 		this.__setResponsive({ _active: true });
 		this.__makeNavViewable();
