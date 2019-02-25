@@ -1,3 +1,41 @@
+## [0.0.12](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.11...v0.0.12) (2019-02-25)
+
+
+### Bug Fixes
+
+* **firefox:** ensure responsive navs display over succeeding navs ([b2a29de](https://github.com/rapid-build-ui/rb-nav/commit/b2a29de))
+* **firefox and safari:** dividers option for default kind from not showing up ([d2dc9d1](https://github.com/rapid-build-ui/rb-nav/commit/d2dc9d1))
+* **responsive:** only display nav menu over other elements when responsive and small viewport ([81734b0](https://github.com/rapid-build-ui/rb-nav/commit/81734b0))
+* **responsive:** when zooming in on devices ([25bc953](https://github.com/rapid-build-ui/rb-nav/commit/25bc953))
+
+
+### Features
+
+* **css variables:** create and expose them so consumers can style rb-nav how they please ([21e52a5](https://github.com/rapid-build-ui/rb-nav/commit/21e52a5))
+* **display:** set host's display to either block or inline-block so consumer can add bumpers ([34c0af8](https://github.com/rapid-build-ui/rb-nav/commit/34c0af8))
+* **normalize styles:** ensure component always looks the same via setting css all property to initial ([64a21eb](https://github.com/rapid-build-ui/rb-nav/commit/64a21eb))
+* **responsive scrolling:** ensure responsive nav content is always accessible via scrolling ([1e48201](https://github.com/rapid-build-ui/rb-nav/commit/1e48201))
+
+
+### Dependencies
+
+* **bump:** dep rb-base v0.0.7 ([a5fe97f](https://github.com/rapid-build-ui/rb-nav/commit/a5fe97f))
+
+
+### BREAKING CHANGES
+
+* **api option:** change inverse to dark ([fd9d850](https://github.com/rapid-build-ui/rb-nav/commit/fd9d850))
+
+To migrate the code follow the example below:
+
+**Before:**  
+inverse
+
+**Now:**  
+dark
+
+
+
 ## [0.0.11](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.10...v0.0.11) (2018-12-05)
 
 
