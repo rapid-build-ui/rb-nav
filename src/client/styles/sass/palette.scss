@@ -1,0 +1,39 @@
+/****************
+ * COLOR PALETTE
+ ****************/
+$palette: (
+	// Transparent
+	trans: transparent,
+
+	// Blues
+	blue:           #4682b4,
+	blueLight:      #6798c1,
+	xBlueLight:     #78a4c8,
+
+	// Blue Greys
+	xBlueGreyDark:  #5d6b78,
+	blueGreyDark:   #626f7b,
+	blueGrey:       #778796,
+	blueGreyLight:  #788491,
+
+	// Darks
+	xDark:          #292929,
+	dark:           #323232,
+
+	// Greys
+	xGreyDark:      #575757,
+	greyDark:       #696969,
+	grey:           #808080,
+	greyLight:      #bbb,
+	xGreyLight:     #c1c1c1,
+	xxGreyLight:    #d0d0d0,
+
+	// Lights
+	light:          #dcdcdc,
+	xLight:         #e3e3e3,
+	xxLight:        #f5f5f5,
+	xxxLight:       #f9f9f9,
+
+	// White
+	white:          white
+);

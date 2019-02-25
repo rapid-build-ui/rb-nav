@@ -2,29 +2,39 @@
  * RB-NAV STYLES - IN ORDER!
  ****************************/
 @import 'sass/functions.scss';
-@import 'sass/colors/palette.scss';
-@import 'sass/colors/colors.scss';
-@import 'sass/colors/inverse.scss';
-@import 'main/host.scss';
+@import 'sass/variables.scss';
 
-// Nav
-nav {
-	@import 'main/common.scss';
-	@import 'main/kinds.scss';
-	@import 'main/displays.scss';
-	@import 'main/layouts.scss';
-	@import 'main/dividers.scss';
+/* Layout
+ *********/
+@import 'layout/host.scss';
+@import 'layout/common.scss';
+@import 'layout/displays.scss';
+@import 'layout/layouts.scss';
+
+/* Responsive Layout
+ ********************/
+@media (max-width: $RESPONSIVE) {
+	@import 'layout/responsive/responsive.scss';
+	@import 'layout/responsive/trigger.scss';
+	@import 'layout/responsive/scrollbar.scss';
+	@import 'layout/responsive/scrolling.scss';
 }
 
-// Inverse Colors
-nav.inverse {
-	@import 'inverse/inverse.scss';
-}
+/* CSS Style Variables
+ **********************/
+@import 'sass/palette.scss';
+@import 'variables/common.scss';
+@import 'variables/light/backgrounds.scss';
+@import 'variables/light/borders.scss';
+@import 'variables/light/colors.scss';
+@import 'variables/dark/backgrounds.scss';
+@import 'variables/dark/borders.scss';
+@import 'variables/dark/colors.scss';
+@import 'sass/css-vars.scss';
 
-// Responsive
-@media (max-width: 768px) {
-	nav.responsive {
-		@import 'responsive/trigger.scss';
-		@import 'responsive/responsive.scss';
-	}
-}
+/* Styles
+ *********/
+@import 'style/common.scss';
+@import 'style/backgrounds.scss';
+@import 'style/borders.scss';
+@import 'style/colors.scss';

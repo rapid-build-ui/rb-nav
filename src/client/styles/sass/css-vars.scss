@@ -1,0 +1,21 @@
+/********************
+ * CSS VARIABLES MAP
+ ********************/
+$lightCssVars: mergeMaps(
+	$lightCssBgVars,
+	$lightCssBorderVars,
+	$lightCssColorVars
+);
+
+$darkCssVars: mergeMaps(
+	$darkCssBgVars,
+	$darkCssBorderVars,
+	$darkCssColorVars
+);
+
+$component: 'rb-nav';
+$vars: (
+	common: getCssVarsMap($component, $commonCssVars),
+	light:  getCssVarsMap($component, $lightCssVars, 'light'),
+	dark:   getCssVarsMap($component, $darkCssVars, 'dark')
+);

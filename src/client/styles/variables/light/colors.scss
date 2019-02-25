@@ -1,0 +1,20 @@
+/****************************
+ * LIGHT CSS COLOR VARIABLES
+ ****************************/
+$lightCssColorVars: (
+	// Default
+	default-heading-color:       mapGet($palette, xBlueGreyDark),
+	default-heading-text-shadow: mapGet($palette, white),
+	default-link-color:          mapGet($palette, blueGrey),
+	default-link-color-hover:    mapGet($palette, xBlueLight),
+	default-link-color-click:    mapGet($palette, blueLight),
+	default-link-color-active:   mapGet($palette, blue),
+
+	// Primary
+	primary-heading-color:       mapGet($palette, xBlueGreyDark),
+	primary-heading-text-shadow: mapGet($palette, white),
+	primary-link-color:          mapGet($palette, blueGrey),
+	primary-link-color-hover:    mapGet($palette, blueLight),
+	primary-link-color-click:    mapGet($palette, blueGreyLight),
+	primary-link-color-active:   mapGet($palette, blueGreyDark)
+);

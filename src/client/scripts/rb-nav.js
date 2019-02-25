@@ -1,10 +1,10 @@
 /*********
  * RB-NAV
  *********/
-import { props, html, RbBase } from '../../rb-base/scripts/rb-base.js';
-import Activity from './activity.js';
-import Responsive from './responsive.js';
-import template from '../views/rb-nav.html';
+import { RbBase, props, html } from '../../rb-base/scripts/rb-base.js';
+import Activity                from './private/mixins/activity.js';
+import Responsive              from './private/mixins/responsive.js';
+import template                from '../views/rb-nav.html';
 
 export class RbNav extends Activity(Responsive(RbBase())) {
 	/* Lifecycle
@@ -23,10 +23,10 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 	static get props() {
 		return {
 			...super.props,
+			dark:     props.boolean,
 			dividers: props.boolean,
-			inline: props.boolean,
-			inverse: props.boolean,
-			kind: props.string,
+			inline:   props.boolean,
+			kind:     props.string,
 			vertical: props.boolean
 		}
 	}
@@ -74,8 +74,8 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 	_addFirstAndLastClasses(e) { // :void
 		// console.log('ADD CLASSES:', this.rb.elms.links);
 		if (!this.rb.elms.links.length) return;
-		const FIRST = 'rb-first';
-		const LAST  = 'rb-last';
+		const FIRST = 'first';
+		const LAST  = 'last';
 		for (let link of this.rb.elms.links) {
 			link.classList.remove(FIRST, LAST);
 			let prevElm = link.previousElementSibling;
@@ -89,7 +89,7 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 
 	/* Template
 	 ***********/
-	render({ props }) { // :string
+	render({ props, state }) { // :string
 		return html template;
 	}
 }

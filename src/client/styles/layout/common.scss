@@ -1,0 +1,26 @@
+/*********
+ * COMMON
+ *********/
+nav {
+	position: relative;
+}
+.trigger { // responsive
+	display: none;
+}
+
+/* Slot
+ *******/
+::slotted(a) {
+	box-sizing: border-box !important;
+	cursor: pointer !important;
+	text-decoration: none !important;
+}
+::slotted(a:focus) {
+	outline: none !important;
+}
+
+::slotted(a),
+::slotted(h3) {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,80 @@
+/****************
+ * BORDER STYLES
+ ****************/
+@mixin setBorders() {
+	$themes: light, dark;
+	@each $theme in $themes {
+		.#{$theme}.default.vertical.dividers:not(.responsive) .nav {
+			border-top:    mapGet($vars, $theme, default-vertical-dividers-nav-border-top);
+			border-bottom: mapGet($vars, $theme, default-vertical-dividers-nav-border-bottom);
+		}
+		.#{$theme}.default.horizontal.dividers {
+			::slotted(a:not(.first)) { // the dividers
+				box-shadow: -5px 1px 0 -4px mapGet($vars, $theme, default-horizontal-dividers-link-border-color) !important;
+			}
+		}
+		.#{$theme}.default.vertical.dividers {
+			::slotted(h3:not(:last-child)) {
+				border-bottom: mapGet($vars, $theme, default-vertical-dividers-heading-border-bottom) !important;
+			}
+			::slotted(a:not(:last-child)) {
+				border-bottom: mapGet($vars, $theme, default-vertical-dividers-link-border-bottom) !important;
+			}
+		}
+		.#{$theme}.primary.horizontal.no-dividers {
+			::slotted(a) {
+				$trans: mapGet($palette, trans);
+				border: 1px solid $trans !important;
+				border-bottom: none !important;
+			}
+			::slotted(a:hover),
+			::slotted(a:focus),
+			::slotted(a:active),
+			::slotted(a.active) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border) !important;
+				border-bottom: none !important;
+			}
+		}
+		.#{$theme}.primary.horizontal.dividers {
+			::slotted(a) {
+				border: mapGet($vars, $theme, primary-horizontal-dividers-link-border) !important;
+				border-bottom: none !important;
+			}
+		}
+		.#{$theme}.primary.vertical.dividers:not(.responsive) {
+			::slotted(a) {
+				border: mapGet($vars, $theme, primary-vertical-dividers-link-border) !important;
+			}
+		}
+	}
+}
+@mixin setResponsiveBorders() {
+	$themes: light, dark;
+	$kinds: default, primary;
+	@each $theme in $themes {
+		.#{$theme}.primary.vertical.dividers.responsive {
+			$border: mapGet($vars, $theme, primary-vertical-dividers-link-border);
+			::slotted(a.first:not(:first-child)) {
+				border-top: $border !important;
+			}
+			::slotted(a:not(:last-child)) {
+				border-bottom: $border !important;
+			}
+		}
+	}
+	@each $theme in $themes {
+		@each $kind in $kinds {
+			.#{$theme}.#{$kind}.responsive {
+				.nav {
+					border: mapGet($vars, $theme, #{$kind}-responsive-nav-border);
+				}
+				.trigger {
+					border: mapGet($vars, $theme, #{$kind}-responsive-trigger-border);
+				}
+			}
+		}
+	}
+}
+
+@include setBorders();
+@include setResponsiveBorders();

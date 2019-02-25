@@ -1,0 +1,29 @@
+/*********************
+ * RESPONSIVE LAYOUTS
+ *********************/
+.responsive {
+	width: fit-content;
+
+	.nav {
+		position: absolute;
+		z-index: 5;
+		top: 34px;
+		overflow-y: auto;
+		overflow-x: hidden; // needed for firefox on windows
+		width: max-content;
+		transition: opacity .25s ease-in-out;
+	}
+
+	&.menu-closed .nav {
+		width: 0;
+		height: 0;
+		opacity: 0;
+		visibility: hidden;
+	}
+	&.menu-left .nav {
+		right: 0;
+	}
+	&.menu-right .nav {
+		left: 0; // default
+	}
+}

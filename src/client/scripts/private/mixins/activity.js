@@ -1,16 +1,16 @@
 /******************
  * ACTIVITY MODULE
  ******************/
-import { props } from '../../rb-base/scripts/rb-base.js';
+import { props } from '../../../../rb-base/scripts/rb-base.js';
 const ACTIVE_CLASS = 'active';
 
-const Activity = superClass => class extends superClass {
+const Activity = BaseElm => class extends BaseElm {
 	/* Lifecycle
 	 ************/
 	viewReady() {
 		super.viewReady && super.viewReady();
 		if (!this.props.active) return;
-		this._attachActivityEvents()
+		this._attachActivityEvents();
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();

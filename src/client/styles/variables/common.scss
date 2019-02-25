@@ -1,0 +1,48 @@
+/*****************************************
+ * COMMON CSS VARIABLES
+ * Applies to both light and dark themes.
+ *****************************************/
+// mac: helvetica | windows: segoe
+$FONT_FAMILY: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+
+$commonCssVars: (
+	// Font Family
+	default-heading-font-family:    $FONT_FAMILY,
+	primary-heading-font-family:    $FONT_FAMILY,
+	default-link-font-family:       $FONT_FAMILY,
+	primary-link-font-family:       $FONT_FAMILY,
+
+	// Font Size
+	default-heading-font-size:      13px,
+	primary-heading-font-size:      13px,
+	default-link-font-size:         16px,
+	primary-link-font-size:         13px,
+
+	// Font Weight
+	default-heading-font-weight:    700,
+	primary-heading-font-weight:    700,
+	default-link-font-weight:       400,
+	primary-link-font-weight:       600,
+
+	// Letter Spacing
+	default-heading-letter-spacing: .1px,
+	primary-heading-letter-spacing: .1px,
+	default-link-letter-spacing:    normal,
+	primary-link-letter-spacing:    .1px,
+
+	// Text Transform
+	default-heading-text-transform: uppercase,
+	primary-heading-text-transform: uppercase,
+	default-link-text-transform:    none,
+	primary-link-text-transform:    uppercase,
+
+	// Border Radius
+	primary-horizontal-link-border-radius:        10px,
+	primary-vertical-dividers-link-border-radius: 6px,
+
+	// Responsive Border Radius
+	default-responsive-nav-border-radius:         5px,
+	default-responsive-trigger-border-radius:     5px,
+	primary-responsive-nav-border-radius:         5px,
+	primary-responsive-trigger-border-radius:     5px
+);

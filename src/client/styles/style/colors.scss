@@ -1,0 +1,33 @@
+/***************
+ * COLOR STYLES
+ ***************/
+@mixin setColors() {
+	$themes: light, dark;
+	$kinds: default, primary;
+	@each $theme in $themes {
+		@each $kind in $kinds {
+			.#{$theme}.#{$kind} {
+				::slotted(h3) {
+					$ts: mapGet($vars, $theme, #{$kind}-heading-text-shadow);
+					color: mapGet($vars, $theme, #{$kind}-heading-color) !important;
+					text-shadow: -1px 0 $ts, 0 1px $ts, 1px 0 $ts, 0 -1px $ts !important;
+				}
+				::slotted(a) {
+					color: mapGet($vars, $theme, #{$kind}-link-color) !important;
+				}
+				::slotted(a:hover),
+				::slotted(a:focus) {
+					color: mapGet($vars, $theme, #{$kind}-link-color-hover) !important;
+				}
+				::slotted(a:active) {
+					color: mapGet($vars, $theme, #{$kind}-link-color-click) !important;
+				}
+				::slotted(a.active) {
+					color: mapGet($vars, $theme, #{$kind}-link-color-active) !important;
+				}
+			}
+		}
+	}
+}
+
+@include setColors();
