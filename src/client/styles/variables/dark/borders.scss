@@ -3,20 +3,23 @@
  ****************************/
 $darkCssBorderVars: (
 	// Default
-	default-horizontal-dividers-link-border-color:   mapGet($palette, greyDark),
-	default-vertical-dividers-nav-border-top:        1px solid mapGet($palette, greyDark),
-	default-vertical-dividers-nav-border-bottom:     1px solid mapGet($palette, greyDark),
-	default-vertical-dividers-heading-border-bottom: 1px solid mapGet($palette, greyDark),
-	default-vertical-dividers-link-border-bottom:    1px solid mapGet($palette, greyDark),
+	default-horizontal-dividers-link-border-color:     mapGet($palette, greyDark),
+	default-vertical-dividers-nav-border-top:          1px solid mapGet($palette, greyDark),
+	default-vertical-dividers-nav-border-bottom:       1px solid mapGet($palette, greyDark),
+	default-vertical-dividers-heading-border-bottom:   1px solid mapGet($palette, greyDark),
+	default-vertical-dividers-link-border-bottom:      1px solid mapGet($palette, greyDark),
 
 	// Primary
-	primary-horizontal-no-dividers-link-border:      1px solid mapGet($palette, greyDark),
-	primary-horizontal-dividers-link-border:         1px solid mapGet($palette, greyDark),
-	primary-vertical-dividers-link-border:           1px solid mapGet($palette, greyDark),
+	primary-horizontal-no-dividers-link-border:        1px solid mapGet($palette, trans),
+	primary-horizontal-no-dividers-link-border-hover:  1px solid mapGet($palette, greyDark),
+	primary-horizontal-no-dividers-link-border-click:  1px solid mapGet($palette, greyDark),
+	primary-horizontal-no-dividers-link-border-active: 1px solid mapGet($palette, greyDark),
+	primary-horizontal-dividers-link-border:           1px solid mapGet($palette, greyDark),
+	primary-vertical-dividers-link-border:             1px solid mapGet($palette, greyDark),
 
 	// Responsive
-	default-responsive-nav-border:                   1px solid mapGet($palette, greyDark),
-	default-responsive-trigger-border:               1px solid mapGet($palette, greyDark),
-	primary-responsive-nav-border:                   1px solid mapGet($palette, greyDark),
-	primary-responsive-trigger-border:               1px solid mapGet($palette, greyDark)
+	default-responsive-nav-border:                     1px solid mapGet($palette, greyDark),
+	default-responsive-trigger-border:                 1px solid mapGet($palette, greyDark),
+	primary-responsive-nav-border:                     1px solid mapGet($palette, greyDark),
+	primary-responsive-trigger-border:                 1px solid mapGet($palette, greyDark)
 );

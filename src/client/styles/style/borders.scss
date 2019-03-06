@@ -23,15 +23,23 @@
 		}
 		.#{$theme}.primary.horizontal.no-dividers {
 			::slotted(a) {
-				$trans: mapGet($palette, trans);
-				border: 1px solid $trans !important;
-				border-bottom: none !important;
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border) !important;
 			}
+			::slotted(a:hover),
+			::slotted(a:focus) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border-hover) !important;
+			}
+			::slotted(a:active) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border-click) !important;
+			}
+			::slotted(a.active) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border-active) !important;
+			}
+			::slotted(a),
 			::slotted(a:hover),
 			::slotted(a:focus),
 			::slotted(a:active),
 			::slotted(a.active) {
-				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border) !important;
 				border-bottom: none !important;
 			}
 		}
