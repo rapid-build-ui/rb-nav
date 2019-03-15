@@ -12,6 +12,7 @@
 		overflow-x: hidden; // needed for firefox on windows
 		width: max-content;
 		transition: opacity .25s ease-in-out;
+		-webkit-overflow-scrolling: touch; // momentum scrolling on iOS
 	}
 
 	&.menu-closed .nav {
