@@ -19,7 +19,10 @@ $darkCssBorderVars: (
 
 	// Responsive
 	default-responsive-nav-border:                     1px solid mapGet($palette, greyDark),
-	default-responsive-trigger-border:                 1px solid mapGet($palette, greyDark),
+	default-responsive-closed-trigger-border:          1px solid mapGet($palette, xGreyDark),
+	default-responsive-open-trigger-border:            1px solid mapGet($palette, greyDark),
+
 	primary-responsive-nav-border:                     1px solid mapGet($palette, greyDark),
-	primary-responsive-trigger-border:                 1px solid mapGet($palette, greyDark)
+	primary-responsive-closed-trigger-border:          1px solid mapGet($palette, greyDark),
+	primary-responsive-open-trigger-border:            1px solid mapGet($palette, greyDark)
 );

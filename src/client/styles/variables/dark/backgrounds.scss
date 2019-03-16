@@ -24,13 +24,20 @@ $darkCssBgVars: (
 	primary-vertical-dividers-link-bg-active:      mapGet($palette, xDark),
 
 	// Responsive
-	default-responsive-nav-bg:                     mapGet($palette, dark),
-	default-responsive-trigger-bg:                 mapGet($palette, dark),
-	default-responsive-trigger-bars-bg:            mapGet($palette, grey),
-	default-responsive-trigger-bars-bg-hover:      mapGet($palette, greyLight),
-	primary-responsive-nav-bg:                     mapGet($palette, dark),
-	primary-responsive-trigger-bg:                 mapGet($palette, dark),
-	primary-responsive-trigger-bars-bg:            mapGet($palette, grey),
-	primary-responsive-trigger-bars-bg-hover:      mapGet($palette, greyLight),
-	primary-responsive-dividers-heading-bg:        mapGet($palette, xGreyDark)
+	default-responsive-nav-bg:                       mapGet($palette, dark),
+	default-responsive-closed-trigger-bg:            mapGet($palette, xDark),
+	default-responsive-closed-trigger-bars-bg:       mapGet($palette, greyDark),
+	default-responsive-closed-trigger-bars-bg-hover: mapGet($palette, greyLight),
+	default-responsive-open-trigger-bg:              mapGet($palette, dark),
+	default-responsive-open-trigger-bars-bg:         mapGet($palette, grey),
+	default-responsive-open-trigger-bars-bg-hover:   mapGet($palette, greyLight),
+
+	primary-responsive-nav-bg:                       mapGet($palette, dark),
+	primary-responsive-closed-trigger-bg:            mapGet($palette, dark),
+	primary-responsive-closed-trigger-bars-bg:       mapGet($palette, grey),
+	primary-responsive-closed-trigger-bars-bg-hover: mapGet($palette, greyLight),
+	primary-responsive-open-trigger-bg:              mapGet($palette, dark),
+	primary-responsive-open-trigger-bars-bg:         mapGet($palette, grey),
+	primary-responsive-open-trigger-bars-bg-hover:   mapGet($palette, greyLight),
+	primary-responsive-dividers-heading-bg:          mapGet($palette, xGreyDark)
 );

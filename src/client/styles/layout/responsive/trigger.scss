@@ -43,26 +43,4 @@
 			opacity: 0;
 		}
 	}
-
-	/* Kinds
-	 ********/
-	&.default {
-		&.menu-closed {
-			&.light .trigger {
-				filter: brightness(115%);
-				b { filter: brightness(135%); } // the bars
-			}
-			&.dark .trigger {
-				filter: brightness(85%);
-			}
-		}
-		&.dark .trigger,
-		&.light .trigger {
-			&:hover,
-			&:focus {
-				filter: brightness(1);
-				b { filter: brightness(1); } // the bars
-			}
-		}
-	}
 }

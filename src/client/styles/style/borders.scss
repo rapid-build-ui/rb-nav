@@ -59,6 +59,7 @@
 @mixin setResponsiveBorders() {
 	$themes: light, dark;
 	$kinds: default, primary;
+	$triggers: closed, open;
 	@each $theme in $themes {
 		.#{$theme}.primary.vertical.dividers.responsive {
 			$border: mapGet($vars, $theme, primary-vertical-dividers-link-border);
@@ -76,8 +77,10 @@
 				.nav {
 					border: mapGet($vars, $theme, #{$kind}-responsive-nav-border);
 				}
-				.trigger {
-					border: mapGet($vars, $theme, #{$kind}-responsive-trigger-border);
+				@each $trigger in $triggers {
+					&.menu-#{$trigger} .trigger {
+						border: mapGet($vars, $theme, #{$kind}-responsive-#{$trigger}-trigger-border);
+					}
 				}
 			}
 		}
