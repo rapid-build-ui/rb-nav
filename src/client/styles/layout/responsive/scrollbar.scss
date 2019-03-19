@@ -4,6 +4,7 @@
 .responsive {
 	.nav {
 		scrollbar-width: thin; // supported by firefox
+		-webkit-overflow-scrolling: touch; // momentum scrolling on iOS
 
 		&::-webkit-scrollbar,
 		&::-webkit-scrollbar-thumb {
