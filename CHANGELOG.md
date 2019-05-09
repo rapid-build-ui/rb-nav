@@ -1,3 +1,24 @@
+## [0.0.14](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.13...v0.0.14) (2019-05-09)
+
+
+### Bug Fixes
+
+* **responsive nav:** scrolling to active on menu open for firefox and safari ([2b2cfcd](https://github.com/rapid-build-ui/rb-nav/commit/2b2cfcd))
+
+
+### Features
+
+* **css variables:** add ability via css vars to uniquely style responsive trigger when closed and open ([86e129f](https://github.com/rapid-build-ui/rb-nav/commit/86e129f))
+* **responsive:** add momentum scrolling on iOS ([ce8ac2d](https://github.com/rapid-build-ui/rb-nav/commit/ce8ac2d))
+* **styling:** add states for css var primary-horizontal-no-dividers-link-border ([d3b4a8c](https://github.com/rapid-build-ui/rb-nav/commit/d3b4a8c))
+
+
+### Dependencies
+
+* **bump:** dep rb-base v0.0.9 ([b39fbd4](https://github.com/rapid-build-ui/rb-nav/commit/b39fbd4))
+
+
+
 ## [0.0.13](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.12...v0.0.13) (2019-03-05)
 
 
