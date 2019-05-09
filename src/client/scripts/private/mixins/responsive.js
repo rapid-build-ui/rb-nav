@@ -128,7 +128,12 @@ const Responsive = BaseElm => class extends BaseElm {
 		const activeLink = this.rb.elms.links.find(link => link.classList.contains('active'));
 		if (!activeLink) return;
 		const borderTop = parseInt(getComputedStyle(activeLink).borderTopWidth.slice(0,-2)); // slice removes 'px'
-		this.rb.elms.menu.scrollTop = activeLink.offsetTop + borderTop; // (scroll past top border)
+		let scrollTop = activeLink.offsetTop + borderTop; // scroll past top border
+		// chrome currently hasn't implemented this but firefox and safari have
+		// adjust to new dom spec for retargeting (offsetParent)
+		// which means, the offsetParent of a slot elm is the shadowRoot.host (IDKW!)
+		if (activeLink.offsetParent === this) scrollTop -= this.rb.elms.menu.offsetTop;
+		this.rb.elms.menu.scrollTop = scrollTop;
 	}
 	__updateCssMedia() { // :void
 		const { at, _atDefault } = this.state.responsive;

@@ -23,15 +23,23 @@
 		}
 		.#{$theme}.primary.horizontal.no-dividers {
 			::slotted(a) {
-				$trans: mapGet($palette, trans);
-				border: 1px solid $trans !important;
-				border-bottom: none !important;
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border) !important;
 			}
+			::slotted(a:hover),
+			::slotted(a:focus) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border-hover) !important;
+			}
+			::slotted(a:active) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border-click) !important;
+			}
+			::slotted(a.active) {
+				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border-active) !important;
+			}
+			::slotted(a),
 			::slotted(a:hover),
 			::slotted(a:focus),
 			::slotted(a:active),
 			::slotted(a.active) {
-				border: mapGet($vars, $theme, primary-horizontal-no-dividers-link-border) !important;
 				border-bottom: none !important;
 			}
 		}
@@ -51,6 +59,7 @@
 @mixin setResponsiveBorders() {
 	$themes: light, dark;
 	$kinds: default, primary;
+	$triggers: closed, open;
 	@each $theme in $themes {
 		.#{$theme}.primary.vertical.dividers.responsive {
 			$border: mapGet($vars, $theme, primary-vertical-dividers-link-border);
@@ -68,8 +77,10 @@
 				.nav {
 					border: mapGet($vars, $theme, #{$kind}-responsive-nav-border);
 				}
-				.trigger {
-					border: mapGet($vars, $theme, #{$kind}-responsive-trigger-border);
+				@each $trigger in $triggers {
+					&.menu-#{$trigger} .trigger {
+						border: mapGet($vars, $theme, #{$kind}-responsive-#{$trigger}-trigger-border);
+					}
 				}
 			}
 		}

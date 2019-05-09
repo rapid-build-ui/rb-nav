@@ -45,6 +45,7 @@
 @mixin setResponsiveBGs() {
 	$themes: light, dark;
 	$kinds: default, primary;
+	$triggers: closed, open;
 	@each $theme in $themes {
 		.#{$theme}.primary.vertical.dividers.responsive ::slotted(h3) {
 			background-color: mapGet($vars, $theme, primary-responsive-dividers-heading-bg) !important;
@@ -54,15 +55,15 @@
 				.nav {
 					background-color: mapGet($vars, $theme, #{$kind}-responsive-nav-bg);
 				}
-				.trigger {
-					background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bg);
-					// the bars
-					b {
-						background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg);
-					}
-					&:focus b,
-					&:hover b {
-						background-color: mapGet($vars, $theme, #{$kind}-responsive-trigger-bars-bg-hover);
+				@each $trigger in $triggers {
+					&.menu-#{$trigger} .trigger {
+						background-color: mapGet($vars, $theme, #{$kind}-responsive-#{$trigger}-trigger-bg);
+						// the bars
+						b { background-color: mapGet($vars, $theme, #{$kind}-responsive-#{$trigger}-trigger-bars-bg); }
+						&:focus b,
+						&:hover b {
+							background-color: mapGet($vars, $theme, #{$kind}-responsive-#{$trigger}-trigger-bars-bg-hover);
+						}
 					}
 				}
 			}
