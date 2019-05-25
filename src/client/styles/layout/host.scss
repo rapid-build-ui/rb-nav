@@ -20,9 +20,6 @@
 @media (max-width: $RESPONSIVE) {
 	:host([responsive]) {
 		position: relative;
-		z-index: 4;
-		@-moz-document url-prefix() {
-			z-index: auto;
-		}
+		z-index: 200;
 	}
 }
