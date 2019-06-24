@@ -20,6 +20,6 @@
 @media (max-width: $RESPONSIVE) {
 	:host([responsive]) {
 		position: relative;
-		z-index: 200;
+		z-index: 100;
 	}
 }
