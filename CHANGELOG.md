@@ -1,3 +1,22 @@
+## [0.0.15](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.14...v0.0.15) (2019-07-05)
+
+
+### Bug Fixes
+
+* **positioning:** bump down the z-index to 100 so it appears under popovers ([540a36e](https://github.com/rapid-build-ui/rb-nav/commit/540a36e))
+
+
+### Features
+
+* **version:** add to component properties accessible via this.version ([6fa7ec1](https://github.com/rapid-build-ui/rb-nav/commit/6fa7ec1))
+
+
+### Dependencies
+
+* **bump:** dep rb-base v0.0.10 ([a4c85a0](https://github.com/rapid-build-ui/rb-nav/commit/a4c85a0))
+
+
+
 ## [0.0.14](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.13...v0.0.14) (2019-05-09)
 
 
