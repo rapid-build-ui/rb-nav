@@ -102,9 +102,16 @@ const Responsive = BaseElm => class extends BaseElm {
 			this.__setResponsive({ _left: true });
 		});
 	}
+	__makeNavAboveOtherNavs(isOpen) { // :void (ensures open nav is above other navs)
+		if (!Type.is.boolean(isOpen)) return;
+		if (isOpen === false) return this.style.zIndex = null;
+		const zIndex = parseInt(window.getComputedStyle(this).zIndex);
+		if (!Type.is.int(zIndex)) return;
+		this.style.zIndex = zIndex + 1;
+	}
 	__setResponsive(opts={}, triggerUpdate = true) { // :void
 		Object.assign(this.state.responsive, opts);
-		// console.log('set responsive:',  this.state.responsive);
+		this.__makeNavAboveOtherNavs(opts.show);
 		if (!triggerUpdate) return;
 		this.triggerUpdate();
 	}
