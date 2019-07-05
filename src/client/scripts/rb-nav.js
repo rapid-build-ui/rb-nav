@@ -9,6 +9,10 @@ import template                from '../views/rb-nav.html';
 export class RbNav extends Activity(Responsive(RbBase())) {
 	/* Lifecycle
 	 ************/
+	constructor() {
+		super();
+		this.version = '0.0.14';
+	}
 	viewReady() {
 		super.viewReady && super.viewReady();
 		Object.assign(this.rb.elms, {
