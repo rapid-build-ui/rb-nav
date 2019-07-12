@@ -1,7 +1,7 @@
 /*********
  * RB-NAV
  *********/
-import { RbBase, props, html } from '../../rb-base/scripts/rb-base.js';
+import { RbBase, props, html } from '../../base/scripts/base.js';
 import Activity                from './private/mixins/activity.js';
 import Responsive              from './private/mixins/responsive.js';
 import template                from '../views/rb-nav.html';
