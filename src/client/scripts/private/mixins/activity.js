@@ -1,7 +1,7 @@
 /******************
  * ACTIVITY MODULE
  ******************/
-import { props } from '../../../../rb-base/scripts/rb-base.js';
+import { props } from '../../../../base/scripts/base.js';
 const ACTIVE_CLASS = 'active';
 
 const Activity = BaseElm => class extends BaseElm {

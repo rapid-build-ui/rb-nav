@@ -1,8 +1,8 @@
 /********************
  * RESPONSIVE MODULE
  ********************/
-import { props } from '../../../../rb-base/scripts/rb-base.js';
-import Type      from '../../../../rb-base/scripts/public/services/type.js';
+import { props } from '../../../../base/scripts/base.js';
+import Type      from '../../../../base/scripts/public/services/type.js';
 
 const Responsive = BaseElm => class extends BaseElm {
 	/* Lifecycle
