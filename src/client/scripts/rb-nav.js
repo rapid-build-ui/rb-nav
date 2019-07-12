@@ -11,7 +11,7 @@ export class RbNav extends Activity(Responsive(RbBase())) {
 	 ************/
 	constructor() {
 		super();
-		this.version = '0.0.15';
+		this.version = '0.0.16';
 	}
 	viewReady() {
 		super.viewReady && super.viewReady();
