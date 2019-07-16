@@ -1,3 +1,12 @@
+## [0.0.17](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.16...v0.0.17) (2019-07-16)
+
+
+### Dependencies
+
+* **bump:** dep base v0.0.12 ([ba9cf2e](https://github.com/rapid-build-ui/rb-nav/commit/ba9cf2e))
+
+
+
 ## [0.0.16](https://github.com/rapid-build-ui/rb-nav/compare/v0.0.15...v0.0.16) (2019-07-12)
 
 
