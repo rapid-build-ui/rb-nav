@@ -25,6 +25,17 @@
 				::slotted(a.active) {
 					color: mapGet($vars, $theme, #{$kind}-link-color-active) !important;
 				}
+				::slotted(rb-popover) {
+					--rb-popover-default-trigger-color: #{mapGet($vars, $theme, #{$kind}-link-color)};
+					--rb-popover-default-trigger-color-hover: #{mapGet($vars, $theme, #{$kind}-link-color-hover)};
+				}
+				::slotted(rb-popover:active) {
+					--rb-popover-default-trigger-color: #{mapGet($vars, $theme, #{$kind}-link-color-click)};
+				}
+				::slotted(rb-popover.active) {
+					--rb-popover-default-trigger-color: #{mapGet($vars, $theme, #{$kind}-link-color-active)};
+					--rb-popover-default-trigger-color-hover: #{mapGet($vars, $theme, #{$kind}-link-color-active)};
+				}
 			}
 		}
 	}

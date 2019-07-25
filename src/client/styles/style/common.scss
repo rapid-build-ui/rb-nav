@@ -18,13 +18,15 @@
 	}
 	// Border Radius
 	.primary.horizontal {
-		::slotted(a) {
+		::slotted(a),
+		::slotted(rb-popover) {
 			$r: mapGet($vars, common, primary-horizontal-link-border-radius);
 			border-radius: $r $r 0 0 !important;
 		}
 	}
 	.primary.vertical.dividers:not(.responsive) {
-		::slotted(a) {
+		::slotted(a),
+		::slotted(rb-popover) {
 			border-radius: mapGet($vars, common, primary-vertical-dividers-link-border-radius) !important;
 		}
 	}

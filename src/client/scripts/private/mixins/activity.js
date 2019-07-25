@@ -61,14 +61,18 @@ const Activity = BaseElm => class extends BaseElm {
 	 ***************/
 	__activateLink(link) { // :void
 		link.classList.add(ACTIVE_CLASS);
+		this.__activatePopover(link);
 	}
 	__deactivateLink(link) { // :void
 		if (!this._isActiveLink(link)) return;
+		if (link.localName === 'rb-popover' && link.querySelector('rb-nav a.active')) return;
+		const popover = link.parentElement.closest('rb-popover');
+		if (popover) popover.classList.remove(ACTIVE_CLASS);
 		link.classList.remove(ACTIVE_CLASS);
 		link.blur(); // remove focus incase :focus and ACTIVE_CLASS are styled same
 	}
 	__deactivateLinks() { // :void
-		for (let link of this.rb.elms.links)
+		for (const link of this.rb.elms.links)
 			this.__deactivateLink(link);
 	}
 	_isActiveLink(link) { // :boolean
@@ -82,6 +86,15 @@ const Activity = BaseElm => class extends BaseElm {
 	_deactivateLinks(deactivate = true) { // :void
 		if (deactivate === false) return;
 		this.__deactivateLinks();
+	}
+
+	/* Popover Helpers
+	 ******************/
+	__activatePopover(link) { // :void
+		const popover = link.parentElement.closest('rb-popover');
+		if (!popover) return;
+		if (!popover.closest('rb-nav').active) return;
+		this.__activateLink(popover);
 	}
 
 	/* Event Management
@@ -99,31 +112,31 @@ const Activity = BaseElm => class extends BaseElm {
 
 	/* Event Handlers
 	 *****************/
-	_activateLinks(e) { // :void
+	_activateLinks(evt) { // :void
 		this.rb.events.add(this.rb.elms.links, 'click', this._activeLinkClick);
 	}
-	_setActiveObserver(e) { // :void
+	_setActiveObserver(evt) { // :void
 		switch(true) {
 			case this.active === 'hash':
 				if (this._hashInterval) break;
-				this._setActiveHash(e);
+				this._setActiveHash(evt);
 				let oldHash = location.hash;
 				this._hashInterval = setInterval(() => {
 					let newHash = location.hash;
 					if (newHash === oldHash) return;
 					oldHash = newHash;
-					this._setActiveHash(e);
+					this._setActiveHash(evt);
 				}, 100);
 				break;
 
 			case this.active === 'path':
 				if (this._pathObserver) break;
-				this._setActivePath(e);
+				this._setActivePath(evt);
 				let oldPath = location.pathname;
 				this._pathObserver = new MutationObserver(() => {
 					let newPath = location.pathname;
 					if (newPath === oldPath) return;
-					this._setActivePath(e);
+					this._setActivePath(evt);
 					oldPath = newPath;
 				});
 				this._pathObserver.observe(document.body, {
@@ -133,24 +146,24 @@ const Activity = BaseElm => class extends BaseElm {
 
 			case !!this.active.param:
 				if (this._paramsInterval) break;
-				this._setActiveParam(e);
+				this._setActiveParam(evt);
 				let oldParams = location.search;
 				this._paramsInterval = setInterval(() => {
 					let newParams = location.search;
 					if (newParams === oldParams) return;
 					oldParams = newParams;
-					this._setActiveParam(e);
+					this._setActiveParam(evt);
 				}, 100);
 				break;
 
 			case !!this.active.segment:
 				if (this._segmentObserver) break;
-				this._setActiveSegment(e);
+				this._setActiveSegment(evt);
 				let oldSegment = location.pathname;
 				this._segmentObserver = new MutationObserver(() => {
 					let newSegment = location.pathname;
 					if (newSegment === oldSegment) return;
-					this._setActiveSegment(e);
+					this._setActiveSegment(evt);
 					oldSegment = newSegment;
 				});
 				this._segmentObserver.observe(document.body, {
@@ -162,10 +175,10 @@ const Activity = BaseElm => class extends BaseElm {
 
 	/* Link Activity Events
 	 ***********************/
-	_activeLinkClick(e) { // :void
-		this._activateLink(e.currentTarget);
+	_activeLinkClick(evt) { // :void
+		this._activateLink(evt.currentTarget);
 	}
-	_setActiveHash(e) { // :void
+	_setActiveHash(evt) { // :void
 		let deactivate;
 		let locHash = location.hash.split('#')[1];
 		locHash = locHash && locHash.toLowerCase();
@@ -181,7 +194,7 @@ const Activity = BaseElm => class extends BaseElm {
 		}
 		this._deactivateLinks(deactivate);
 	}
-	_setActivePath(e) { // :void (TODO: support hrefs with ..)
+	_setActivePath(evt) { // :void (TODO: support hrefs with ..)
 		let deactivate;
 		const locPath = location.pathname.toLowerCase();
 		for (const link of this.rb.elms.links) {
@@ -196,7 +209,7 @@ const Activity = BaseElm => class extends BaseElm {
 		}
 		this._deactivateLinks(deactivate);
 	}
-	_setActiveParam(e) { // :void
+	_setActiveParam(evt) { // :void
 		let deactivate;
 		const activeParam = this.active.param;
 		const locQS       = location.search.slice(0);
@@ -218,7 +231,7 @@ const Activity = BaseElm => class extends BaseElm {
 		}
 		this._deactivateLinks(deactivate);
 	}
-	_setActiveSegment(e) { // :void
+	_setActiveSegment(evt) { // :void
 		let deactivate;
 		const activeSeg = this.active.segment - 1;
 		const locSegs   = this.__cleanArray(location.pathname.toLowerCase().split('/'));

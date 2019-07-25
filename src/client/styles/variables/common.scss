@@ -2,15 +2,12 @@
  * COMMON CSS VARIABLES
  * Applies to both light and dark themes.
  *****************************************/
-// mac: helvetica | windows: segoe
-$FONT_FAMILY: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
-
 $commonCssVars: (
 	// Font Family
-	default-heading-font-family:    $FONT_FAMILY,
-	primary-heading-font-family:    $FONT_FAMILY,
-	default-link-font-family:       $FONT_FAMILY,
-	primary-link-font-family:       $FONT_FAMILY,
+	default-heading-font-family:    mapGet($fonts, default),
+	primary-heading-font-family:    mapGet($fonts, default),
+	default-link-font-family:       mapGet($fonts, default),
+	primary-link-font-family:       mapGet($fonts, default),
 
 	// Font Size
 	default-heading-font-size:      13px,

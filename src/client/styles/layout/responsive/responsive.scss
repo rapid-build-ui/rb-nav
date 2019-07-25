@@ -3,6 +3,7 @@
  *********************/
 .responsive {
 	width: fit-content;
+	transform: translate(0,0); // makes position fixed popovers relative to this
 
 	.nav {
 		position: absolute;

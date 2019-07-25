@@ -8,17 +8,23 @@ nav {
 	display: none;
 }
 
-/* Slot
- *******/
+/* Slots
+ ********/
 ::slotted(a) {
-	box-sizing: border-box !important;
 	cursor: pointer !important;
 	text-decoration: none !important;
 }
-::slotted(a:focus) {
+::slotted(rb-popover) {
+	position: relative !important; // js: _makePopoverViewable() needs this
+}
+::slotted(a),
+::slotted(rb-popover) {
+	box-sizing: border-box !important;
+}
+::slotted(a:focus),
+::slotted(rb-popover:focus) {
 	outline: none !important;
 }
-
 ::slotted(a),
 ::slotted(h3) {
 	-webkit-font-smoothing: antialiased;

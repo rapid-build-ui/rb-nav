@@ -155,45 +155,98 @@ const Responsive = BaseElm => class extends BaseElm {
 		}
 	}
 
+	/* Popover Helpers
+	 ******************/
+	__resetPopover(popover) { // :void (clear styles set in __makePopoverViewable())
+		const menu    = this.rb.elms.menu;
+		const popRoot = popover.shadowRoot.querySelector('.rb-popover');
+		menu.style.WebkitOverflowScrolling = null;
+		popover.open = false;
+		popover.style.minHeight = null;
+		popRoot.style.position  = null;
+		popRoot.style.zIndex    = null;
+		popRoot.style.top       = null;
+	}
+	__resetPopovers() { // :void
+		for (const popover of this.rb.elms.popovers)
+			this.__resetPopover(popover);
+	}
+
 	/* Event Management
 	 *******************/
 	_attachResponsiveEvents() { // :void
 		this.rb.events.add(this.rb.elms.menu, 'click', this._menuClick);
 		this.rb.events.add(window, 'click touchstart', this._windowClick);
 		this.rb.events.add(window, 'resize', this._windowResize);
+		this.rb.events.add(this, 'popovers-changed', this._attachResponsivePopoverEvents);
 		this._windowResize(); // init
+	}
+	_attachResponsivePopoverEvents(evt) { // :void
+		this.rb.events.add(this.rb.elms.popovers, 'open', this._makePopoverViewable);
+		this.rb.events.add(this.rb.elms.popovers, 'close', this._resetPopoverOnclose);
 	}
 
 	/* Event Handlers
 	 *****************/
-	_windowClick(e) { // :void
+	_windowClick(evt) { // :void
 		if (!this.state.responsive.show) return;
-		const path = e.composedPath();
+		const path = evt.composedPath();
 		if (path.includes(this.rb.elms.nav)) return;
 		this.__setResponsive({ show: false });
 	}
-	_windowResize(e) { // :void
-		if (this.__viewportWidth > this.state.responsive.at)
+	_windowResize(evt) { // :void
+		if (this.__viewportWidth > this.state.responsive.at) {
+			if (this.rb.elms.popovers) this.__resetPopovers();
 			return this.__setResponsive({ show: false, _active: false });
+		}
 		this.__setResponsive({ _active: true });
 		this.__makeNavViewable();
 	}
-	_menuClick(e) { // :void
+	_menuClick(evt) { // :void
 		if (this.state.responsive.closeOnClick === false) return;
-		const path = e.composedPath();
-		const h3Index = path.findIndex((elm, i, arr) => { // don't close when clicking on h3
-			if (elm.localName !== 'h3') return false;
-			return arr[i+1].localName === 'slot'; // slot will be next elm
-		}); if (h3Index !== -1) return;
+		const path = evt.composedPath();
+		const linkIndex = path.findIndex((elm, i, arr) => { // only close on link click
+			return elm.localName === 'a';
+		});
+		if (linkIndex === -1) return; // not link keep open
+		this.__resetPopovers();
 		this.__setResponsive({ show: false });
 	}
-	_triggerLeave(e) { // :void
+	_triggerLeave(evt) { // :void
 		this.rb.elms.trigger.blur();
 	}
-	_triggerClick(e) { // :void
+	_triggerClick(evt) { // :void
 		this.__setResponsive({ show: !this.state.responsive.show });
 		this.__scrollToActive();
 		this.__makeNavViewable();
+	}
+
+	/* Popover Event Handlers
+	 *************************/
+	_makePopoverViewable(evt) { // :void
+		if (!this.state.responsive.show) return;
+		evt.stopPropagation();
+		const popover = evt.currentTarget;
+		if (popover !== evt.target) return;
+		const menu          = this.rb.elms.menu;
+		const popoverRoot   = popover.shadowRoot.querySelector('.rb-popover'); // wrapping root element
+		const popoverHeight = popover.offsetHeight;
+		const menuBorderTop = parseInt(getComputedStyle(menu).borderTopWidth.slice(0,-2)); // slice removes 'px'
+		let popoverRootTop  = (popover.offsetTop + popoverRoot.offsetTop + menuBorderTop) - menu.scrollTop;
+		if (popover.offsetParent !== this) popoverRootTop += menu.offsetTop; // see __scrollToActive() for explanation
+		// add styles
+		menu.style.WebkitOverflowScrolling = 'auto';       // position fixed doesn't work with iOS momentum scroll
+		popover.style.minHeight    = `${popoverHeight}px`; // so popover doesn't shrink
+		popoverRoot.style.position = 'fixed';              // to break out of nav menu overflow
+		popoverRoot.style.zIndex   = 1;                    // for popover inside popover
+		popoverRoot.style.top      = `${popoverRootTop}px`;
+		// add event
+		this.rb.events.add(menu, 'scroll', this.__resetPopovers, { once: true });
+	}
+	_resetPopoverOnclose(evt) { // :void
+		evt.stopPropagation();
+		if (evt.currentTarget !== evt.target) return;
+		this.__resetPopover(evt.currentTarget);
 	}
 }
 

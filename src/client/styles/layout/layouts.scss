@@ -18,8 +18,8 @@
 /* Ensure accurate display.
  * Set critical slot layout properties.
  ***************************************/
-::slotted(a),
-::slotted(h3) {
+::slotted(h3),
+::slotted(a) {
 	margin: 0 !important;
 	padding: 0 !important;
 	line-height: 20px !important;
@@ -33,27 +33,33 @@
 		$vSpace: 5px;
 		&.no-dividers {
 			::slotted(h3),
-			::slotted(a),{
+			::slotted(a),
+			::slotted(rb-popover) {
 				margin-bottom: $vSpace !important;
 			}
 			::slotted(h3:not(:last-child)),
-			::slotted(a:not(:last-child)) {
+			::slotted(a:not(:last-child)),
+			::slotted(rb-popover:not(:last-child)) {
 				margin-right: $xSpace !important;
 			}
 		}
 		&.dividers {
 			::slotted(h3),
-			::slotted(a),{
+			::slotted(a),
+			::slotted(rb-popover) {
 				margin-bottom: $vSpace !important;
 			}
-			::slotted(a:not(.first)) {
+			::slotted(a:not(.first)),
+			::slotted(rb-popover:not(.first)) {
 				padding-left: $xSpace !important;
 			}
-			::slotted(a:not(.last))  {
+			::slotted(a:not(.last)),
+			::slotted(rb-popover:not(.last))  {
 				padding-right: $xSpace !important;
 			}
 			::slotted(h3:not(:last-child)),
-			::slotted(a.last:not(:last-child)) {
+			::slotted(a.last:not(:last-child)),
+			::slotted(rb-popover.last:not(:last-child)) {
 				margin-right: $xSpace !important;
 			}
 		}
@@ -63,7 +69,8 @@
 			::slotted(h3) {
 				padding: 10px 15px 5px 10px !important;
 			}
-			::slotted(a) {
+			::slotted(a),
+			::slotted(rb-popover) {
 				padding: 8px 15px 8px 18px !important;
 			}
 			::slotted(:last-child) {
@@ -79,7 +86,8 @@
 			::slotted(h3) {
 				padding: 10px 15px 9px 11px !important;
 			}
-			::slotted(a) {
+			::slotted(a),
+			::slotted(rb-popover) {
 				padding: 9px 15px 11px 13px !important;
 			}
 		}
@@ -90,14 +98,17 @@
  **********/
 .primary {
 	&.horizontal {
-		::slotted(a) {
+		::slotted(a),
+		::slotted(rb-popover) {
 			padding: 9px 10px 18px !important;
 		}
-		::slotted(a:not(.last)) {
+		::slotted(a:not(.last)),
+		::slotted(rb-popover:not(.last)) {
 			margin-right: 2px !important;
 		}
 		::slotted(h3:not(:last-child)),
-		::slotted(a.last:not(:last-child)) {
+		::slotted(a.last:not(:last-child)),
+		::slotted(rb-popover.last:not(:last-child)) {
 			margin-right: 12px !important;
 		}
 	}
@@ -106,7 +117,8 @@
 			::slotted(h3) {
 				padding: 10px 15px 5px 10px !important;
 			}
-			::slotted(a) {
+			::slotted(a),
+			::slotted(rb-popover) {
 				padding: 8px 15px 8px 18px !important;
 			}
 			::slotted(:last-child) {
@@ -122,10 +134,12 @@
 			::slotted(h3) {
 				padding: 12px 15px 12px 12px !important;
 			}
-			::slotted(a) {
+			::slotted(a),
+			::slotted(rb-popover) {
 				padding: 11px 16px 12px 15px !important;
 			}
-			::slotted(a:not(.last)) {
+			::slotted(a:not(.last)),
+			::slotted(rb-popover:not(.last)) {
 				margin-bottom: 2px !important;
 			}
 			&:not(.responsive) {
@@ -146,7 +160,8 @@
 				::slotted(:first-child) {
 					padding-top: 13px !important;
 				}
-				::slotted(a) {
+				::slotted(a),
+				::slotted(rb-popover) {
 					padding-right: 22px !important;
 				}
 			}
@@ -158,12 +173,14 @@
 				::slotted(:first-child) {
 					padding-top: 13px !important;
 				}
-				::slotted(a) {
+				::slotted(a),
+				::slotted(rb-popover) {
 					padding-right: 22px !important;
 				}
 			}
 			&.dividers {
-				::slotted(a) {
+				::slotted(a),
+				::slotted(rb-popover) {
 					margin-bottom: 0 !important;
 				}
 			}

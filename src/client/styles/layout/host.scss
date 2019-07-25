@@ -4,6 +4,8 @@
 :host {
 	all: initial; // reset all styles first
 	contain: layout style; // paint causes responsive menu to not show up
+	position: relative;
+	z-index: 100; // required for popovers to be over other navs
 	line-height: inherit;
 	vertical-align: top;
 }
@@ -15,11 +17,4 @@
 }
 :host([inline]) {
 	display: inline-block;
-}
-
-@media (max-width: $RESPONSIVE) {
-	:host([responsive]) {
-		position: relative;
-		z-index: 100;
-	}
 }

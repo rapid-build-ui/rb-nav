@@ -16,23 +16,28 @@
 						$bc: if($bc, $bc !important, null);
 						background-color: $bc;
 					}
-					::slotted(a) {
+					::slotted(a),
+					::slotted(rb-popover) {
 						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg);
 						$bc: if($bc, $bc !important, null);
 						background-color: $bc;
 					}
 					::slotted(a:hover),
-					::slotted(a:focus) {
+					::slotted(a:focus),
+					::slotted(rb-popover:hover),
+					::slotted(rb-popover:focus) {
 						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-hover);
 						$bc: if($bc, $bc !important, null);
 						background-color: $bc;
 					}
-					::slotted(a:active) {
+					::slotted(a:active),
+					::slotted(rb-popover:active) {
 						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-click);
 						$bc: if($bc, $bc !important, null);
 						background-color: $bc;
 					}
-					::slotted(a.active) {
+					::slotted(a.active),
+					::slotted(rb-popover.active) {
 						$bc: mapGet($vars, $theme, #{$kind}-#{$layout}-link-bg-active);
 						$bc: if($bc, $bc !important, null);
 						background-color: $bc;
