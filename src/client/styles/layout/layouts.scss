@@ -67,11 +67,11 @@
 	&.vertical {
 		&.no-dividers {
 			::slotted(h3) {
-				padding: 10px 15px 5px 10px !important;
+				padding: 10px 0 5px !important;
 			}
 			::slotted(a),
 			::slotted(rb-popover) {
-				padding: 8px 15px 8px 18px !important;
+				padding: 8px 0 !important;
 			}
 			::slotted(:last-child) {
 				padding-bottom: 16px !important;
@@ -115,11 +115,11 @@
 	&.vertical {
 		&.no-dividers {
 			::slotted(h3) {
-				padding: 10px 15px 5px 10px !important;
+				padding: 10px 0 5px !important;
 			}
 			::slotted(a),
 			::slotted(rb-popover) {
-				padding: 8px 15px 8px 18px !important;
+				padding: 8px 0 !important;
 			}
 			::slotted(:last-child) {
 				padding-bottom: 16px !important;
@@ -160,8 +160,13 @@
 				::slotted(:first-child) {
 					padding-top: 13px !important;
 				}
+				::slotted(h3) {
+					padding-left: 12px !important;
+					padding-right: 15px !important;
+				}
 				::slotted(a),
 				::slotted(rb-popover) {
+					padding-left: 12px !important;
 					padding-right: 22px !important;
 				}
 			}
@@ -173,8 +178,13 @@
 				::slotted(:first-child) {
 					padding-top: 13px !important;
 				}
+				::slotted(h3) {
+					padding-left: 12px !important;
+					padding-right: 15px !important;
+				}
 				::slotted(a),
 				::slotted(rb-popover) {
+					padding-left: 12px !important;
 					padding-right: 22px !important;
 				}
 			}
